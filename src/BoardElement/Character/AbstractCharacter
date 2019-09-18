@@ -1,0 +1,14 @@
+
+package BoardElement.Character;
+
+import BoardElement.Tools.IToolListing;
+
+public abstract class AbstractCharacter{
+    private float defaultLife;
+    private float decrementableLife;
+    //private int type; talvez no se use porque tipo se resuelve con herencia
+    private IToolListing tools;
+    private float level;
+    private float minPlayerLevelReq;
+
+}
