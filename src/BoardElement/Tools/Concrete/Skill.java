@@ -3,6 +3,8 @@ package BoardElement.Tools.Concrete;
 import BoardElement.IBoardElement;
 import BoardElement.Tools.AbstractTool;
 import BoardElement.Tools.ITool;
+import Media.Concrete.ImageArray;
+import Media.IMediaListing;
 import Patterns.IPrototype;
 
 public class Skill extends AbstractTool implements ITool, IBoardElement, IPrototype<Skill> {
@@ -10,12 +12,22 @@ public class Skill extends AbstractTool implements ITool, IBoardElement, IProtot
     private boolean regenerative; //true if its use increments life
     private float effectAmount;
     private int type; //Example. 0: affects character, 1: affects weapon,...
+    private IMediaListing images;
+
 
     public Skill() {
     }
 
-    public Skill(float simpleUseDecrement, String name, int defaultLife, int decrementableLife, int reach, float level, float minCharacterLevelReq, float minPlayerLevelReq, boolean regenerative, float effectAmount, int type) {
+    public Skill(float simpleUseDecrement, String name, int defaultLife, int decrementableLife, int reach, float level, float minCharacterLevelReq, float minPlayerLevelReq) {
         super(simpleUseDecrement, name, defaultLife, decrementableLife, reach, level, minCharacterLevelReq, minPlayerLevelReq);
+        images = new ImageArray();
+    }
+    public IMediaListing getImages() {
+        return images;
+    }
+
+    public void setImages(IMediaListing images) {
+        this.images = images;
     }
 
     @Override
@@ -50,7 +62,7 @@ public class Skill extends AbstractTool implements ITool, IBoardElement, IProtot
 
     @Override
     public IPrototype deepClone() {
-        Skill clonedSkill = new Skill(this.simpleUseDecrement, this.name, this.defaultLife, this.decrementableLife, this.reach, this.level, this.minCharacterLevelReq, this.minPlayerLevelReq, this.regenerative, this.effectAmount, this.type);
+        Skill clonedSkill = new Skill(this.simpleUseDecrement, this.name, this.defaultLife, this.decrementableLife, this.reach, this.level, this.minCharacterLevelReq, this.minPlayerLevelReq);
         return clonedSkill;
     }
 }
