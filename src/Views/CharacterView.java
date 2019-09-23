@@ -5,25 +5,12 @@
  */
 package Views;
 
-import BoardElement.Tools.ITool;
-import BoardElement.Tools.IToolListing;
-import BoardElement.Tools.ToolArray;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JButton;
-import javax.tools.Tool;
-
 /**
  *
  * @author Marvin Armando
  */
 public class CharacterView extends javax.swing.JFrame {
 
-    
-    private ArrayList<JButton> tools;
     /**
      * Creates new form CharacterView
      */
@@ -40,54 +27,18 @@ public class CharacterView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        StatisticsScroll = new javax.swing.JScrollPane();
-        Statistics = new javax.swing.JTextArea();
-        ImagePanel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        WeaponScroll = new javax.swing.JScrollPane();
-        WeaponPanel = new javax.swing.JPanel();
-        SkillScroll = new javax.swing.JScrollPane();
-        SkillPanel = new javax.swing.JPanel();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Statistics.setColumns(20);
-        Statistics.setRows(5);
-        StatisticsScroll.setViewportView(Statistics);
-
-        getContentPane().add(StatisticsScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 370, 390));
-
-        jLabel1.setText("ImageLabel");
-
-        javax.swing.GroupLayout ImagePanelLayout = new javax.swing.GroupLayout(ImagePanel);
-        ImagePanel.setLayout(ImagePanelLayout);
-        ImagePanelLayout.setHorizontalGroup(
-            ImagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ImagePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
-                .addContainerGap())
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 657, Short.MAX_VALUE)
         );
-        ImagePanelLayout.setVerticalGroup(
-            ImagePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ImagePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
-                .addContainerGap())
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 408, Short.MAX_VALUE)
         );
-
-        getContentPane().add(ImagePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 20, 390, 370));
-
-        WeaponPanel.setLayout(new java.awt.GridLayout(0, 5));
-        WeaponScroll.setViewportView(WeaponPanel);
-
-        getContentPane().add(WeaponScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 520, 370, 110));
-
-        SkillPanel.setLayout(new java.awt.GridLayout(0, 5));
-        SkillScroll.setViewportView(SkillPanel);
-
-        getContentPane().add(SkillScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 370, 110));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -126,28 +77,7 @@ public class CharacterView extends javax.swing.JFrame {
             }
         });
     }
-    
-    //
-    public void setTools(ToolArray tools){
-        
-        ArrayList<ITool> toolsList = tools.getList();
-        
-        for(ITool tool : toolsList) {
-            JButton toolButton = new JButton();
-            //toolButton.setIcon(new javax.swing.ImageIcon(getClass().getResource(tool.)));
-        }
-        
-        
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel ImagePanel;
-    private javax.swing.JPanel SkillPanel;
-    private javax.swing.JScrollPane SkillScroll;
-    private javax.swing.JTextArea Statistics;
-    private javax.swing.JScrollPane StatisticsScroll;
-    private javax.swing.JPanel WeaponPanel;
-    private javax.swing.JScrollPane WeaponScroll;
-    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
