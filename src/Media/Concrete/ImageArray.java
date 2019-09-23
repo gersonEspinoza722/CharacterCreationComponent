@@ -3,13 +3,20 @@ package Media.Concrete;
 import Media.AbstractMediaElement;
 import Media.IMediaListing;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.ArrayList;
 
 public class ImageArray implements IMediaListing {
+    ArrayList<Image> images;
+    public ImageArray() {
+        images=new ArrayList<>();
+    }
 
     @Override
     public void loadMedia(String name, File file) {
-
+        Image image = new Image(name,file);
+        images.add(image);
     }
 
     @Override
