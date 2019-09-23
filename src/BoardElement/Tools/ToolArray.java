@@ -22,4 +22,14 @@ public class ToolArray implements IToolListing {
     public ITool getTool(int index) {
         return null;
     }
+
+    public ArrayList<ITool> getList() {
+        return list;
+    }
+
+    public void setList(ArrayList<ITool> list) {
+        this.list = list;
+    }
+    
+    
 }
