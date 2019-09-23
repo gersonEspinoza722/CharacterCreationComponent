@@ -5,11 +5,10 @@ import Media.IMediaListing;
 
 import java.io.File;
 
-public class ImageArray implements IMediaListing {
-
+public class ImageCharacterBasic implements IMediaListing {
     @Override
     public void loadMedia(String name, File file) {
-
+        
     }
 
     @Override

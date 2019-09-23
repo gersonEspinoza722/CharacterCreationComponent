@@ -5,6 +5,8 @@ import BoardElement.Tools.IToolListing;
 
 public abstract class AbstractCharacter{
     public AbstractCharacter(float defaultLife, float decrementableLife, IToolListing tools, float level, float minPlayerLevelReq) {
+
+
         this.defaultLife = defaultLife;
         this.decrementableLife = decrementableLife;
         this.tools = tools;

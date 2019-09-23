@@ -28,6 +28,7 @@ public class Weapon extends AbstractTool implements ITool, IBoardElement {
     @Override
     public void func(IBoardElement object) {//input can be character or tool to be affected by the weapon
 
+
     }
 
 
