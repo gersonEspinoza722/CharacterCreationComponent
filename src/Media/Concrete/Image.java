@@ -32,6 +32,6 @@ public class Image extends AbstractMediaElement implements IMediaElement {
 
     @Override
     public void getPath() {
-
+        
     }
 }
