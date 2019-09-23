@@ -7,6 +7,9 @@ public class ToolArray implements IToolListing {
     private String name;
     private int maxAmount;
 
+    public ArrayList<ITool> getList() {
+        return list;
+    }
 
     @Override
     public void deleteTool(int index) {
