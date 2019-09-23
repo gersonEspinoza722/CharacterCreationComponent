@@ -6,11 +6,16 @@ import BoardElement.Tools.ITool;
 import BoardElement.Tools.IToolListing;
 import Patterns.IPrototype;
 
-public class Character extends AbstractCharacter implements ICharacter, IPrototype<Character>{
+public class Warrior extends AbstractCharacter implements ICharacter, IPrototype<Warrior>{
+    private int stamina;
+    private int speed;
 
-    public Character(float defaultLife, float decrementableLife, IToolListing tools, float level, float minPlayerLevelReq, float hitsPerUnit, int fields) {
+    public Warrior(int stamina, int speed, float defaultLife, float decrementableLife, IToolListing tools, float level, float minPlayerLevelReq, float hitsPerUnit, int fields) {
         super(defaultLife, decrementableLife, tools, level, minPlayerLevelReq, hitsPerUnit, fields);
+        this.speed=speed;
+        this.stamina=stamina;
     }
+
 
     @Override
     public void decLife(int amount) {
