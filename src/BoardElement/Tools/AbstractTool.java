@@ -15,11 +15,11 @@ public class AbstractTool {
         //IMAGE AND MEDIA STORAGE NEEDED
     }
 
-    private int defaultLife;
-    private int decrementableLife;
-    private int reach; //can be used as radial or linear effect
-    private float level;
-    private float minCharacterLevelReq;
-    private float minPlayerLevelReq;
-    private float simpleUseDecrement;
+    protected int defaultLife;
+    protected int decrementableLife;
+    protected int reach; //can be used as radial or linear effect
+    protected float level;
+    protected float minCharacterLevelReq;
+    protected float minPlayerLevelReq;
+    protected float simpleUseDecrement;
 }
