@@ -3,8 +3,9 @@ package BoardElement.Tools.Concrete;
 import BoardElement.IBoardElement;
 import BoardElement.Tools.AbstractTool;
 import BoardElement.Tools.ITool;
+import Patterns.IPrototype;
 
-public class Skill extends AbstractTool implements ITool, IBoardElement {
+public class Skill extends AbstractTool implements ITool, IBoardElement, IPrototype<Skill> {
     public Skill(float simpleUseDecrement, String name, int defaultLife, int decrementableLife, int reach, float level, float minCharacterLevelReq, float minPlayerLevelReq) {
         super(simpleUseDecrement, name, defaultLife, decrementableLife, reach, level, minCharacterLevelReq, minPlayerLevelReq);
     }
@@ -37,5 +38,16 @@ public class Skill extends AbstractTool implements ITool, IBoardElement {
     @Override
     public void incLevel() {
 
+    }
+
+    @Override
+    public IPrototype clone() {
+        return null;
+    }
+
+    @Override
+    public IPrototype deepClone() {
+        Skill clonedSkill = new Skill(this.simpleUseDecrement, this.name, this.defaultLife, this.decrementableLife, this.reach, this.level, this.minCharacterLevelReq, this.minPlayerLevelReq);
+        return clonedSkill;
     }
 }
