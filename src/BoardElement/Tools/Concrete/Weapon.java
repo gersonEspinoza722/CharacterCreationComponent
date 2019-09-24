@@ -7,6 +7,9 @@ import Patterns.IPrototype;
 
 public class Weapon extends AbstractTool implements ITool, IBoardElement, IPrototype<Weapon> {
 
+    public Weapon() {
+    }
+
     public Weapon(float simpleUseDecrement, String name, int defaultLife, int decrementableLife, int reach, float level, float minCharacterLevelReq, float minPlayerLevelReq) {
         super(simpleUseDecrement,name, defaultLife, decrementableLife, reach, level, minCharacterLevelReq, minPlayerLevelReq);
     }

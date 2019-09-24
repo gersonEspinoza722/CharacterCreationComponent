@@ -4,6 +4,13 @@ package BoardElement.Character;
 import BoardElement.Tools.IToolListing;
 
 public abstract class AbstractCharacter{
+
+    protected float defaultLife;
+    protected float decrementableLife;
+    protected IToolListing tools;
+    protected float level;
+    protected float minPlayerLevelReq;
+
     public AbstractCharacter(float defaultLife, float decrementableLife, IToolListing tools, float level, float minPlayerLevelReq) {
         this.defaultLife = defaultLife;
         this.decrementableLife = decrementableLife;
@@ -11,11 +18,5 @@ public abstract class AbstractCharacter{
         this.level = level;
         this.minPlayerLevelReq = minPlayerLevelReq;
     }
-
-    protected float defaultLife;
-    protected float decrementableLife;
-    protected IToolListing tools;
-    protected float level;
-    protected float minPlayerLevelReq;
 
 }

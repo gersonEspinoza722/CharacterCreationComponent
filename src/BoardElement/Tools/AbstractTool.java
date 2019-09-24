@@ -10,6 +10,9 @@ public class AbstractTool {
     protected float minPlayerLevelReq;
     protected float simpleUseDecrement;
 
+    public AbstractTool() {
+    }
+
     public AbstractTool(float simpleUseDecrement, String name, int defaultLife, int decrementableLife, int reach, float level, float minCharacterLevelReq, float minPlayerLevelReq) {
         this.name = name;
         this.defaultLife = defaultLife;

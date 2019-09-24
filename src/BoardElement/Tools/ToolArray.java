@@ -20,17 +20,17 @@ public class ToolArray implements IToolListing, IPrototype<ToolArray> {
 
     @Override
     public void deleteTool(int index) {
-
+        list.remove(index);
     }
 
     @Override
     public void addTool(ITool object) {
-
+        list.add(object);
     }
 
     @Override
     public ITool getTool(int index) {
-        return null;
+        return list.get(index);
     }
 
     @Override

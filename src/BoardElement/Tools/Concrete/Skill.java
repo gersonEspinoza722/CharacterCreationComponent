@@ -6,14 +6,17 @@ import BoardElement.Tools.ITool;
 import Patterns.IPrototype;
 
 public class Skill extends AbstractTool implements ITool, IBoardElement, IPrototype<Skill> {
-    public Skill(float simpleUseDecrement, String name, int defaultLife, int decrementableLife, int reach, float level, float minCharacterLevelReq, float minPlayerLevelReq) {
-        super(simpleUseDecrement, name, defaultLife, decrementableLife, reach, level, minCharacterLevelReq, minPlayerLevelReq);
-    }
 
     private boolean regenerative; //true if its use increments life
     private float effectAmount;
     private int type; //Example. 0: affects character, 1: affects weapon,...
 
+    public Skill() {
+    }
+
+    public Skill(float simpleUseDecrement, String name, int defaultLife, int decrementableLife, int reach, float level, float minCharacterLevelReq, float minPlayerLevelReq, boolean regenerative, float effectAmount, int type) {
+        super(simpleUseDecrement, name, defaultLife, decrementableLife, reach, level, minCharacterLevelReq, minPlayerLevelReq);
+    }
 
     @Override
     public void setDefaultLife(int amount) {
@@ -47,7 +50,7 @@ public class Skill extends AbstractTool implements ITool, IBoardElement, IProtot
 
     @Override
     public IPrototype deepClone() {
-        Skill clonedSkill = new Skill(this.simpleUseDecrement, this.name, this.defaultLife, this.decrementableLife, this.reach, this.level, this.minCharacterLevelReq, this.minPlayerLevelReq);
+        Skill clonedSkill = new Skill(this.simpleUseDecrement, this.name, this.defaultLife, this.decrementableLife, this.reach, this.level, this.minCharacterLevelReq, this.minPlayerLevelReq, this.regenerative, this.effectAmount, this.type);
         return clonedSkill;
     }
 }
