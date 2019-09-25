@@ -8,7 +8,10 @@ import Patterns.IPrototype;
 import Media.Concrete.ImageArray;
 import Media.IMediaListing;
 
+import java.util.ArrayList;
+
 public class Warrior extends AbstractCharacter implements ICharacter, IPrototype<Warrior>{
+
     private int stamina;
     private int speed;
     private IMediaListing images;
@@ -45,34 +48,54 @@ public class Warrior extends AbstractCharacter implements ICharacter, IPrototype
     }
 
 
-
-
-
+    /**
+     * Decrements the current life points by the amount specified, if it reach 0 nothing happens
+     * @param amount: Amount of life points to decrement
+     */
     @Override
     public void decLife(int amount) {
-
+        if(decrementableLife - amount <= 0){
+            decrementableLife = 0;
+        }
+        else{
+            decrementableLife -= amount;
+        }
     }
 
+    /**
+     * Increments the current life points by the amount specified, if it reach the life cap nothing happens
+     * @param amount: Amount of life points to increment
+     */
     @Override
     public void incLife(int amount) {
-
+        if(decrementableLife + amount >= defaultLife){
+            decrementableLife = defaultLife;
+        }
+        else{
+            decrementableLife += amount;
+        }
     }
 
+    /**
+     * Sets the life cap points
+     * @param amount: Amount of life points to set
+     */
     @Override
     public void setDefaultLife(int amount) {
-
+        defaultLife = amount;
     }
 
     @Override
     public IPrototype clone() {
-        Character clone = new Character(this.defaultLife, this.decrementableLife, this.tools, this.level, this.minPlayerLevelReq, this.hitsPerUnit, this.fields);
+        Warrior clone = new Warrior(this.stamina, this.speed, this.defaultLife, this.decrementableLife, this.tools, this.level, this.minPlayerLevelReq, this.hitsPerUnit, this.fields);
         return clone;
     }
 
     @Override
     public IPrototype deepClone() {
         IToolListing clonedTools = (IToolListing) this.tools.deepClone();
-        Character clone = new Character(this.defaultLife, this.decrementableLife, clonedTools, this.level, this.minPlayerLevelReq, this.hitsPerUnit, this.fields);
+        Warrior clone = new Warrior(this.stamina, this.speed, this.defaultLife, this.decrementableLife, clonedTools, this.level, this.minPlayerLevelReq, this.hitsPerUnit, this.fields);
+        clone.setImages((ImageArray) this.images);
         return clone;
     }
 }
