@@ -10,6 +10,7 @@ public class ToolArray implements IToolListing, IPrototype<ToolArray> {
     private int maxAmount;
 
     public ToolArray() {
+        this.list = new ArrayList<>();
     }
 
     public ToolArray(ArrayList<ITool> list, String name, int maxAmount) {
@@ -20,12 +21,12 @@ public class ToolArray implements IToolListing, IPrototype<ToolArray> {
 
     @Override
     public void deleteTool(int index) {
-        list.remove(index);
+        this.list.remove(index);
     }
 
     @Override
     public void addTool(ITool object) {
-        list.add(object);
+        this.list.add(object);
     }
 
     @Override
@@ -35,7 +36,7 @@ public class ToolArray implements IToolListing, IPrototype<ToolArray> {
 
     @Override
     public int getSize() {
-        return list.size();
+        return this.list.size();
     }
 
     @Override
@@ -53,13 +54,15 @@ public class ToolArray implements IToolListing, IPrototype<ToolArray> {
         return clonedToolArray;
     }
 
-    public ArrayList<ITool> getList() {
-        return list;
-    }
+
 
     public void setList(ArrayList<ITool> list) {
         this.list = list;
     }
 
+    @Override
+    public ArrayList<ITool> getToolList() {
+        return this.list;
+    }
 
 }

@@ -5,11 +5,18 @@
  */
 package Views;
 
+import BoardElement.Character.Concrete.Warrior;
+import BoardElement.Tools.Concrete.Skill;
+import BoardElement.Tools.Concrete.Weapon;
 import BoardElement.Tools.ITool;
 import BoardElement.Tools.IToolListing;
 import BoardElement.Tools.ToolArray;
+import Media.Concrete.Image;
+import Media.Concrete.ImageArray;
+import Media.IMediaListing;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,14 +28,16 @@ import javax.tools.Tool;
  * @author Marvin Armando
  */
 public class CharacterView extends javax.swing.JFrame {
-
     
-    private ArrayList<JButton> tools;
+     IToolListing prueba = new ToolArray();
+     Warrior character = new Warrior("Prueba",100,50,prueba,10,10,10,10,10,10);
+     
     /**
      * Creates new form CharacterView
      */
     public CharacterView() {
         initComponents();
+        loadCharacter();
     }
 
     /**
@@ -48,6 +57,9 @@ public class CharacterView extends javax.swing.JFrame {
         WeaponPanel = new javax.swing.JPanel();
         SkillScroll = new javax.swing.JScrollPane();
         SkillPanel = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        ToolStatisticsScroll = new javax.swing.JScrollPane();
+        ToolStatistics = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -89,8 +101,27 @@ public class CharacterView extends javax.swing.JFrame {
 
         getContentPane().add(SkillScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 370, 110));
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 370, -1, -1));
+
+        ToolStatistics.setColumns(20);
+        ToolStatistics.setRows(5);
+        ToolStatisticsScroll.setViewportView(ToolStatistics);
+
+        getContentPane().add(ToolStatisticsScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 410, 480, 220));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        setTools(character.getTools());
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -128,26 +159,69 @@ public class CharacterView extends javax.swing.JFrame {
     }
     
     //
-    public void setTools(ToolArray tools){
-        
-        ArrayList<ITool> toolsList = tools.getList();
+    public void setTools(IToolListing tools){
+        ArrayList<ITool> toolsList = tools.getToolList();
         
         for(ITool tool : toolsList) {
             JButton toolButton = new JButton();
-            //toolButton.setIcon(new javax.swing.ImageIcon(getClass().getResource(tool.)));
+            String path = tool.getMediaListing().getImages().get(0).getPath();
+            toolButton.setIcon(new javax.swing.ImageIcon(path));
+            if(tool.getType()==0){
+                this.SkillPanel.add(toolButton);
+                this.SkillPanel.updateUI();  
+            }else{
+                this.WeaponPanel.add(toolButton);
+                 this.WeaponPanel.updateUI();  
+            }
+            toolButton.addActionListener(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    System.out.println(path);
+                    try {
+                        System.out.println("Soy:" + tool.getType());
+                        ToolStatistics.setText(tool.getToString());
+                        
+                    } catch (Exception ex) {
+                        Logger.getLogger(CharacterView.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }       
+            });
         }
-        
-        
     }
 
+    public void loadCharacter(){
+        IMediaListing images = new ImageArray();
+        File file = new File("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\icons8-hamburger-100.png");
+        images.loadMedia("prueba1", file);
+        
+        Skill tool = new Skill(5,"RompeAnos",100,50,10,1,2,2,0);
+        tool.setMedia(images);
+        //System.out.println(tool.getToString());
+        //System.out.println(images.getImages().get(0).getPath());
+        prueba.addTool(tool);
+        
+        IMediaListing images2 = new ImageArray();
+        File file2 = new File("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\maiz.png");
+        images2.loadMedia("prueba2", file2);
+        Weapon tool2 = new Weapon(5,"RompeCulos",100,50,10,1,2,2,1);
+        tool2.setMedia(images2);
+        //System.out.println(tool2.getToString());
+        //System.out.println(images2.getImages().get(0).getPath());
+        prueba.addTool(tool2);
+        
+        this.Statistics.setText(character.getToString());
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ImagePanel;
     private javax.swing.JPanel SkillPanel;
     private javax.swing.JScrollPane SkillScroll;
     private javax.swing.JTextArea Statistics;
     private javax.swing.JScrollPane StatisticsScroll;
+    private javax.swing.JTextArea ToolStatistics;
+    private javax.swing.JScrollPane ToolStatisticsScroll;
     private javax.swing.JPanel WeaponPanel;
     private javax.swing.JScrollPane WeaponScroll;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
