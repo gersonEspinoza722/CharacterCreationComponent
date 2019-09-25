@@ -18,6 +18,9 @@ public class Skill extends AbstractTool implements ITool, IBoardElement, IProtot
     public Skill() {
     }
 
+    public Skill(float simpleUseDecrement, String name, int defaultLife, int decrementableLife, int reach, float level, float minCharacterLevelReq, float minPlayerLevelReq, boolean regenerative, float effectAmount, int type) {
+        super(simpleUseDecrement, name, defaultLife, decrementableLife, reach, level, minCharacterLevelReq, minPlayerLevelReq);
+    }
     public Skill(float simpleUseDecrement, String name, int defaultLife, int decrementableLife, int reach, float level, float minCharacterLevelReq, float minPlayerLevelReq) {
         super(simpleUseDecrement, name, defaultLife, decrementableLife, reach, level, minCharacterLevelReq, minPlayerLevelReq);
         images = new ImageArray();
@@ -62,7 +65,7 @@ public class Skill extends AbstractTool implements ITool, IBoardElement, IProtot
 
     @Override
     public IPrototype deepClone() {
-        Skill clonedSkill = new Skill(this.simpleUseDecrement, this.name, this.defaultLife, this.decrementableLife, this.reach, this.level, this.minCharacterLevelReq, this.minPlayerLevelReq);
+        Skill clonedSkill = new Skill(this.simpleUseDecrement, this.name, this.defaultLife, this.decrementableLife, this.reach, this.level, this.minCharacterLevelReq, this.minPlayerLevelReq, this.regenerative, this.effectAmount, this.type);
         return clonedSkill;
     }
 }
