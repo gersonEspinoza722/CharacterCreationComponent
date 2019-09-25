@@ -18,20 +18,16 @@ public class Warrior extends AbstractCharacter implements ICharacter, IPrototype
 
     private int stamina;
     private int speed;
+    private String name;
 
-    public Warrior(float defaultLife, float decrementableLife, IToolListing tools, float level, float minPlayerLevelReq, float hitsPerUnit, int fields, int stamina, int speed) {
+    public Warrior(String name, float defaultLife, float decrementableLife, IToolListing tools, float level, float minPlayerLevelReq, float hitsPerUnit, int fields, int stamina, int speed) {
         super(defaultLife, decrementableLife, tools, level, minPlayerLevelReq, hitsPerUnit, fields);
         this.speed=speed;
         this.stamina=stamina;
+        this.name = name;
         super.media = new ImageArray();
     }
-
-    public Warrior(float defaultLife, float decrementableLife, IToolListing tools, float level, float minPlayerLevelReq, float hitsPerUnit, int fields, IMediaListing media, int stamina, int speed) {
-        super(defaultLife, decrementableLife, tools, level, minPlayerLevelReq, hitsPerUnit, fields, media);
-        this.stamina = stamina;
-        this.speed = speed;
-    }
-
+    
     public int getStamina() {
         return stamina;
     }
@@ -56,6 +52,7 @@ public class Warrior extends AbstractCharacter implements ICharacter, IPrototype
         super.media = images;
     }
 
+ 
 
     /**
      * Decrements the current life points by the amount specified, if it reach 0 nothing happens
@@ -96,26 +93,48 @@ public class Warrior extends AbstractCharacter implements ICharacter, IPrototype
 
     @Override
     public IPrototype clone() {
-        Warrior clone = new Warrior(this.defaultLife, this.decrementableLife, this.tools, this.level, this.minPlayerLevelReq, this.hitsPerUnit, this.fields, this.stamina, this.speed);
+        Warrior clone = new Warrior(this.name, this.defaultLife, this.decrementableLife, this.tools, this.level, this.minPlayerLevelReq, this.hitsPerUnit, this.fields, this.stamina, this.speed);
         return clone;
     }
 
     @Override
     public IPrototype deepClone() {
         IToolListing clonedTools = (IToolListing) this.tools.deepClone();
-        Warrior clone = new Warrior(this.defaultLife, this.decrementableLife, clonedTools, this.level, this.minPlayerLevelReq, this.hitsPerUnit, this.fields, this.media, this.stamina, this.speed);
+        Warrior clone = new Warrior(this.name, this.defaultLife, this.decrementableLife, clonedTools, this.level, this.minPlayerLevelReq, this.hitsPerUnit, this.fields, this.stamina, this.speed);
         return clone;
     }
 
+    @Override
+    public IToolListing getTools() {
+        return this.tools;
+    }
+
+    @Override
+    public String getToString() {
+        String toString= "";
+        toString = "Name" + this.name + "\n" +
+                "DefaultLife" + this.defaultLife + "\n" +
+                "HitsPerUnit" + this.hitsPerUnit + "\n" +
+                "Fields" + this.fields + "\n" +
+                "Stamina" + this.stamina + "\n" +
+                "Speed" + this.speed + "\n" +
+                "DecrementableLife" + this.decrementableLife + "\n" + 
+                "Level" + this.level + "\n" +
+                "MinPlayerLevelReq" + this.minPlayerLevelReq;
+        return toString;
+    }
+    
+
     public static class WarriorBuilder implements IBuilder<AbstractCharacter> {
         private int stamina, speed, fields;
+        private String name;
         private float defaultLife, decrementableLife, hitsPerUnit, level, minPlayerLevelReq;
         IToolListing tools;
         IMediaListing media;
 
         @Override
         public AbstractCharacter build() {
-            AbstractCharacter newWarrior = new Warrior(defaultLife, decrementableLife, tools, level, minPlayerLevelReq, hitsPerUnit, fields, media, stamina, speed);
+            AbstractCharacter newWarrior = new Warrior(this.name, this.defaultLife, this.decrementableLife, this.tools, this.level, this.minPlayerLevelReq, this.hitsPerUnit, this.fields, this.stamina, this.speed);
             return newWarrior;
         }
 
