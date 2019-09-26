@@ -9,6 +9,7 @@ public class ToolArray implements IToolListing, IPrototype<ToolArray> {
     private String name;
 
     public ToolArray(String name) {
+        this.name = name;
         this.list = new ArrayList<>();
     }
 

@@ -18,7 +18,7 @@ public class json_intents {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		IToolListing array = new ToolArray();
+		IToolListing array = new ToolArray("armas");
 		IMediaListing images = new ImageArray();
 		
 		CharacterDummy character = new CharacterDummy(100f,100f,array,10f,10f,10f,2,images);
