@@ -43,5 +43,4 @@ public abstract class AbstractCharacter{
         this.media = media;
     }
 
-
 }

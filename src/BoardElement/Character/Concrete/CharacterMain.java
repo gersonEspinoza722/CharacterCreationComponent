@@ -6,7 +6,9 @@ import BoardElement.IBoardElement;
 import BoardElement.Tools.ITool;
 import BoardElement.Tools.IToolListing;
 import BoardElement.Tools.ToolListingFactory;
+import Media.Concrete.ImageArray;
 import Media.IMediaListing;
+import Media.MediaListingFactory;
 import Patterns.IBuilder;
 import Patterns.IPrototype;
 
@@ -18,7 +20,11 @@ public class CharacterMain extends AbstractCharacter implements ICharacter, IPro
 
     public CharacterMain() {
         ToolListingFactory toolListingFactory = ToolListingFactory.getInstance();
-        this.tools = toolListingFactory.getToolListing(0, "Character Main List");
+        this.tools = toolListingFactory.getToolListing(ToolListingFactory.TOOL_ARRAY, "Character Main List");
+
+        MediaListingFactory mediaListingFactory = new MediaListingFactory();
+        super.media = mediaListingFactory.getMediaListing(MediaListingFactory.IMAGE_ARRAY);
+
     }
 
     public CharacterMain(String name, float defaultLife, float decrementableLife, IToolListing tools, float level, float minPlayerLevelReq, float hitsPerUnit, int fields) {
