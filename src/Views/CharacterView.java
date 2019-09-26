@@ -50,13 +50,13 @@ public class CharacterView extends javax.swing.JFrame {
         SkillPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        //getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Statistics.setColumns(20);
         Statistics.setRows(5);
         StatisticsScroll.setViewportView(Statistics);
 
-        getContentPane().add(StatisticsScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 370, 390));
+        //getContentPane().add(StatisticsScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 370, 390));
 
         jLabel1.setText("ImageLabel");
 
@@ -77,17 +77,17 @@ public class CharacterView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        getContentPane().add(ImagePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 20, 390, 370));
+        //getContentPane().add(ImagePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 20, 390, 370));
 
         WeaponPanel.setLayout(new java.awt.GridLayout(0, 5));
         WeaponScroll.setViewportView(WeaponPanel);
 
-        getContentPane().add(WeaponScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 520, 370, 110));
+        //getContentPane().add(WeaponScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 520, 370, 110));
 
         SkillPanel.setLayout(new java.awt.GridLayout(0, 5));
         SkillScroll.setViewportView(SkillPanel);
 
-        getContentPane().add(SkillScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 370, 110));
+        //getContentPane().add(SkillScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 370, 110));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

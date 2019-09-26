@@ -2,8 +2,10 @@
 package BoardElement.Character;
 
 import BoardElement.Tools.IToolListing;
+import Media.IMediaListing;
 
 public abstract class AbstractCharacter{
+	
 
     protected float defaultLife;
     protected float decrementableLife;
@@ -12,8 +14,15 @@ public abstract class AbstractCharacter{
     protected float minPlayerLevelReq;
     protected float hitsPerUnit;
     protected int fields;
+    protected IMediaListing images;
 
-    public AbstractCharacter(float defaultLife, float decrementableLife, IToolListing tools, float level, float minPlayerLevelReq, float hitsPerUnit, int fields) {
+    public AbstractCharacter(float defaultLife, 
+    		float decrementableLife, 
+    		IToolListing tools, float level, 
+    		float minPlayerLevelReq, float hitsPerUnit, 
+    		int fields,
+    		IMediaListing images
+    		) {
         this.defaultLife = defaultLife;
         this.decrementableLife = decrementableLife;
         this.tools = tools;
@@ -21,6 +30,7 @@ public abstract class AbstractCharacter{
         this.minPlayerLevelReq = minPlayerLevelReq;
         this.hitsPerUnit = hitsPerUnit;
         this.fields = fields;
+        this.images = images;
     }
 
 }

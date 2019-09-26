@@ -13,6 +13,9 @@ public class ToolArray implements IToolListing, IPrototype<ToolArray> {
         return list;
     }
     public ToolArray() {
+    	list = null;
+    	name = "name";
+    	maxAmount = 0;
     }
 
     public ToolArray(ArrayList<ITool> list, String name, int maxAmount) {

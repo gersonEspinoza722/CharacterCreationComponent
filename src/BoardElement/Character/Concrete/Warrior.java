@@ -11,8 +11,8 @@ public class Warrior extends AbstractCharacter implements ICharacter {
     private int speed;
     private IMediaListing images;
 
-    public Warrior(int stamina, int speed, float defaultLife, float decrementableLife, IToolListing tools, float level, float minPlayerLevelReq) {
-        super(defaultLife,decrementableLife,tools,level,minPlayerLevelReq);
+    public Warrior(int stamina, int speed, float defaultLife, float decrementableLife, IToolListing tools, float level, float minPlayerLevelReq,IMediaListing images) {
+        super(defaultLife,decrementableLife,tools,level,minPlayerLevelReq, minPlayerLevelReq, speed, images);
         this.speed=speed;
         this.stamina=stamina;
         images = new ImageArray();
