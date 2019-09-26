@@ -6,6 +6,7 @@ import Media.IMediaListing;
 
 public abstract class AbstractCharacter{
 
+    protected String name;
     protected float defaultLife;
     protected float decrementableLife;
     protected IToolListing tools;
@@ -15,7 +16,11 @@ public abstract class AbstractCharacter{
     protected int fields;
     protected IMediaListing media;
 
-    public AbstractCharacter(float defaultLife, float decrementableLife, IToolListing tools, float level, float minPlayerLevelReq, float hitsPerUnit, int fields) {
+    public AbstractCharacter() {
+    }
+
+    public AbstractCharacter(String name, float defaultLife, float decrementableLife, IToolListing tools, float level, float minPlayerLevelReq, float hitsPerUnit, int fields) {
+        this.name = name;
         this.defaultLife = defaultLife;
         this.decrementableLife = decrementableLife;
         this.tools = tools;
@@ -26,7 +31,8 @@ public abstract class AbstractCharacter{
 
     }
 
-    public AbstractCharacter(float defaultLife, float decrementableLife, IToolListing tools, float level, float minPlayerLevelReq, float hitsPerUnit, int fields, IMediaListing media) {
+    public AbstractCharacter(String name, float defaultLife, float decrementableLife, IToolListing tools, float level, float minPlayerLevelReq, float hitsPerUnit, int fields, IMediaListing media) {
+        this.name = name;
         this.defaultLife = defaultLife;
         this.decrementableLife = decrementableLife;
         this.tools = tools;
@@ -36,4 +42,6 @@ public abstract class AbstractCharacter{
         this.fields = fields;
         this.media = media;
     }
+
+
 }
