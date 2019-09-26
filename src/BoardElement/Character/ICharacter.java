@@ -14,4 +14,5 @@ public interface ICharacter {
     IMediaListing getMedia();
     IToolListing getTools();
     String getToString();
+    IBuilder<ICharacter> getBuilder();
 }

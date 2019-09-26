@@ -56,8 +56,6 @@ public abstract class AbstractCharacter implements ICharacter, IPrototype<Abstra
         this.builder = new CharacterBuilder();
     }
 
-    public abstract IBuilder<ICharacter> getBuilder();
-
     public static class CharacterBuilder implements IBuilder<ICharacter> {
 
         private String name;
