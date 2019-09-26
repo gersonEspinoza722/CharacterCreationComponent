@@ -10,9 +10,11 @@ import java.io.IOException;
 
 public class Image extends AbstractMediaElement implements IMediaElement {
     private BufferedImage image;
+    private String path;
 
     public Image(String name, File file) {
         super(name, file);
+        this.path=file.getPath();
         load();
     }
 
@@ -31,7 +33,7 @@ public class Image extends AbstractMediaElement implements IMediaElement {
     }
 
     @Override
-    public void getPath() {
-        
+    public String getPath() {
+        return path;
     }
 }
