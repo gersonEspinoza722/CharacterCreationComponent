@@ -28,6 +28,7 @@ public abstract class AbstractCharacter implements ICharacter, IPrototype<Abstra
     protected static IBuilder<ICharacter> builder;
 
     public AbstractCharacter() {
+        this.builder = new CharacterBuilder();
     }
 
     public AbstractCharacter(String name, float defaultLife, float decrementableLife, IToolListing tools, float level, float minPlayerLevelReq, float hitsPerUnit, int fields) {
@@ -39,7 +40,7 @@ public abstract class AbstractCharacter implements ICharacter, IPrototype<Abstra
         this.minPlayerLevelReq = minPlayerLevelReq;
         this.hitsPerUnit = hitsPerUnit;
         this.fields = fields;
-
+        this.builder = new CharacterBuilder();
     }
 
     public AbstractCharacter(String name, float defaultLife, float decrementableLife, IToolListing tools, float level, float minPlayerLevelReq, float hitsPerUnit, int fields, IMediaListing media) {
@@ -60,7 +61,7 @@ public abstract class AbstractCharacter implements ICharacter, IPrototype<Abstra
         private String name;
         private int fields;
         private float defaultLife, decrementableLife, hitsPerUnit, level, minPlayerLevelReq;
-        IToolListing tools = ToolListingFactory.getInstance().getToolListing(0, "Character List"); //esta bien?
+        IToolListing tools = ToolListingFactory.getInstance().getToolListing(ToolListingFactory.TOOL_ARRAY, "Character List"); //esta bien?
 
         MediaListingFactory mediaListingFactory = new MediaListingFactory();
         IMediaListing media = mediaListingFactory.getMediaListing(MediaListingFactory.IMAGE_ARRAY); //esta bien?
