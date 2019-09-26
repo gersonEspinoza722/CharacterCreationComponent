@@ -1,6 +1,7 @@
 package Media.Concrete;
 
 import Media.AbstractMediaElement;
+import Media.IMediaElement;
 import Media.IMediaListing;
 
 import java.awt.image.BufferedImage;
@@ -27,5 +28,10 @@ public class ImageArray implements IMediaListing {
     @Override
     public AbstractMediaElement getElement(String name) {
         return null;
+    }
+
+    @Override
+    public ArrayList<Image> getImages() {
+        return images;
     }
 }

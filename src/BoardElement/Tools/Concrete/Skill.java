@@ -12,25 +12,22 @@ public class Skill extends AbstractTool implements ITool, IBoardElement, IProtot
     private boolean regenerative; //true if its use increments life
     private float effectAmount;
     private int type; //Example. 0: affects character, 1: affects weapon,...
-    private IMediaListing images;
+    private IMediaListing media;
 
 
     public Skill() {
     }
 
-    public Skill(float simpleUseDecrement, String name, int defaultLife, int decrementableLife, int reach, float level, float minCharacterLevelReq, float minPlayerLevelReq, boolean regenerative, float effectAmount, int type) {
+    public Skill(float simpleUseDecrement, String name, int defaultLife, int decrementableLife, int reach, float level, float minCharacterLevelReq, float minPlayerLevelReq, int type) {
         super(simpleUseDecrement, name, defaultLife, decrementableLife, reach, level, minCharacterLevelReq, minPlayerLevelReq);
-    }
-    public Skill(float simpleUseDecrement, String name, int defaultLife, int decrementableLife, int reach, float level, float minCharacterLevelReq, float minPlayerLevelReq) {
-        super(simpleUseDecrement, name, defaultLife, decrementableLife, reach, level, minCharacterLevelReq, minPlayerLevelReq);
-        images = new ImageArray();
-    }
-    public IMediaListing getImages() {
-        return images;
+        this.type = type;
+        media = new ImageArray();
     }
 
-    public void setImages(IMediaListing images) {
-        this.images = images;
+
+
+    public void setMedia(IMediaListing media) {
+        this.media = media;
     }
 
     @Override
@@ -55,7 +52,7 @@ public class Skill extends AbstractTool implements ITool, IBoardElement, IProtot
 
     @Override
     public void incLevel() {
-
+        this.level ++;
     }
 
     @Override
@@ -65,7 +62,36 @@ public class Skill extends AbstractTool implements ITool, IBoardElement, IProtot
 
     @Override
     public IPrototype deepClone() {
-        Skill clonedSkill = new Skill(this.simpleUseDecrement, this.name, this.defaultLife, this.decrementableLife, this.reach, this.level, this.minCharacterLevelReq, this.minPlayerLevelReq, this.regenerative, this.effectAmount, this.type);
+        Skill clonedSkill = new Skill(this.simpleUseDecrement, this.name, this.defaultLife, this.decrementableLife, this.reach, this.level, this.minCharacterLevelReq, this.minPlayerLevelReq, this.type);
         return clonedSkill;
+    }
+
+    @Override
+    public IMediaListing getMediaListing() {
+        return this.media;
+    }
+
+    @Override
+    public int getType() {
+        return this.type;
+    }
+
+    @Override
+    public String getToString() {
+        String toString="";
+        toString = "Name" + this.name + "\n" +
+                "SimpleUseDecrement" + this.simpleUseDecrement + "\n"+
+                "DefaultLife" + this.defaultLife + "\n" +
+                "DecrementableLife" + this.decrementableLife + "\n" +
+                "Reach" + this.reach + "\n" +
+                "Level" + this.level + "\n" +
+                "MinCharacterLevelReq" + this.minCharacterLevelReq + "\n" +
+                "MinPlayerLevelReq" + this.minPlayerLevelReq;
+        return toString;
+    }
+
+    @Override
+    public void decLevel() {
+        this.level --;
     }
 }

@@ -7,31 +7,24 @@ import java.util.ArrayList;
 public class ToolArray implements IToolListing, IPrototype<ToolArray> {
     private ArrayList<ITool> list;
     private String name;
-    private int maxAmount;
 
-    public ArrayList<ITool> getList() {
-        return list;
-    }
-    public ToolArray() {
-    	list = null;
-    	name = "name";
-    	maxAmount = 0;
+    public ToolArray(String name) {
+        this.list = new ArrayList<>();
     }
 
-    public ToolArray(ArrayList<ITool> list, String name, int maxAmount) {
+    public ToolArray(ArrayList<ITool> list, String name) {
         this.list = list;
         this.name = name;
-        this.maxAmount = maxAmount;
     }
 
     @Override
     public void deleteTool(int index) {
-        list.remove(index);
+        this.list.remove(index);
     }
 
     @Override
     public void addTool(ITool object) {
-        list.add(object);
+        this.list.add(object);
     }
 
     @Override
@@ -41,7 +34,7 @@ public class ToolArray implements IToolListing, IPrototype<ToolArray> {
 
     @Override
     public int getSize() {
-        return list.size();
+        return this.list.size();
     }
 
     @Override
@@ -55,7 +48,19 @@ public class ToolArray implements IToolListing, IPrototype<ToolArray> {
         for (int i = 0; i<list.size(); i++){
             clonedTools.add(list.get(i));
         }
-        ToolArray clonedToolArray = new ToolArray(clonedTools, this.name, this.maxAmount);
+        ToolArray clonedToolArray = new ToolArray(clonedTools, this.name);
         return clonedToolArray;
     }
+
+
+
+    public void setList(ArrayList<ITool> list) {
+        this.list = list;
+    }
+
+    @Override
+    public ArrayList<ITool> getToolList() {
+        return this.list;
+    }
+
 }
