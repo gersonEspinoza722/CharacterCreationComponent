@@ -14,21 +14,25 @@ import Media.IMediaListing;
 import java.io.File;
 import java.util.ArrayList;
 
-public class Warrior extends AbstractCharacter implements ICharacter, IPrototype<Warrior>, IBoardElement {
+public class Warrior extends AbstractCharacter {
 
     private int stamina;
     private int speed;
     private String name;
 
-
-    
-    public Warrior(String name, float defaultLife, float decrementableLife, IToolListing tools, float level, float minPlayerLevelReq, float hitsPerUnit, int fields, int stamina, int speed, IMediaListing media) {
-        super(defaultLife, decrementableLife, tools, level, minPlayerLevelReq, hitsPerUnit, fields, media);
+    public Warrior(String name, float defaultLife, float decrementableLife, IToolListing tools, float level, float minPlayerLevelReq, float hitsPerUnit, int fields, int stamina, int speed) {
+        super(name, defaultLife, decrementableLife, tools, level, minPlayerLevelReq, hitsPerUnit, fields);
         this.speed=speed;
         this.stamina=stamina;
-        this.name = name;
+        super.media = new ImageArray();
     }
-    
+
+    public Warrior(String name, float defaultLife, float decrementableLife, IToolListing tools, float level, float minPlayerLevelReq, float hitsPerUnit, int fields, IMediaListing media, int stamina, int speed) {
+        super(name, defaultLife, decrementableLife, tools, level, minPlayerLevelReq, hitsPerUnit, fields, media);
+        this.stamina = stamina;
+        this.speed = speed;
+    }
+
     public int getStamina() {
         return stamina;
     }
@@ -49,8 +53,6 @@ public class Warrior extends AbstractCharacter implements ICharacter, IPrototype
         super.media = images;
     }
 
- 
- 
 
     /**
      * Decrements the current life points by the amount specified, if it reach 0 nothing happens
@@ -72,8 +74,12 @@ public class Warrior extends AbstractCharacter implements ICharacter, IPrototype
      */
     @Override
     public void incLife(int amount) {
-        decrementableLife += amount;
-      
+        if(decrementableLife + amount >= defaultLife){
+            decrementableLife = defaultLife;
+        }
+        else{
+            decrementableLife += amount;
+        }
     }
 
     /**
@@ -86,15 +92,20 @@ public class Warrior extends AbstractCharacter implements ICharacter, IPrototype
     }
 
     @Override
+    public IBuilder<ICharacter> getBuilder() {
+        return null;
+    }
+
+    @Override
     public IPrototype clone() {
-        Warrior clone = new Warrior(this.name, this.defaultLife, this.decrementableLife, this.tools, this.level, this.minPlayerLevelReq, this.hitsPerUnit, this.fields, this.stamina, this.speed, this.media);
+        Warrior clone = new Warrior(this.name, this.defaultLife, this.decrementableLife, this.tools, this.level, this.minPlayerLevelReq, this.hitsPerUnit, this.fields, this.stamina, this.speed);
         return clone;
     }
 
     @Override
     public IPrototype deepClone() {
         IToolListing clonedTools = (IToolListing) this.tools.deepClone();
-        Warrior clone = new Warrior(this.name, this.defaultLife, this.decrementableLife, clonedTools, this.level, this.minPlayerLevelReq, this.hitsPerUnit, this.fields, this.stamina, this.speed,this.media);
+        Warrior clone = new Warrior(this.name, this.defaultLife, this.decrementableLife, clonedTools, this.level, this.minPlayerLevelReq, this.hitsPerUnit, this.fields, this.media, this.stamina, this.speed);
         return clone;
     }
 
@@ -112,7 +123,7 @@ public class Warrior extends AbstractCharacter implements ICharacter, IPrototype
                 "Fields" + this.fields + "\n" +
                 "Stamina" + this.stamina + "\n" +
                 "Speed" + this.speed + "\n" +
-                "DecrementableLife" + this.decrementableLife + "\n" + 
+                "DecrementableLife" + this.decrementableLife + "\n" +
                 "Level" + this.level + "\n" +
                 "MinPlayerLevelReq" + this.minPlayerLevelReq;
         return toString;
@@ -132,9 +143,10 @@ public class Warrior extends AbstractCharacter implements ICharacter, IPrototype
     public void decLvl(int amount) {
         this.level=this.level - amount;
     }
-    
+
 
     public static class WarriorBuilder implements IBuilder<AbstractCharacter> {
+        String name;
         private int stamina, speed, fields;
         private String name;
         private float defaultLife, decrementableLife, hitsPerUnit, level, minPlayerLevelReq;
@@ -144,6 +156,7 @@ public class Warrior extends AbstractCharacter implements ICharacter, IPrototype
         @Override
         public AbstractCharacter build() {
             AbstractCharacter newWarrior = new Warrior(this.name, this.defaultLife, this.decrementableLife, this.tools, this.level, this.minPlayerLevelReq, this.hitsPerUnit, this.fields, this.stamina, this.speed,this.media);
+            AbstractCharacter newWarrior = new Warrior(name, defaultLife, decrementableLife, tools, level, minPlayerLevelReq, hitsPerUnit, fields, media, stamina, speed);
             return newWarrior;
         }
 

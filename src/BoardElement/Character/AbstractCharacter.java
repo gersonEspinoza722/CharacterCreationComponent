@@ -1,11 +1,21 @@
 
 package BoardElement.Character;
 
+import BoardElement.Character.Concrete.CharacterBasic;
+import BoardElement.IBoardElement;
+import BoardElement.Tools.ITool;
 import BoardElement.Tools.IToolListing;
+import BoardElement.Tools.ToolListingFactory;
 import Media.IMediaListing;
+import Media.MediaListingFactory;
+import Patterns.IBuilder;
+import Patterns.IPrototype;
 
-public abstract class AbstractCharacter{
+import java.io.File;
 
+public abstract class AbstractCharacter implements ICharacter, IPrototype<AbstractCharacter>, IBoardElement {
+
+    protected String name;
     protected float defaultLife;
     protected float decrementableLife;
     protected IToolListing tools;
@@ -15,7 +25,14 @@ public abstract class AbstractCharacter{
     protected int fields;
     protected IMediaListing media;
 
-    public AbstractCharacter(float defaultLife, float decrementableLife, IToolListing tools, float level, float minPlayerLevelReq, float hitsPerUnit, int fields) {
+    protected static IBuilder<ICharacter> builder;
+
+    public AbstractCharacter() {
+        this.builder = new CharacterBuilder();
+    }
+
+    public AbstractCharacter(String name, float defaultLife, float decrementableLife, IToolListing tools, float level, float minPlayerLevelReq, float hitsPerUnit, int fields) {
+        this.name = name;
         this.defaultLife = defaultLife;
         this.decrementableLife = decrementableLife;
         this.tools = tools;
@@ -23,10 +40,11 @@ public abstract class AbstractCharacter{
         this.minPlayerLevelReq = minPlayerLevelReq;
         this.hitsPerUnit = hitsPerUnit;
         this.fields = fields;
-
+        this.builder = new CharacterBuilder();
     }
 
-    public AbstractCharacter(float defaultLife, float decrementableLife, IToolListing tools, float level, float minPlayerLevelReq, float hitsPerUnit, int fields, IMediaListing media) {
+    public AbstractCharacter(String name, float defaultLife, float decrementableLife, IToolListing tools, float level, float minPlayerLevelReq, float hitsPerUnit, int fields, IMediaListing media) {
+        this.name = name;
         this.defaultLife = defaultLife;
         this.decrementableLife = decrementableLife;
         this.tools = tools;
@@ -35,5 +53,33 @@ public abstract class AbstractCharacter{
         this.hitsPerUnit = hitsPerUnit;
         this.fields = fields;
         this.media = media;
+        this.builder = new CharacterBuilder();
+    }
+
+    public static class CharacterBuilder implements IBuilder<ICharacter> {
+
+        private String name;
+        private int fields;
+        private float defaultLife, decrementableLife, hitsPerUnit, level, minPlayerLevelReq;
+        IToolListing tools = ToolListingFactory.getInstance().getToolListing(ToolListingFactory.TOOL_ARRAY, "Character List"); //esta bien?
+
+        MediaListingFactory mediaListingFactory = new MediaListingFactory();
+        IMediaListing media = mediaListingFactory.getMediaListing(MediaListingFactory.IMAGE_ARRAY); //esta bien?
+
+        @Override
+        public ICharacter build() {
+            ICharacter newCharacter = new CharacterBasic(name, defaultLife, decrementableLife, tools, level, minPlayerLevelReq, hitsPerUnit, fields, media);
+            return newCharacter;
+        }
+
+        public CharacterBuilder addTool(ITool tool) {
+            this.tools.addTool(tool);
+            return this;
+        }
+
+        public CharacterBuilder addImage(String name, File file) {
+            this.media.loadMedia(name, file);
+            return this;
+        }
     }
 }
