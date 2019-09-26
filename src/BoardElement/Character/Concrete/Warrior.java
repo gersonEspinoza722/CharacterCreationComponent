@@ -146,7 +146,6 @@ public class Warrior extends AbstractCharacter {
 
 
     public static class WarriorBuilder implements IBuilder<AbstractCharacter> {
-        String name;
         private int stamina, speed, fields;
         private String name;
         private float defaultLife, decrementableLife, hitsPerUnit, level, minPlayerLevelReq;
@@ -155,7 +154,6 @@ public class Warrior extends AbstractCharacter {
 
         @Override
         public AbstractCharacter build() {
-            AbstractCharacter newWarrior = new Warrior(this.name, this.defaultLife, this.decrementableLife, this.tools, this.level, this.minPlayerLevelReq, this.hitsPerUnit, this.fields, this.stamina, this.speed,this.media);
             AbstractCharacter newWarrior = new Warrior(name, defaultLife, decrementableLife, tools, level, minPlayerLevelReq, hitsPerUnit, fields, media, stamina, speed);
             return newWarrior;
         }
