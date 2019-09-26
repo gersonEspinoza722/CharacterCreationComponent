@@ -75,9 +75,45 @@ public class CharacterBasic extends AbstractCharacter implements IBoardElement {
         defaultLife = amount;
     }
 
+    /**
+     *
+     * @param amount
+     */
     @Override
-    public IBuilder<ICharacter> getBuilder() {
-        return builder;
+    public void incLvl(int amount) {
+        this.level=this.level + amount;
+    }
+
+    /**
+     *
+     * @param amount
+     */
+    @Override
+    public void decLvl(int amount) {
+        this.level=this.level - amount;
+    }
+
+    @Override
+    public IMediaListing getMedia() {
+        return this.media;
+    }
+
+    @Override
+    public IToolListing getTools() {
+        return this.tools;
+    }
+
+    @Override
+    public String getToString() {
+        String toString= "";
+        toString = "Name" + this.name + "\n" +
+                "DefaultLife" + this.defaultLife + "\n" +
+                "HitsPerUnit" + this.hitsPerUnit + "\n" +
+                "Fields" + this.fields + "\n" +
+                "DecrementableLife" + this.decrementableLife + "\n" +
+                "Level" + this.level + "\n" +
+                "MinPlayerLevelReq" + this.minPlayerLevelReq;
+        return toString;
     }
 
     @Override
@@ -93,7 +129,10 @@ public class CharacterBasic extends AbstractCharacter implements IBoardElement {
         return clone;
     }
 
-
+    @Override
+    public IBuilder<ICharacter> getBuilder() {
+        return builder;
+    }
 /*
     public static class CharacterBasicBuilder implements IBuilder<ICharacter>{
         private String name;
