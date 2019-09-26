@@ -75,13 +75,13 @@ public class CharacterView extends javax.swing.JFrame {
         lvlDecButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        //getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Statistics.setColumns(20);
         Statistics.setRows(5);
         StatisticsScroll.setViewportView(Statistics);
 
-        getContentPane().add(StatisticsScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 370, 390));
+        //getContentPane().add(StatisticsScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 370, 390));
 
         backButton.setText("Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
@@ -103,17 +103,17 @@ public class CharacterView extends javax.swing.JFrame {
         ImagePanel.add(toolViewCharacter, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 360));
         ImagePanel.add(characterView, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 357));
 
-        getContentPane().add(ImagePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 20, 390, 370));
+        //getContentPane().add(ImagePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 20, 390, 370));
 
         WeaponPanel.setLayout(new java.awt.GridLayout(0, 5));
         WeaponScroll.setViewportView(WeaponPanel);
 
-        getContentPane().add(WeaponScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 520, 370, 110));
+        //getContentPane().add(WeaponScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 520, 370, 110));
 
         SkillPanel.setLayout(new java.awt.GridLayout(0, 5));
         SkillScroll.setViewportView(SkillPanel);
 
-        getContentPane().add(SkillScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 370, 110));
+        //getContentPane().add(SkillScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 370, 110));
 
         ToolStatistics.setColumns(20);
         ToolStatistics.setRows(5);

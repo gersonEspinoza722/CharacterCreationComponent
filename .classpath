@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="C:/Users/josue/Desktop/jackson-core-2.10.0.pr3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/josue/Desktop/jackson-annotations-2.10.0.pr3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/josue/Downloads/jackson-databind-2.10.0.pr3.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
