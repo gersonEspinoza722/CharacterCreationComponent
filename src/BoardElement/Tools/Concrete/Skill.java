@@ -52,7 +52,7 @@ public class Skill extends AbstractTool implements ITool, IBoardElement, IProtot
 
     @Override
     public void incLevel() {
-
+        this.level ++;
     }
 
     @Override
@@ -88,5 +88,10 @@ public class Skill extends AbstractTool implements ITool, IBoardElement, IProtot
                 "MinCharacterLevelReq" + this.minCharacterLevelReq + "\n" +
                 "MinPlayerLevelReq" + this.minPlayerLevelReq;
         return toString;
+    }
+
+    @Override
+    public void decLevel() {
+        this.level --;
     }
 }

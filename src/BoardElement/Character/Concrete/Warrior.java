@@ -20,12 +20,13 @@ public class Warrior extends AbstractCharacter implements ICharacter, IPrototype
     private int speed;
     private String name;
 
-    public Warrior(String name, float defaultLife, float decrementableLife, IToolListing tools, float level, float minPlayerLevelReq, float hitsPerUnit, int fields, int stamina, int speed) {
-        super(defaultLife, decrementableLife, tools, level, minPlayerLevelReq, hitsPerUnit, fields);
+
+    
+    public Warrior(String name, float defaultLife, float decrementableLife, IToolListing tools, float level, float minPlayerLevelReq, float hitsPerUnit, int fields, int stamina, int speed, IMediaListing media) {
+        super(defaultLife, decrementableLife, tools, level, minPlayerLevelReq, hitsPerUnit, fields, media);
         this.speed=speed;
         this.stamina=stamina;
         this.name = name;
-        super.media = new ImageArray();
     }
     
     public int getStamina() {
@@ -44,14 +45,11 @@ public class Warrior extends AbstractCharacter implements ICharacter, IPrototype
         this.speed = speed;
     }
 
-    public IMediaListing getMedia() {
-        return super.media;
-    }
-
     public void setMedia(ImageArray images) {
         super.media = images;
     }
 
+ 
  
 
     /**
@@ -74,12 +72,8 @@ public class Warrior extends AbstractCharacter implements ICharacter, IPrototype
      */
     @Override
     public void incLife(int amount) {
-        if(decrementableLife + amount >= defaultLife){
-            decrementableLife = defaultLife;
-        }
-        else{
-            decrementableLife += amount;
-        }
+        decrementableLife += amount;
+      
     }
 
     /**
@@ -93,14 +87,14 @@ public class Warrior extends AbstractCharacter implements ICharacter, IPrototype
 
     @Override
     public IPrototype clone() {
-        Warrior clone = new Warrior(this.name, this.defaultLife, this.decrementableLife, this.tools, this.level, this.minPlayerLevelReq, this.hitsPerUnit, this.fields, this.stamina, this.speed);
+        Warrior clone = new Warrior(this.name, this.defaultLife, this.decrementableLife, this.tools, this.level, this.minPlayerLevelReq, this.hitsPerUnit, this.fields, this.stamina, this.speed, this.media);
         return clone;
     }
 
     @Override
     public IPrototype deepClone() {
         IToolListing clonedTools = (IToolListing) this.tools.deepClone();
-        Warrior clone = new Warrior(this.name, this.defaultLife, this.decrementableLife, clonedTools, this.level, this.minPlayerLevelReq, this.hitsPerUnit, this.fields, this.stamina, this.speed);
+        Warrior clone = new Warrior(this.name, this.defaultLife, this.decrementableLife, clonedTools, this.level, this.minPlayerLevelReq, this.hitsPerUnit, this.fields, this.stamina, this.speed,this.media);
         return clone;
     }
 
@@ -123,6 +117,21 @@ public class Warrior extends AbstractCharacter implements ICharacter, IPrototype
                 "MinPlayerLevelReq" + this.minPlayerLevelReq;
         return toString;
     }
+
+    @Override
+    public IMediaListing getMedia() {
+        return this.media;
+    }
+
+    @Override
+    public void incLvl(int amount) {
+        this.level=this.level + amount;
+    }
+
+    @Override
+    public void decLvl(int amount) {
+        this.level=this.level - amount;
+    }
     
 
     public static class WarriorBuilder implements IBuilder<AbstractCharacter> {
@@ -134,7 +143,7 @@ public class Warrior extends AbstractCharacter implements ICharacter, IPrototype
 
         @Override
         public AbstractCharacter build() {
-            AbstractCharacter newWarrior = new Warrior(this.name, this.defaultLife, this.decrementableLife, this.tools, this.level, this.minPlayerLevelReq, this.hitsPerUnit, this.fields, this.stamina, this.speed);
+            AbstractCharacter newWarrior = new Warrior(this.name, this.defaultLife, this.decrementableLife, this.tools, this.level, this.minPlayerLevelReq, this.hitsPerUnit, this.fields, this.stamina, this.speed,this.media);
             return newWarrior;
         }
 

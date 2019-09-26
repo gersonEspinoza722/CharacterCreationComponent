@@ -7,7 +7,8 @@ public interface ICharacter {
     void decLife(int amount);
     void incLife(int amount);
     void setDefaultLife(int amount);//sets the life range, not decrementable
-    String toString();
+    void incLvl(int amount);
+    void decLvl(int amount);
     IMediaListing getMedia();
     IToolListing getTools();
     String getToString();

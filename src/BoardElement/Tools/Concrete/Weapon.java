@@ -50,7 +50,7 @@ public class Weapon extends AbstractTool implements ITool, IBoardElement, IProto
 
     @Override
     public void incLevel() {
-
+        this.level ++;
     }
 
     @Override
@@ -86,6 +86,11 @@ public class Weapon extends AbstractTool implements ITool, IBoardElement, IProto
                 "MinCharacterLevelReq" + this.minCharacterLevelReq + "\n" +
                 "MinPlayerLevelReq" + this.minPlayerLevelReq;
         return toString;
+    }
+
+    @Override
+    public void decLevel() {
+        this.level --;
     }
 
 }

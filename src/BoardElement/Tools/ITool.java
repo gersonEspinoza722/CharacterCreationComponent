@@ -9,6 +9,7 @@ public interface ITool {
     void incLife(int amount);
     void func(IBoardElement object);
     void incLevel();
+    void decLevel();
     IMediaListing getMediaListing();
     int getType();
     String getToString();
