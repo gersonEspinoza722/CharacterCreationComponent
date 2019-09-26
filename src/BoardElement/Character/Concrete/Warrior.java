@@ -14,7 +14,7 @@ import Media.IMediaListing;
 import java.io.File;
 import java.util.ArrayList;
 
-public class Warrior extends AbstractCharacter implements ICharacter, IPrototype<Warrior>, IBoardElement {
+public class Warrior extends AbstractCharacter {
 
     private int stamina;
     private int speed;
