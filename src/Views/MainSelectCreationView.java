@@ -31,6 +31,7 @@ import java.io.File;
  */
 public  class MainSelectCreationView extends javax.swing.JFrame {
     
+
     public CharacterListingFactory characterListingFactory = new CharacterListingFactory();
     public CharacterFactory characterFactory = new CharacterFactory();
     
@@ -62,7 +63,7 @@ public  class MainSelectCreationView extends javax.swing.JFrame {
         newCharacterButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        //getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         templatesButton.setText("Templates");
         templatesButton.addActionListener(new java.awt.event.ActionListener() {
@@ -70,7 +71,7 @@ public  class MainSelectCreationView extends javax.swing.JFrame {
                 templatesButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(templatesButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, 240, 60));
+        //getContentPane().add(templatesButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, 240, 60));
 
         newCharacterButton.setText("NewCharacter");
         newCharacterButton.addActionListener(new java.awt.event.ActionListener() {
@@ -78,7 +79,7 @@ public  class MainSelectCreationView extends javax.swing.JFrame {
                 newCharacterButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(newCharacterButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 280, 240, 60));
+        //getContentPane().add(newCharacterButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 280, 240, 60));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -170,7 +171,6 @@ public  class MainSelectCreationView extends javax.swing.JFrame {
         //System.out.println(tool2.getToString());
         //System.out.println(images2.getImages().get(0).getPath());
         prueba.addTool(tool2);
-        character = new Warrior("Prueba", 100, 50, prueba, 10, 10, 10, 10, 10, 10, imagesCharacter);
     }
     /**
      * @param args the command line arguments

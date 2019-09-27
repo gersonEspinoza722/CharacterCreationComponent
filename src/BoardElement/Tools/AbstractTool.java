@@ -1,5 +1,7 @@
 package BoardElement.Tools;
 
+import Media.IMediaListing;
+
 public class AbstractTool {
     protected String name;
     protected int defaultLife;
@@ -9,6 +11,7 @@ public class AbstractTool {
     protected float minCharacterLevelReq;
     protected float minPlayerLevelReq;
     protected float simpleUseDecrement;
+    protected IMediaListing media;
 
     public AbstractTool() {
     }

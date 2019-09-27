@@ -1,6 +1,7 @@
 package BoardElement.Character.Concrete;
 
 import BoardElement.Character.AbstractCharacter;
+import BoardElement.Character.CharacterFactory;
 import BoardElement.Character.ICharacter;
 import BoardElement.IBoardElement;
 import BoardElement.Tools.ITool;
@@ -117,7 +118,7 @@ public class CharacterBasic extends AbstractCharacter implements ICharacter, IPr
                 "MinPlayerLevelReq" + this.minPlayerLevelReq;
         return toString;
     }
-
+/*
     @Override
     public IPrototype clone() {
         CharacterBasic clone = new CharacterBasic(this.name, this.defaultLife, this.decrementableLife, this.tools, this.level, this.minPlayerLevelReq, this.hitsPerUnit, this.fields);
@@ -130,7 +131,7 @@ public class CharacterBasic extends AbstractCharacter implements ICharacter, IPr
         CharacterBasic clone = new CharacterBasic(this.name, this.defaultLife, this.decrementableLife, clonedTools, this.level, this.minPlayerLevelReq, this.hitsPerUnit, this.fields, this.media);
         return clone;
     }
-
+*/
     @Override
     public IBuilder<ICharacter> getBuilder() {
         return new CharacterBasicBuilder();
@@ -146,10 +147,14 @@ public class CharacterBasic extends AbstractCharacter implements ICharacter, IPr
         private String name;
         private int fields;
         private float defaultLife, decrementableLife, hitsPerUnit, level, minPlayerLevelReq;
-        IToolListing tools = ToolListingFactory.getInstance().getToolListing(ToolListingFactory.TOOL_ARRAY); //esta bien?
+        private IToolListing tools;
+        private IMediaListing media;
 
-        MediaListingFactory mediaListingFactory = new MediaListingFactory();
-        IMediaListing media = mediaListingFactory.getMediaListing(MediaListingFactory.IMAGE_ARRAY); //esta bien?
+        public CharacterBasicBuilder() {
+            tools = ToolListingFactory.getInstance().getToolListing(ToolListingFactory.TOOL_ARRAY);
+            MediaListingFactory mediaListingFactory = new MediaListingFactory();
+            media = mediaListingFactory.getMediaListing(MediaListingFactory.IMAGE_ARRAY);
+        }
 
         @Override
         public ICharacter build() {
@@ -166,5 +171,42 @@ public class CharacterBasic extends AbstractCharacter implements ICharacter, IPr
             this.media.loadMedia(image);
             return this;
         }
+
+        public CharacterBasicBuilder setName(String name){
+            this.name = name;
+            return this;
+        }
+
+        public CharacterBasicBuilder setFields(int fields){
+            this.fields = fields;
+            return this;
+        }
+
+        public CharacterBasicBuilder setDefaultLife(float defaultLife){
+            this.defaultLife = defaultLife;
+            return this;
+        }
+
+        public CharacterBasicBuilder setHitsPerUnit(float hitsPerUnit){
+            this.hitsPerUnit = hitsPerUnit;
+            return this;
+        }
+
+        public CharacterBasicBuilder setDecrementableLife(float decrementableLife){
+            this.decrementableLife = decrementableLife;
+            return this;
+        }
+
+        public CharacterBasicBuilder setLevel(float level){
+            this.level = level;
+            return this;
+        }
+
+        public CharacterBasicBuilder setMinPlayerLevelReq(float minPlayerLevelReq){
+            this.minPlayerLevelReq = minPlayerLevelReq;
+            return this;
+        }
+
+
     }
 }
