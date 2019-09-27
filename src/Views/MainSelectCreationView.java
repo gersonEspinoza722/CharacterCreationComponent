@@ -5,12 +5,24 @@
  */
 package Views;
 
-import BoardElement.Character.Concrete.Warrior;
+import BoardElement.Character.CharacterFactory;
+import BoardElement.Character.CharacterListingFactory;
+import BoardElement.Character.ICharacter;
+import BoardElement.Character.ICharacterListing;
 import BoardElement.Tools.Concrete.Skill;
 import BoardElement.Tools.Concrete.Weapon;
+import BoardElement.Tools.ITool;
+import BoardElement.Tools.IToolListing;
 import BoardElement.Tools.ToolArray;
+import BoardElement.Tools.ToolFactory;
+import BoardElement.Tools.ToolListingFactory;
 import Media.Concrete.ImageArray;
+import Media.IMediaElement;
 import Media.IMediaListing;
+import Media.MediaElementFactory;
+import Media.MediaListingFactory;
+import Patterns.IBuilder;
+import java.awt.Image;
 import java.io.File;
 
 /**
@@ -19,9 +31,15 @@ import java.io.File;
  */
 public  class MainSelectCreationView extends javax.swing.JFrame {
     
-    public ToolArray prueba = new ToolArray("Arma");
-    public Warrior character;
-    public IMediaListing imagesCharacter = new ImageArray();
+    public CharacterListingFactory characterListingFactory = new CharacterListingFactory();
+    public CharacterFactory characterFactory = new CharacterFactory();
+    
+    public ToolListingFactory toolListingFactory = new ToolListingFactory();
+    public ToolFactory toolFactory = new ToolFactory();
+    
+    public MediaListingFactory mediaListingFactory  = new MediaListingFactory();
+    public MediaElementFactory mediaElementFactory = new MediaElementFactory();
+    
 
     /**
      * Creates new form MainCharacterView
@@ -44,7 +62,7 @@ public  class MainSelectCreationView extends javax.swing.JFrame {
         newCharacterButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        //getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         templatesButton.setText("Templates");
         templatesButton.addActionListener(new java.awt.event.ActionListener() {
@@ -52,7 +70,7 @@ public  class MainSelectCreationView extends javax.swing.JFrame {
                 templatesButtonActionPerformed(evt);
             }
         });
-        //getContentPane().add(templatesButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, 240, 60));
+        getContentPane().add(templatesButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, 240, 60));
 
         newCharacterButton.setText("NewCharacter");
         newCharacterButton.addActionListener(new java.awt.event.ActionListener() {
@@ -60,7 +78,7 @@ public  class MainSelectCreationView extends javax.swing.JFrame {
                 newCharacterButtonActionPerformed(evt);
             }
         });
-        //getContentPane().add(newCharacterButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 280, 240, 60));
+        getContentPane().add(newCharacterButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 280, 240, 60));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -79,43 +97,80 @@ public  class MainSelectCreationView extends javax.swing.JFrame {
     }//GEN-LAST:event_newCharacterButtonActionPerformed
 
     public void loadTemplates(){
-        File fileCharacter = new File("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\magicLvl1.png");
-        File fileCharacter2 = new File("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\magicLvl2.png");
-        File fileCharacter3 = new File("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\magicLvl3.png");
-        File fileCharacter4 = new File("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\magicLvl4.png");
+        
+        IMediaListing imagesCharacter = mediaListingFactory.getMediaListing(0);
+        IMediaElement imageCharacterLvl0= mediaElementFactory.getTool(0);
+        imageCharacterLvl0.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\magicLvl1.png");
+        IMediaElement imageCharacterLvl1 = mediaElementFactory.getTool(0);
+        imageCharacterLvl1.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\magicLvl2.png");
+        IMediaElement imageCharacterLvl2 = mediaElementFactory.getTool(0);
+        imageCharacterLvl2.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\magicLvl3.png");
+        IMediaElement imageCharacterLvl3 = mediaElementFactory.getTool(0);
+        imageCharacterLvl3.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\magicLvl4.png");
+        imagesCharacter.loadMedia(imageCharacterLvl0);
+        imagesCharacter.loadMedia(imageCharacterLvl1);
+        imagesCharacter.loadMedia(imageCharacterLvl2);
+        imagesCharacter.loadMedia(imageCharacterLvl3);
+        
+        
+        IMediaListing imagesToolSkill = mediaListingFactory.getMediaListing(0);
+        IMediaElement imageSkillPreview= mediaElementFactory.getTool(0);
+        imageSkillPreview.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\Skill\\ball\\ballPREVIEW.png");
+        IMediaElement imageSkillLvl0= mediaElementFactory.getTool(0);
+        imageSkillLvl0.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\Skill\\ball\\ballLevel1.png");
+        IMediaElement imageSkillLvl1= mediaElementFactory.getTool(0);
+        imageSkillLvl1.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\Skill\\ball\\ballLevel2.png");
+        imagesToolSkill.loadMedia(imageSkillPreview);
+        imagesToolSkill.loadMedia(imageSkillLvl0);
+        imagesToolSkill.loadMedia(imageSkillLvl1);
+        
+        IMediaListing imagesToolWeapon = mediaListingFactory.getMediaListing(0);
+        IMediaElement imageToolPreview= mediaElementFactory.getTool(0);
+        imageToolPreview.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\Weapon\\Stick\\stickPREVIEW.png");
+        IMediaElement imageToolLvl0= mediaElementFactory.getTool(0);
+        imageToolLvl0.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\Weapon\\Stick\\stickLevel1.png");
+        IMediaElement imageToolLvl1= mediaElementFactory.getTool(0);
+        imageToolLvl1.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\Weapon\\Stick\\stickLevel2.png");
+        imagesToolWeapon.loadMedia(imageToolPreview);
+        imagesToolWeapon.loadMedia(imageToolLvl0);
+        imagesToolWeapon.loadMedia(imageToolLvl1);
+        
+        IToolListing toolListingCharacter = toolListingFactory.getToolListing(0);
+        ITool toolSkill = toolFactory.getTool(0);
+        
+        ITool toolWeapon = toolFactory.getTool(0);
+        
+        ICharacterListing characterListing = characterListingFactory.getCharacterListing(0);
+        IBuilder character = characterFactory.getCharacterBuilder();
+        
+        
+        
+        Skill tool = 
+        
+        
+        
+        imagesCharacter.loadMedia("CharacterWarrior", fileCharacter);
+        imagesCharacter.loadMedia("CharacterWarrior", fileCharacter2);
+        imagesCharacter.loadMedia("CharacterWarrior", fileCharacter3);
+        imagesCharacter.loadMedia("CharacterWarrior", fileCharacter4);
+        imagesToolSkill.loadMedia("WeaponPreview", fileWeapon);
+        imagesToolSkill.loadMedia("WeaponLevel1", fileWeapon2);
+        imagesToolSkill.loadMedia("WeaponLevel2", fileWeapon3);
+        imagesToolWeapon.loadMedia("SkillPreview", fileSkill);
+        imagesToolWeapon.loadMedia("SkillLevel1", fileSkill2);
+        imagesToolWeapon.loadMedia("SkillLevel2", fileSkill3);
 
-        IMediaListing images = new ImageArray();
-        File fileSkill = new File("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\Skill\\ball\\ballPREVIEW.png");
-        File fileSkill2 = new File("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\Skill\\ball\\ballLevel1.png");
-        File fileSkill3 = new File("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\Skill\\ball\\ballLevel2.png");
-        images.loadMedia("SkillPreview", fileSkill);
-        images.loadMedia("SkillLevel1", fileSkill2);
-        images.loadMedia("SkillLevel2", fileSkill3);
-
-        Skill tool = new Skill(5, "RompeAnos", 100, 50, 10, 1, 2, 2, 0);
         tool.setMedia(images);
         //System.out.println(tool.getToString());
         //System.out.println(images.getImages().get(0).getPath());
         prueba.addTool(tool);
 
-        IMediaListing images2 = new ImageArray();
-        File fileWeapon = new File("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\Weapon\\Stick\\stickPREVIEW.png");
-        File fileWeapon2 = new File("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\Weapon\\Stick\\stickLevel1.png");
-        File fileWeapon3 = new File("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\Weapon\\Stick\\stickLevel2.png");
-        images2.loadMedia("WeaponPreview", fileWeapon);
-        images2.loadMedia("WeaponLevel1", fileWeapon2);
-        images2.loadMedia("WeaponLevel2", fileWeapon3);
         Weapon tool2 = new Weapon(5, "RompeCulos", 100, 50, 10, 1, 2, 2, 1);
         tool2.setMedia(images2);
         //System.out.println(tool2.getToString());
         //System.out.println(images2.getImages().get(0).getPath());
         prueba.addTool(tool2);
-
-        imagesCharacter.loadMedia("CharacterWarrior", fileCharacter);
-        imagesCharacter.loadMedia("CharacterWarrior", fileCharacter2);
-        imagesCharacter.loadMedia("CharacterWarrior", fileCharacter3);
-        imagesCharacter.loadMedia("CharacterWarrior", fileCharacter4);
-        //character = new Warrior("Prueba", 100, 50, prueba, 10, 10, 10, 10, 10, 10, imagesCharacter);
+        character = new Warrior("Prueba", 100, 50, prueba, 10, 10, 10, 10, 10, 10, imagesCharacter);
     }
     /**
      * @param args the command line arguments
