@@ -1,0 +1,66 @@
+{
+  "name" : "beast",
+  "defaultLife" : 250.0,
+  "decrementableLife" : 230.0,
+  "weapons" : [ {
+    "name" : "Axe",
+    "defaultLife" : 50,
+    "decrementableLife" : 45,
+    "reach" : 6,
+    "level" : 2.0,
+    "minCharacterLevelReq" : 1.0,
+    "minPlayerLevelReq" : 1.0,
+    "simpleUseDecrement" : 2.0,
+    "type" : 0,
+    "images" : [ {
+      "name" : "axeLevel1-01",
+      "path" : "src/storage/beast/ITools/Weapon1/axeLevel1-01.png"
+    }, {
+      "name" : "axeLevel2-01",
+      "path" : "src/storage/beast/ITools/Weapon1/axeLevel2-01.png"
+    }, {
+      "name" : "axePREVIEW",
+      "path" : "src/storage/beast/ITools/Weapon1/axePREVIEW.png"
+    } ]
+  } ],
+  "skills" : [ {
+    "name" : "Thunder",
+    "defaultLife" : 50,
+    "decrementableLife" : 45,
+    "reach" : 6,
+    "level" : 2.0,
+    "minCharacterLevelReq" : 1.0,
+    "minPlayerLevelReq" : 1.0,
+    "simpleUseDecrement" : 2.0,
+    "regenerative" : false,
+    "effectAmount" : 0.0,
+    "type" : 0,
+    "images" : [ {
+      "name" : "thunderLevel1",
+      "path" : "src/storage/beast/ITools/Skill1/thunderLevel1.png"
+    }, {
+      "name" : "thunderLevel2-01",
+      "path" : "src/storage/beast/ITools/Skill1/thunderLevel2-01.png"
+    }, {
+      "name" : "thunderPREVIEW",
+      "path" : "src/storage/beast/ITools/Skill1/thunderPREVIEW.png"
+    } ]
+  } ],
+  "level" : 1.0,
+  "minPlayerLevelReq" : 1.0,
+  "hitsPerUnit" : 13.0,
+  "fields" : 4,
+  "images" : [ {
+    "name" : "beastLvl1",
+    "path" : "src/storage/beast/beastLvl1.png"
+  }, {
+    "name" : "beastLvl2",
+    "path" : "src/storage/beast/beastLvl2.png"
+  }, {
+    "name" : "beastLvl3",
+    "path" : "src/storage/beast/beastLvl3.png"
+  }, {
+    "name" : "beastLvl4",
+    "path" : "src/storage/beast/beastLvl4.png"
+  } ]
+}

@@ -1,0 +1,66 @@
+{
+  "name" : "warrior",
+  "defaultLife" : 250.0,
+  "decrementableLife" : 230.0,
+  "weapons" : [ {
+    "name" : "Sword",
+    "defaultLife" : 50,
+    "decrementableLife" : 45,
+    "reach" : 6,
+    "level" : 2.0,
+    "minCharacterLevelReq" : 1.0,
+    "minPlayerLevelReq" : 1.0,
+    "simpleUseDecrement" : 2.0,
+    "type" : 0,
+    "images" : [ {
+      "name" : "swordLevel1",
+      "path" : "src/storage/warrior/ITools/Weapon1/swordLevel1.png"
+    }, {
+      "name" : "swordLevel2",
+      "path" : "src/storage/warrior/ITools/Weapon1/swordLevel2.png"
+    }, {
+      "name" : "swordPREVIEW",
+      "path" : "src/storage/warrior/ITools/Weapon1/swordPREVIEW.png"
+    } ]
+  } ],
+  "skills" : [ {
+    "name" : "Shield",
+    "defaultLife" : 50,
+    "decrementableLife" : 45,
+    "reach" : 6,
+    "level" : 2.0,
+    "minCharacterLevelReq" : 1.0,
+    "minPlayerLevelReq" : 1.0,
+    "simpleUseDecrement" : 2.0,
+    "regenerative" : false,
+    "effectAmount" : 0.0,
+    "type" : 0,
+    "images" : [ {
+      "name" : "shieldLevel1",
+      "path" : "src/storage/warrior/ITools/Skill1/shieldLevel1.png"
+    }, {
+      "name" : "shieldLevel2",
+      "path" : "src/storage/warrior/ITools/Skill1/shieldLevel2.png"
+    }, {
+      "name" : "shieldPREVIEW",
+      "path" : "src/storage/warrior/ITools/Skill1/shieldPREVIEW.png"
+    } ]
+  } ],
+  "level" : 1.0,
+  "minPlayerLevelReq" : 1.0,
+  "hitsPerUnit" : 13.0,
+  "fields" : 4,
+  "images" : [ {
+    "name" : "warriorLvl1",
+    "path" : "src/storage/warrior/warriorLvl1.png"
+  }, {
+    "name" : "warriorLvl2",
+    "path" : "src/storage/warrior/warriorLvl2.png"
+  }, {
+    "name" : "warriorLvl3",
+    "path" : "src/storage/warrior/warriorLvl3.png"
+  }, {
+    "name" : "warriorLvl4",
+    "path" : "src/storage/warrior/warriorLvl4.png"
+  } ]
+}

@@ -88,7 +88,7 @@ public class CharacterView extends javax.swing.JFrame {
                 backButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 380, -1, -1));
+        //getContentPane().add(backButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 380, -1, -1));
 
         nextButton.setText("Next");
         nextButton.addActionListener(new java.awt.event.ActionListener() {
@@ -96,11 +96,11 @@ public class CharacterView extends javax.swing.JFrame {
                 nextButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(nextButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 380, -1, -1));
+        //getContentPane().add(nextButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 380, -1, -1));
 
-        ImagePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        ImagePanel.add(toolViewCharacter, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 360));
-        ImagePanel.add(characterView, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 357));
+        //ImagePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        //ImagePanel.add(toolViewCharacter, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 360));
+        //ImagePanel.add(characterView, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 357));
 
         //getContentPane().add(ImagePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 20, 390, 370));
 
@@ -118,8 +118,8 @@ public class CharacterView extends javax.swing.JFrame {
         ToolStatistics.setRows(5);
         ToolStatisticsScroll.setViewportView(ToolStatistics);
 
-        getContentPane().add(ToolStatisticsScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 410, 220, 220));
-        getContentPane().add(ToolView, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 410, 210, 220));
+        //getContentPane().add(ToolStatisticsScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 410, 220, 220));
+        //getContentPane().add(ToolView, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 410, 210, 220));
 
         lvlIncButton.setText("LVL+");
         lvlIncButton.addActionListener(new java.awt.event.ActionListener() {
@@ -127,7 +127,7 @@ public class CharacterView extends javax.swing.JFrame {
                 lvlIncButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(lvlIncButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 460, 60, -1));
+        //getContentPane().add(lvlIncButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 460, 60, -1));
 
         lvlDecButton.setText("LVL-");
         lvlDecButton.addActionListener(new java.awt.event.ActionListener() {
@@ -135,7 +135,7 @@ public class CharacterView extends javax.swing.JFrame {
                 lvlDecButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(lvlDecButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 540, 60, -1));
+        //getContentPane().add(lvlDecButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 540, 60, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

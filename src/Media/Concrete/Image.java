@@ -23,6 +23,7 @@ public class Image extends AbstractMediaElement implements IMediaElement {
         try {
             this.image = ImageIO.read(this.file);
         } catch (IOException e) {
+        	System.out.println("No encontre: "+path);
             e.printStackTrace();
         }
     }

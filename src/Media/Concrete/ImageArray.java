@@ -13,6 +13,9 @@ public class ImageArray implements IMediaListing {
     public ImageArray() {
         images=new ArrayList<>();
     }
+    public ImageArray(ArrayList<Image> images) {
+        this.images = images;
+    }
 
     @Override
     public void loadMedia(String name, File file) {

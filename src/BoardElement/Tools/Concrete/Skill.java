@@ -29,6 +29,30 @@ public class Skill extends AbstractTool implements ITool, IBoardElement, IProtot
 
 
 
+    public boolean isRegenerative() {
+		return regenerative;
+	}
+
+	public void setRegenerative(boolean regenerative) {
+		this.regenerative = regenerative;
+	}
+
+	public float getEffectAmount() {
+		return effectAmount;
+	}
+
+	public void setEffectAmount(float effectAmount) {
+		this.effectAmount = effectAmount;
+	}
+
+	public IMediaListing getMedia() {
+		return media;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
+
     public void setMedia(IMediaListing media) {
         this.media = media;
     }

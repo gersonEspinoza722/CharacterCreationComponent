@@ -5,60 +5,118 @@ import java.util.ArrayList;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import BoardElement.Character.Concrete.CharacterDummy;
+import BoardElement.Character.AbstractCharacter;
+import BoardElement.Character.Concrete.CharacterBasic;
+//import BoardElement.Character.Concrete.CharacterDummy;
 import BoardElement.Tools.IToolListing;
 import BoardElement.Tools.ToolArray;
 import Media.IMediaListing;
 import Media.Concrete.ImageArray;
+import storage.CharacterClassFactory;
+import storage.CharacterDummy;
+import storage.ImageDummy;
+import storage.SkillDummy;
+import storage.WeaponDummy;
 
 
 
 public class json_intents {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
-		IToolListing array = new ToolArray("armas");
-		IMediaListing images = new ImageArray();
-		
-		CharacterDummy character = new CharacterDummy(100f,100f,array,10f,10f,10f,2,images);
-		
+		ArrayList<AbstractCharacter> myList = CharacterClassFactory.getInstace().getCharacters();
+		System.out.println("Personajes en Json: "+myList.size());
 		ObjectMapper mapper = new ObjectMapper();
 		
-		Cat cat = new Cat("Mishy","12","white");
-		Cat cat2 = new Cat("Flo","8","black");
-		Cat cat3 = new Cat("Elsa","3","brown");
-		Cat cat4 = new Cat("Monchi","19","gray");
+		/*
+		ArrayList<WeaponDummy> weapons = new ArrayList<WeaponDummy>(); 
+		ArrayList<SkillDummy> skills = new ArrayList<SkillDummy>();
+		ArrayList<ImageDummy> images = new ArrayList<ImageDummy>();
 		
-		//cat.addSon(cat2);
-		//cat.addSon(cat3);
-		//cat.addSon(cat4);
+		ArrayList<ImageDummy> imagesWeapon = new ArrayList<ImageDummy>();
+		ArrayList<ImageDummy> imagesSkill = new ArrayList<ImageDummy>();
 		
-		ArrayList<Cat> cats = new ArrayList<Cat>();
+		WeaponDummy weaponDummy1 = new WeaponDummy();
+		weaponDummy1.name = "Sword";
+		weaponDummy1.defaultLife = 50;
+		weaponDummy1.decrementableLife = 45;
+		weaponDummy1.reach = 6;
+		weaponDummy1.level = 2;
+		weaponDummy1.minCharacterLevelReq = 1;
+		weaponDummy1.minPlayerLevelReq = 1;
+		weaponDummy1.simpleUseDecrement = 2;
+		weaponDummy1.type = 0;
+		imagesWeapon.add(new ImageDummy("swordLevel1","src/storage/warrior/ITools/Weapon1/swordLevel1.png"));
+		imagesWeapon.add(new ImageDummy("swordLevel2","src/storage/warrior/ITools/Weapon1/swordLevel2.png"));
+		imagesWeapon.add(new ImageDummy("swordPREVIEW","src/storage/warrior/ITools/Weapon1/swordPREVIEW.png"));
+		weaponDummy1.images = imagesWeapon;
+		
+		SkillDummy skillDummy1 = new SkillDummy();
+		skillDummy1.name = "Shield";
+		skillDummy1.defaultLife = 50;
+		skillDummy1.decrementableLife = 45;
+		skillDummy1.reach = 6;
+		skillDummy1.level = 2;
+		skillDummy1.minCharacterLevelReq = 1;
+		skillDummy1.minPlayerLevelReq = 1;
+		skillDummy1.simpleUseDecrement = 2;
+		skillDummy1.type = 0;
+		
+		imagesSkill.add(new ImageDummy("shieldLevel1","src/storage/warrior/ITools/Skill1/shieldLevel1.png"));
+		imagesSkill.add(new ImageDummy("shieldLevel2","src/storage/warrior/ITools/Skill1/shieldLevel2.png"));
+		imagesSkill.add(new ImageDummy("shieldPREVIEW","src/storage/warrior/ITools/Skill1/shieldPREVIEW.png"));
+		skillDummy1.images = imagesSkill;
+		
+		CharacterDummy dummy1 = new CharacterDummy();
+		dummy1.name = "warrior";
+		dummy1.defaultLife = 250f;
+		dummy1.decrementableLife = 230f;
+		
+		weapons.add(weaponDummy1);
+		
+		dummy1.weapons = weapons;
+		
+		skills.add(skillDummy1);
+		
+		dummy1.skills = skills;
+		dummy1.level = 1;
+		dummy1.minPlayerLevelReq = 1;
+		dummy1.hitsPerUnit = 13f;
+		dummy1.fields = 4;
+		
+		images.add(new ImageDummy("warriorLvl1","src/storage/warriorc/warriorLvl1.png"));
+		images.add(new ImageDummy("warriorLvl2","src/storage/warrior/warriorLvl2.png"));
+		images.add(new ImageDummy("warriorLvl3","src/storage/warrior/warriorLvl3.png"));
+		images.add(new ImageDummy("warriorLvl4","src/storage/warrior/warriorLvl4.png"));
+		
+		dummy1.images = images;
+		*/
 		/*
 		try {
             //mapper.writeValue(new File("src/storage/result.json"), cat);//Plain JSON
-            mapper.writerWithDefaultPrettyPrinter().writeValue(new File("src/storage/result0.json"), cat);//Prettified JSON
-            mapper.writerWithDefaultPrettyPrinter().writeValue(new File("src/storage/result1.json"), cat2);//Prettified JSON
-            mapper.writerWithDefaultPrettyPrinter().writeValue(new File("src/storage/result2.json"), cat3);//Prettified JSON
-            mapper.writerWithDefaultPrettyPrinter().writeValue(new File("src/storage/result3.json"), cat4);//Prettified JSON
+            mapper.writerWithDefaultPrettyPrinter().writeValue(new File("src/storage/jsons/result2.json"), dummy1);//Prettified JSON
+            //mapper.writerWithDefaultPrettyPrinter().writeValue(new File("src/storage/result1.json"), cat2);//Prettified JSON
+            //mapper.writerWithDefaultPrettyPrinter().writeValue(new File("src/storage/result2.json"), cat3);//Prettified JSON
+            //mapper.writerWithDefaultPrettyPrinter().writeValue(new File("src/storage/result3.json"), cat4);//Prettified JSON
             System.out.println("Json files created");
         } catch (Exception e) {
             e.printStackTrace();
         }
         */
-		int files = 4;
-		Cat value = null;
+		/*
+		int files = 1;
+		CharacterDummy value = null;
 		for(int i = 0;i<files;i++) {
 			try {
-	            value = mapper.readValue(new File("src/storage/result"+i+".json"), Cat.class);
+	            value = mapper.readValue(new File("src/storage/jsons/result"+i+".json"), CharacterDummy.class);
 	            System.out.println(value.toString());
-	            cats.add(value);
+	            //cats.add(value);
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }	
 		}
-		System.out.println(cats.size());
+        //CharacterBasic example = value.getRealClass();
+        
+        
         
         
         
@@ -71,40 +129,6 @@ public class json_intents {
             e.printStackTrace();
         }*/
 		
-	}
-	public static class Cat{
-		public String name;
-		public String age;
-		public String color;
-		public ArrayList<Cat> sons;
-		public Cat() {
-			
-		}
-		public Cat(String name,String age,String color) {
-			this.name = name;
-			this.age = age;
-			this.color = color;
-			sons = new ArrayList<Cat>();
-		}
-		public void addSon(Cat cat) {
-			sons.add(cat);
-		}
-		public String toString() {
-			String msg = "";
-			msg += "Name: "+name+"\n";
-			msg += "Age: "+age+"\n";
-			msg += "Color: "+color+"\n";
-			
-			if(sons.size()==0) {
-				msg+="Sons: No sons\n\n";
-			}else {
-				msg += "Sons: \n\n";
-				for(Cat cat:sons) {
-					msg+=cat.toString();
-				}
-			}
-			return msg;
-		}
 	}
 
 }

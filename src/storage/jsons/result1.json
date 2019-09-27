@@ -1,0 +1,66 @@
+{
+  "name" : "magic",
+  "defaultLife" : 250.0,
+  "decrementableLife" : 230.0,
+  "weapons" : [ {
+    "name" : "Stick",
+    "defaultLife" : 50,
+    "decrementableLife" : 45,
+    "reach" : 6,
+    "level" : 2.0,
+    "minCharacterLevelReq" : 1.0,
+    "minPlayerLevelReq" : 1.0,
+    "simpleUseDecrement" : 2.0,
+    "type" : 0,
+    "images" : [ {
+      "name" : "stickLevel1",
+      "path" : "src/storage/magic/ITools/Weapon1/stickLevel1.png"
+    }, {
+      "name" : "stickLevel2",
+      "path" : "src/storage/magic/ITools/Weapon1/stickLevel2.png"
+    }, {
+      "name" : "stickPREVIEW",
+      "path" : "src/storage/magic/ITools/Weapon1/stickPREVIEW.png"
+    } ]
+  } ],
+  "skills" : [ {
+    "name" : "Ball",
+    "defaultLife" : 50,
+    "decrementableLife" : 45,
+    "reach" : 6,
+    "level" : 2.0,
+    "minCharacterLevelReq" : 1.0,
+    "minPlayerLevelReq" : 1.0,
+    "simpleUseDecrement" : 2.0,
+    "regenerative" : false,
+    "effectAmount" : 0.0,
+    "type" : 0,
+    "images" : [ {
+      "name" : "ballLevel1",
+      "path" : "src/storage/magic/ITools/Skill1/ballLevel1.png"
+    }, {
+      "name" : "ballLevel2",
+      "path" : "src/storage/magic/ITools/Skill1/ballLevel2.png"
+    }, {
+      "name" : "ballPREVIEW",
+      "path" : "src/storage/magic/ITools/Skill1/ballPREVIEW.png"
+    } ]
+  } ],
+  "level" : 1.0,
+  "minPlayerLevelReq" : 1.0,
+  "hitsPerUnit" : 13.0,
+  "fields" : 4,
+  "images" : [ {
+    "name" : "magicLvl1",
+    "path" : "src/storage/magic/magicLvl1.png"
+  }, {
+    "name" : "magicLvl2",
+    "path" : "src/storage/magic/magicLvl2.png"
+  }, {
+    "name" : "magicLvl3",
+    "path" : "src/storage/magic/magicLvl3.png"
+  }, {
+    "name" : "magicLvl4",
+    "path" : "src/storage/magic/magicLvl4.png"
+  } ]
+}
