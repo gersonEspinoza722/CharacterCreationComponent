@@ -6,8 +6,8 @@ import java.io.File;
 import java.util.ArrayList;
 
 public interface IMediaListing {
-    void loadMedia(String name, File file);
+    void loadMedia(IMediaElement image);
     void deleteMediaElement(String name);
     AbstractMediaElement getElement(String name);
-    ArrayList<Image> getImages();
+    ArrayList<IMediaElement> getMedia();
 }

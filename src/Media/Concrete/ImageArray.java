@@ -9,15 +9,14 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class ImageArray implements IMediaListing {
-    ArrayList<Image> images;
+    ArrayList<IMediaElement> mediaList;
     public ImageArray() {
-        images=new ArrayList<>();
+        mediaList=new ArrayList<>();
     }
 
     @Override
-    public void loadMedia(String name, File file) {
-        Image image = new Image(name,file);
-        images.add(image);
+    public void loadMedia(IMediaElement media) {
+        mediaList.add(media);
     }
 
     @Override
@@ -31,7 +30,8 @@ public class ImageArray implements IMediaListing {
     }
 
     @Override
-    public ArrayList<Image> getImages() {
-        return images;
+    public ArrayList<IMediaElement> getMedia() {
+        return mediaList;
     }
+
 }

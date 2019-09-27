@@ -14,7 +14,7 @@ import BoardElement.Character.Concrete.CharacterArray;
 public class CharacterListingFactory {
     private static CharacterListingFactory singleton = null;
 
-    public static final int TOOL_ARRAY = 0;
+    public static final int CHARACTER_ARRAY = 0;
 
     public CharacterListingFactory() {
     }
@@ -26,9 +26,9 @@ public class CharacterListingFactory {
         return singleton;
     }
     
-    public ICharacterListing getCharacterListing(int type, String name){
+    public ICharacterListing getCharacterListing(int type){
         switch (type){
-            case TOOL_ARRAY:
+            case CHARACTER_ARRAY:
                 return new CharacterArray();
         }
         return null;

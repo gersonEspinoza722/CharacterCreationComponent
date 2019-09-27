@@ -6,6 +6,8 @@ import BoardElement.IBoardElement;
 import BoardElement.Tools.ITool;
 import BoardElement.Tools.IToolListing;
 import BoardElement.Tools.ToolListingFactory;
+import Media.Concrete.Image;
+import Media.IMediaElement;
 import Media.IMediaListing;
 import Media.MediaListingFactory;
 import Patterns.IBuilder;
@@ -160,8 +162,8 @@ public class CharacterBasic extends AbstractCharacter implements ICharacter, IPr
             return this;
         }
 
-        public CharacterBasicBuilder addImage(String name, File file) {
-            this.media.loadMedia(name, file);
+        public CharacterBasicBuilder addImage(IMediaElement image) {
+            this.media.loadMedia(image);
             return this;
         }
     }
