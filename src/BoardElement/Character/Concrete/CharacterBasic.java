@@ -145,10 +145,14 @@ public class CharacterBasic extends AbstractCharacter implements ICharacter, IPr
         private String name;
         private int fields;
         private float defaultLife, decrementableLife, hitsPerUnit, level, minPlayerLevelReq;
-        IToolListing tools = ToolListingFactory.getInstance().getToolListing(ToolListingFactory.TOOL_ARRAY); //esta bien?
+        private IToolListing tools;
+        private IMediaListing media;
 
-        MediaListingFactory mediaListingFactory = new MediaListingFactory();
-        IMediaListing media = mediaListingFactory.getMediaListing(MediaListingFactory.IMAGE_ARRAY); //esta bien?
+        public CharacterBasicBuilder() {
+            tools = ToolListingFactory.getInstance().getToolListing(ToolListingFactory.TOOL_ARRAY);
+            MediaListingFactory mediaListingFactory = new MediaListingFactory();
+            media = mediaListingFactory.getMediaListing(MediaListingFactory.IMAGE_ARRAY);
+        }
 
         @Override
         public ICharacter build() {

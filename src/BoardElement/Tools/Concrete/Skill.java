@@ -5,12 +5,15 @@ import BoardElement.Tools.AbstractTool;
 import BoardElement.Tools.ITool;
 import Media.Concrete.ImageArray;
 import Media.IMediaListing;
+import Media.MediaListingFactory;
+import Patterns.IBuilder;
 import Patterns.IPrototype;
+
+import java.io.File;
 
 public class Skill extends AbstractTool implements ITool, IBoardElement, IPrototype<Skill> {
 
     private boolean regenerative; //true if its use increments life
-    private float effectAmount;
     private int type; //Example. 0: affects character, 1: affects weapon,...
     private IMediaListing media;
 
@@ -18,7 +21,7 @@ public class Skill extends AbstractTool implements ITool, IBoardElement, IProtot
     public Skill() {
     }
 
-    public Skill(float simpleUseDecrement, String name, int defaultLife, int decrementableLife, int reach, float level, float minCharacterLevelReq, float minPlayerLevelReq, int type) {
+    public Skill(float simpleUseDecrement, String name, int defaultLife, int decrementableLife, int reach, float level, float minCharacterLevelReq, float minPlayerLevelReq, int type, boolean regenerative) {
         super(simpleUseDecrement, name, defaultLife, decrementableLife, reach, level, minCharacterLevelReq, minPlayerLevelReq);
         this.type = type;
         media = new ImageArray();
@@ -62,7 +65,7 @@ public class Skill extends AbstractTool implements ITool, IBoardElement, IProtot
 
     @Override
     public IPrototype deepClone() {
-        Skill clonedSkill = new Skill(this.simpleUseDecrement, this.name, this.defaultLife, this.decrementableLife, this.reach, this.level, this.minCharacterLevelReq, this.minPlayerLevelReq, this.type);
+        Skill clonedSkill = new Skill(this.simpleUseDecrement, this.name, this.defaultLife, this.decrementableLife, this.reach, this.level, this.minCharacterLevelReq, this.minPlayerLevelReq, this.type, this.regenerative);
         return clonedSkill;
     }
 
@@ -93,5 +96,80 @@ public class Skill extends AbstractTool implements ITool, IBoardElement, IProtot
     @Override
     public void decLevel() {
         this.level --;
+    }
+
+    public static class SkillBuilder implements IBuilder<ITool> {
+
+        private int type, defaultLife, decrementableLife, reach;
+        private float simpleUseDecrement, level, minPlayerLevelReq, minCharacterLevelReq;
+        private String name;
+        private IMediaListing media;
+        boolean regenerative;
+
+        public SkillBuilder() {
+            MediaListingFactory mediaListingFactory = new MediaListingFactory();
+            mediaListingFactory.getMediaListing(MediaListingFactory.IMAGE_ARRAY);
+        }
+
+        @Override
+        public ITool build() {
+            ITool newTool = new Skill(simpleUseDecrement, name, defaultLife, decrementableLife, reach, level, minCharacterLevelReq, minPlayerLevelReq, type, regenerative);
+            return newTool;
+        }
+
+        public SkillBuilder setType(int type){
+            this.type = type;
+            return this;
+        }
+
+        public SkillBuilder setDefaultLife(int defaultLife){
+            this.defaultLife = defaultLife;
+            return this;
+        }
+
+        public SkillBuilder setDecrementableLife(int decrementableLife){
+            this.decrementableLife = decrementableLife;
+            return this;
+        }
+
+        public SkillBuilder setReach(int reach){
+            this.reach = reach;
+            return this;
+        }
+
+        public SkillBuilder setSimpleUseDecrement(float simpleUseDecrement){
+            this.simpleUseDecrement = simpleUseDecrement;
+            return this;
+        }
+
+        public SkillBuilder setLevel(float level){
+            this.level = level;
+            return this;
+        }
+
+        public SkillBuilder setMinPlayerLevelReq(float minPlayerLevelReq){
+            this.minPlayerLevelReq = minPlayerLevelReq;
+            return this;
+        }
+
+        public SkillBuilder setMinCharacterLevelReq(float minCharacterLevelReq){
+            this.minCharacterLevelReq = minCharacterLevelReq;
+            return this;
+        }
+
+        public SkillBuilder setName(String name){
+            this.name = name;
+            return this;
+        }
+
+        public SkillBuilder addMedia(String name, File file) {
+            this.media.loadMedia(name, file);
+            return this;
+        }
+
+        public SkillBuilder setRegenerative(boolean regenerative){
+            this.regenerative = regenerative;
+            return this;
+        }
     }
 }
