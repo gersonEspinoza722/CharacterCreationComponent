@@ -30,8 +30,8 @@ public class ImageArray implements IMediaListing {
     }
 
     @Override
-    public ArrayList<IMediaElement> getMedia() {
-        return mediaList;
+    public ArrayList<IMediaElement> getImages() {
+        return this.mediaList;
     }
 
 }

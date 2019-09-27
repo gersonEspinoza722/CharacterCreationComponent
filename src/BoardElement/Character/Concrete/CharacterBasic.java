@@ -143,7 +143,8 @@ public class CharacterBasic extends AbstractCharacter implements ICharacter, IPr
         private final IMediaListing media;
 
         public CharacterBasicBuilder() {
-            tools = ToolListingFactory.getInstance().getToolListing(ToolListingFactory.TOOL_ARRAY);
+            ToolListingFactory toolListingFactory = new ToolListingFactory();
+            tools = toolListingFactory.getToolListing(ToolListingFactory.TOOL_ARRAY);
             MediaListingFactory mediaListingFactory = new MediaListingFactory();
             media = mediaListingFactory.getMediaListing(MediaListingFactory.IMAGE_ARRAY);
         }

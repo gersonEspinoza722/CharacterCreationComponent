@@ -10,13 +10,24 @@ import BoardElement.Character.CharacterListingFactory;
 import BoardElement.Character.Concrete.CharacterBasic;
 import BoardElement.Character.ICharacter;
 import BoardElement.Character.ICharacterListing;
+import BoardElement.Tools.ITool;
+import BoardElement.Tools.IToolListing;
 import BoardElement.Tools.ToolFactory;
 import BoardElement.Tools.ToolListingFactory;
 import Media.IMediaElement;
 import Media.IMediaListing;
 import Media.MediaElementFactory;
 import Media.MediaListingFactory;
+import Patterns.IPrototype;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -36,12 +47,18 @@ public class CreateCharacter extends javax.swing.JFrame {
     public MediaElementFactory mediaElementFactory = new MediaElementFactory();
    
     public ICharacterListing characterListing;
+    public ArrayList<IPrototype> prototypes;
+    public IToolListing tools;
     CharacterBasic.CharacterBasicBuilder characterBasicBuilder = new CharacterBasic.CharacterBasicBuilder();
+    ICharacter character;
     /**
      * Creates new form CreateCharacter
      */
-    public CreateCharacter() {
+    public CreateCharacter(ArrayList<IPrototype> prototypes, IToolListing tools) {
         initComponents();
+        this.tools = tools;
+        this.prototypes = prototypes;
+        loadTools(this.tools);
     }
 
     /**
@@ -69,6 +86,13 @@ public class CreateCharacter extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         textFields = new javax.swing.JTextField();
         createCharacter = new javax.swing.JButton();
+        characterView = new javax.swing.JLabel();
+        savePrototype = new javax.swing.JRadioButton();
+        jButton1 = new javax.swing.JButton();
+        toolsAvailable = new javax.swing.JScrollPane();
+        toolsAvaiableView = new javax.swing.JPanel();
+        myTools = new javax.swing.JScrollPane();
+        myToolsView = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -100,82 +124,167 @@ public class CreateCharacter extends javax.swing.JFrame {
             }
         });
 
+        savePrototype.setText("Save prototype");
+        savePrototype.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                savePrototypeActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Exit");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        toolsAvaiableView.setLayout(new java.awt.GridLayout(0, 5));
+        toolsAvailable.setViewportView(toolsAvaiableView);
+
+        myToolsView.setLayout(new java.awt.GridLayout(0, 5));
+        myTools.setViewportView(myToolsView);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(textDefaultLife)
-                    .addComponent(textName)
-                    .addComponent(textDecrementable)
-                    .addComponent(textLevel)
-                    .addComponent(textMinPlayer)
-                    .addComponent(textHitsPerUnit, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
-                    .addComponent(textFields))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(addImage)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 432, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 693, Short.MAX_VALUE)
                 .addComponent(createCharacter)
                 .addGap(26, 26, 26))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel7))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(textDefaultLife)
+                                    .addComponent(textName)
+                                    .addComponent(textDecrementable)
+                                    .addComponent(textLevel)
+                                    .addComponent(textMinPlayer)
+                                    .addComponent(textHitsPerUnit, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
+                                    .addComponent(textFields))
+                                .addGap(84, 84, 84)
+                                .addComponent(characterView, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(savePrototype)
+                                .addGap(54, 54, 54)
+                                .addComponent(toolsAvailable, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(43, 43, 43)
+                                .addComponent(myTools, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(addImage)))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textDefaultLife, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(textDecrementable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(textLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(textMinPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(textName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(textDefaultLife, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(textDecrementable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(textLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(textMinPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(textHitsPerUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(textFields, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(characterView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(toolsAvailable)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(savePrototype)
+                        .addGap(26, 26, 26)
+                        .addComponent(addImage)
+                        .addGap(0, 106, Short.MAX_VALUE))
+                    .addComponent(myTools))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(textHitsPerUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(textFields, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 215, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addImage)
-                    .addComponent(createCharacter))
+                    .addComponent(createCharacter)
+                    .addComponent(jButton1))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void loadTools(IToolListing tools){
+        for(ITool tool: tools.getToolList()){
+            setTool(tool);
+        }
+    }
+    
+    public void setTool(ITool tool){
+        JButton toolButton = new JButton();
+        //System.out.println(tool.getMediaListing().getMedia().size());
+        String path = tool.getMediaListing().getImages().get(0).getPath();
+        //System.out.println(path);
+        toolButton.setIcon(new javax.swing.ImageIcon(path));
+        this.toolsAvaiableView.add(toolButton);
+        this.toolsAvaiableView.updateUI();
+        toolButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //System.out.println(path);
+                try {
+                    System.out.println("Soy:" + tool.getType());
+                    int i = tool.getType();
+                    ITool itool = (ITool ) tool.deepCloneAux();
+                    characterBasicBuilder.addTool(itool);
+                    JButton toolButton = new JButton();
+                    String path = itool.getMediaListing().getImages().get(0).getPath();
+                    toolButton.setIcon(new javax.swing.ImageIcon(path));
+                    myToolsView.add(toolButton);
+                    myToolsView.updateUI();
+                    System.out.println("Agregue un tool");
+                } catch (Exception ex) {
+                    Logger.getLogger(CharacterView.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+    }
     private void addImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addImageActionPerformed
         // TODO add your handling code here:
         IMediaListing imagesCharacter = mediaListingFactory.getMediaListing(0);
-        IMediaElement imageCharacterLvl0= mediaElementFactory.getTool(0);
+        IMediaElement imageCharacterLvl0= mediaElementFactory.getMedia(0);
         JFileChooser file = new JFileChooser();
         file.showOpenDialog(this);
         File archivo = file.getSelectedFile();
@@ -184,6 +293,13 @@ public class CreateCharacter extends javax.swing.JFrame {
             imageCharacterLvl0.setPath(origen);
             imagesCharacter.loadMedia(imageCharacterLvl0);
             characterBasicBuilder.addImage(imageCharacterLvl0);
+             String path = imageCharacterLvl0.getPath();
+             ImageIcon icon = new ImageIcon(path);
+             Image image = icon.getImage().getScaledInstance(characterView.getWidth(), characterView.getHeight(), Image.SCALE_DEFAULT);
+             ImageIcon newIcon = new ImageIcon(image);
+             characterView.setIcon(newIcon);
+             characterView.updateUI();
+            System.out.println("Path elegido:" + imageCharacterLvl0.getPath());
         }else{
             JOptionPane.showMessageDialog(null, "Por favor seleccione un archivo");
         }
@@ -191,53 +307,42 @@ public class CreateCharacter extends javax.swing.JFrame {
 
     private void createCharacterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createCharacterActionPerformed
         // TODO add your handling code here:
+        int decrementableLife = Integer.parseInt(this.textDecrementable.getText());
+        int defaultLife = Integer.parseInt(this.textDefaultLife.getText());
+        int fields = Integer.parseInt(this.textFields.getText());
+        int hitsPerUnit = Integer.parseInt(this.textHitsPerUnit.getText());
+        int level = Integer.parseInt(this.textLevel.getText());
+        int minPlayerLevelReq = Integer.parseInt(this.textMinPlayer.getText());
+        String name = this.textName.getText();
         characterListing = characterListingFactory.getCharacterListing(0);
-        characterBasicBuilder.setDecrementableLife(10).setDefaultLife(10).setFields(10).setHitsPerUnit(10)
-                .setLevel(10).setMinPlayerLevelReq(10).setName("Barbaro");
-        ICharacter character = characterBasicBuilder.build();
+        characterBasicBuilder.setDecrementableLife(decrementableLife).setDefaultLife(defaultLife).setFields(fields).setHitsPerUnit(hitsPerUnit)
+                .setLevel(level).setMinPlayerLevelReq(minPlayerLevelReq).setName(name);
+        character = characterBasicBuilder.build();
         characterListing.addCharacter(character);
-        characterFactory.addPrototype(character);
-        System.out.println(character.getToString());
+        //characterFactory.addPrototype(character);
+        if(savePrototype.isSelected()){
+            prototypes.add(character.deepCloneAux());
+        }
+        CharacterView characterView = new CharacterView(character,this.prototypes,tools);
+        characterView.show();
+        this.dispose();
     }//GEN-LAST:event_createCharacterActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CreateCharacter.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CreateCharacter.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CreateCharacter.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CreateCharacter.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CreateCharacter().setVisible(true);
-            }
-        });
-    }
+    private void savePrototypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savePrototypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_savePrototypeActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addImage;
+    private javax.swing.JLabel characterView;
     private javax.swing.JButton createCharacter;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -245,6 +350,9 @@ public class CreateCharacter extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JScrollPane myTools;
+    private javax.swing.JPanel myToolsView;
+    private javax.swing.JRadioButton savePrototype;
     private javax.swing.JTextField textDecrementable;
     private javax.swing.JTextField textDefaultLife;
     private javax.swing.JTextField textFields;
@@ -252,5 +360,7 @@ public class CreateCharacter extends javax.swing.JFrame {
     private javax.swing.JTextField textLevel;
     private javax.swing.JTextField textMinPlayer;
     private javax.swing.JTextField textName;
+    private javax.swing.JPanel toolsAvaiableView;
+    private javax.swing.JScrollPane toolsAvailable;
     // End of variables declaration//GEN-END:variables
 }

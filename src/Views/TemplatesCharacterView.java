@@ -23,16 +23,21 @@ import javax.swing.JLabel;
  *
  * @author Marvin Armando
  */
-public class TemplatesCharacterView extends javax.swing.JFrame {
+public  class TemplatesCharacterView extends javax.swing.JFrame {
 
     /**
      * Creates new form TemplatesCharacterView
      *
      * @param warrior
      */
-    public TemplatesCharacterView(ArrayList<IPrototype> prototypes) {
+    public ArrayList<IPrototype> prototypes;
+    public IToolListing tools;
+    
+    public TemplatesCharacterView(ArrayList<IPrototype> prototypes,IToolListing tools) {
         //System.out.println(warrior.getToString());
         initComponents();
+        this.tools = tools;
+        this.prototypes = prototypes;
         setCharacters(prototypes);
     }
 
@@ -40,15 +45,16 @@ public class TemplatesCharacterView extends javax.swing.JFrame {
         System.out.println(prototypes.size());
         for (IPrototype prototype : prototypes) {
             CharacterBasic character = (CharacterBasic) prototype.deepClone();
-            //System.out.println(character.getToString());
-            //System.out.println(character.getMedia().getMedia().size());
+            System.out.println(character.getToString());
+            System.out.println("Size en templates"+character.getMedia().getImages().size());
             JButton toolButton = new JButton();
-            String path = character.getMedia().getMedia().get(0).getPath();
+            String path = character.getMedia().getImages().get(0).getPath();
+            System.out.println(path);
             ImageIcon icon = new ImageIcon(path);
             Image image = icon.getImage().getScaledInstance(250, 500, Image.SCALE_DEFAULT);
             ImageIcon newIcon = new ImageIcon(image);
             toolButton.setIcon(newIcon);
-            //System.out.println("PRUEBA");
+            System.out.println("PRUEBA");
             this.templatesCharacter.add(toolButton);
             this.templatesCharacter.updateUI();
             toolButton.addActionListener(new ActionListener() {
@@ -56,8 +62,9 @@ public class TemplatesCharacterView extends javax.swing.JFrame {
                 public void actionPerformed(ActionEvent e) {
                     //System.out.println(path);
                     try {
-                        CharacterView characterView = new CharacterView(character);
+                        CharacterView characterView = new CharacterView(character,prototypes,tools);
                         characterView.setVisible(true);
+                        dispose();
 
                     } catch (Exception ex) {
                         Logger.getLogger(CharacterView.class.getName()).log(Level.SEVERE, null, ex);
@@ -81,34 +88,52 @@ public class TemplatesCharacterView extends javax.swing.JFrame {
 
         templatesCharacterScroll = new javax.swing.JScrollPane();
         templatesCharacter = new javax.swing.JPanel();
+        back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         templatesCharacter.setLayout(new java.awt.GridLayout(0, 5));
         templatesCharacterScroll.setViewportView(templatesCharacter);
 
+        back.setText("Back");
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(templatesCharacterScroll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 922, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(templatesCharacterScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 898, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(back)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(templatesCharacterScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 589, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(back)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addComponent(templatesCharacterScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+        // TODO add your handling code here:
+        MainSelectCreationView mainSelectCreationView = new MainSelectCreationView(prototypes,tools);
+        mainSelectCreationView.show();
+        this.dispose();
+    }//GEN-LAST:event_backActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton back;
     private javax.swing.JPanel templatesCharacter;
     private javax.swing.JScrollPane templatesCharacterScroll;
     // End of variables declaration//GEN-END:variables

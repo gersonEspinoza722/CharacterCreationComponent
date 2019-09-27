@@ -9,5 +9,5 @@ public interface IMediaListing {
     void loadMedia(IMediaElement image);
     void deleteMediaElement(String name);
     AbstractMediaElement getElement(String name);
-    ArrayList<IMediaElement> getMedia();
+    ArrayList<IMediaElement> getImages();
 }
