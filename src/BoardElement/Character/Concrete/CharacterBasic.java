@@ -1,6 +1,7 @@
 package BoardElement.Character.Concrete;
 
 import BoardElement.Character.AbstractCharacter;
+import BoardElement.Character.CharacterFactory;
 import BoardElement.Character.ICharacter;
 import BoardElement.IBoardElement;
 import BoardElement.Tools.ITool;
@@ -164,5 +165,42 @@ public class CharacterBasic extends AbstractCharacter implements ICharacter, IPr
             this.media.loadMedia(name, file);
             return this;
         }
+
+        public CharacterBasicBuilder setName(String name){
+            this.name = name;
+            return this;
+        }
+
+        public CharacterBasicBuilder setFields(int fields){
+            this.fields = fields;
+            return this;
+        }
+
+        public CharacterBasicBuilder setDefaultLife(float defaultLife){
+            this.defaultLife = defaultLife;
+            return this;
+        }
+
+        public CharacterBasicBuilder setHitsPerUnit(float hitsPerUnit){
+            this.hitsPerUnit = hitsPerUnit;
+            return this;
+        }
+
+        public CharacterBasicBuilder setDecrementableLife(float decrementableLife){
+            this.decrementableLife = decrementableLife;
+            return this;
+        }
+
+        public CharacterBasicBuilder setLevel(float level){
+            this.level = level;
+            return this;
+        }
+
+        public CharacterBasicBuilder setMinPlayerLevelReq(float minPlayerLevelReq){
+            this.minPlayerLevelReq = minPlayerLevelReq;
+            return this;
+        }
+
+
     }
 }
