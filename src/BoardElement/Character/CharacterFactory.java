@@ -23,15 +23,28 @@ public class CharacterFactory {
         return singleton;
     }
 
-    public IBuilder<ICharacter> addCharacter(int type){
-        if(characters.containsKey(type)){
-            return null; //excepcion
-        }
-        else{
-            ICharacter newCharacter = new CharacterBasic();
-            return newCharacter.getBuilder();
-        }
+    /**
+     *
+     * @return: Returns a Builder to build a new character from scratch
+     */
+    public IBuilder<ICharacter> getCharacterBuilder(){
+        ICharacter newCharacter = new CharacterBasic();
+        return newCharacter.getBuilder();
     }
+
+    /**
+     * Adds a new Character to the prototype lists, id is set
+     * @param newCharacter
+     */
+    public void addPrototype(ICharacter newCharacter){
+        int id = characters.size();
+        characters.put(id, newCharacter);
+    }
+
+    /**
+     *
+     * @return: Returns the list of prototypes present in the factory
+     */
     public ArrayList<IPrototype> getCharacters (){
         ArrayList<IPrototype> prototypes = new ArrayList<>();
         for(int i = 0; i<characters.size(); i++){
@@ -40,16 +53,27 @@ public class CharacterFactory {
         return prototypes;
     }
 
-    public ArrayList<IPrototype> getClonedCharacters(int type, int quantity){
+    /**
+     *
+     * @param id: identification of prototype Character
+     * @param quantity: quantity of clones to return
+     * @return: Returns a list of cloned Characters
+     */
+    public ArrayList<IPrototype> getClonedCharacters(int id, int quantity){
         ArrayList<IPrototype> prototypes = new ArrayList<>();
         for (int i = 0; i<quantity; i++){
-            prototypes.add(characters.get(type).deepCloneAux());
+            prototypes.add(characters.get(id).deepCloneAux());
         }
         return prototypes;
     }
 
-    public IBuilder<ICharacter> getCharacter(int type){
-        return characters.get(type).getBuilder();
+    /**
+     *
+     * @param id: identification of the prototype Character
+     * @return: Returns a Builder to modify an existing prototype
+     */
+    public IBuilder<ICharacter> modifyFromBuilder(int id){
+        return characters.get(id).getBuilder();
     }
 
 }

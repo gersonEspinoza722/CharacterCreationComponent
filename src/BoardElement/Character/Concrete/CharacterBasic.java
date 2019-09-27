@@ -13,7 +13,7 @@ import Patterns.IPrototype;
 
 import java.io.File;
 
-public class CharacterBasic extends AbstractCharacter implements IBoardElement {
+public class CharacterBasic extends AbstractCharacter implements ICharacter, IPrototype<CharacterBasic>, IBoardElement{
 
     public CharacterBasic() {
         ToolListingFactory toolListingFactory = ToolListingFactory.getInstance();
@@ -131,20 +131,23 @@ public class CharacterBasic extends AbstractCharacter implements IBoardElement {
 
     @Override
     public IBuilder<ICharacter> getBuilder() {
-        return builder;
+        return new CharacterBasicBuilder();
     }
 
     @Override
     public IPrototype deepCloneAux() {
         return deepClone();
     }
-/*
+
     public static class CharacterBasicBuilder implements IBuilder<ICharacter>{
+
         private String name;
         private int fields;
         private float defaultLife, decrementableLife, hitsPerUnit, level, minPlayerLevelReq;
-        IToolListing tools = ToolListingFactory.getInstance().getToolListing(0, "Character Main List");
-        IMediaListing media;
+        IToolListing tools = ToolListingFactory.getInstance().getToolListing(ToolListingFactory.TOOL_ARRAY, "Character List"); //esta bien?
+
+        MediaListingFactory mediaListingFactory = new MediaListingFactory();
+        IMediaListing media = mediaListingFactory.getMediaListing(MediaListingFactory.IMAGE_ARRAY); //esta bien?
 
         @Override
         public ICharacter build() {
@@ -162,5 +165,4 @@ public class CharacterBasic extends AbstractCharacter implements IBoardElement {
             return this;
         }
     }
-    */
 }

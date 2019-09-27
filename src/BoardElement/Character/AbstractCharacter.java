@@ -13,7 +13,7 @@ import Patterns.IPrototype;
 
 import java.io.File;
 
-public abstract class AbstractCharacter implements ICharacter, IPrototype<AbstractCharacter>, IBoardElement {
+public abstract class AbstractCharacter{
 
     protected String name;
     protected float defaultLife;
@@ -25,10 +25,7 @@ public abstract class AbstractCharacter implements ICharacter, IPrototype<Abstra
     protected int fields;
     protected IMediaListing media;
 
-    protected static IBuilder<ICharacter> builder;
-
     public AbstractCharacter() {
-        this.builder = new CharacterBuilder();
     }
 
     public AbstractCharacter(String name, float defaultLife, float decrementableLife, IToolListing tools, float level, float minPlayerLevelReq, float hitsPerUnit, int fields) {
@@ -40,7 +37,6 @@ public abstract class AbstractCharacter implements ICharacter, IPrototype<Abstra
         this.minPlayerLevelReq = minPlayerLevelReq;
         this.hitsPerUnit = hitsPerUnit;
         this.fields = fields;
-        this.builder = new CharacterBuilder();
     }
 
     public AbstractCharacter(String name, float defaultLife, float decrementableLife, IToolListing tools, float level, float minPlayerLevelReq, float hitsPerUnit, int fields, IMediaListing media) {
@@ -53,9 +49,9 @@ public abstract class AbstractCharacter implements ICharacter, IPrototype<Abstra
         this.hitsPerUnit = hitsPerUnit;
         this.fields = fields;
         this.media = media;
-        this.builder = new CharacterBuilder();
     }
 
+    /*
     public static class CharacterBuilder implements IBuilder<ICharacter> {
 
         private String name;
@@ -91,5 +87,5 @@ public abstract class AbstractCharacter implements ICharacter, IPrototype<Abstra
             this.fields = fields;
             return this;
         }
-    }
+    }*/
 }
