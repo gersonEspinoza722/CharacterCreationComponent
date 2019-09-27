@@ -38,17 +38,27 @@ public class Weapon extends AbstractTool implements ITool, IBoardElement, IProto
 
     @Override
     public void setDefaultLife(int amount) {
-
+        defaultLife = amount;
     }
 
     @Override
     public void decLife(int amount) {
-
+        if(decrementableLife - amount <= 0){
+            decrementableLife = 0;
+        }
+        else{
+            decrementableLife -= amount;
+        }
     }
 
     @Override
     public void incLife(int amount) {
-
+        if(decrementableLife + amount >= defaultLife){
+            decrementableLife = defaultLife;
+        }
+        else{
+            decrementableLife += amount;
+        }
     }
 
     @Override
@@ -165,8 +175,8 @@ public class Weapon extends AbstractTool implements ITool, IBoardElement, IProto
             return this;
         }
 
-        public WeaponBuilder addMedia(String name, File file) {
-            this.media.loadMedia(name, file);
+        public WeaponBuilder addMedia(IMediaElement media) {
+            this.media.loadMedia(media);
             return this;
         }
     }

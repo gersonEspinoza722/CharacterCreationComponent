@@ -4,6 +4,7 @@ import BoardElement.IBoardElement;
 import BoardElement.Tools.AbstractTool;
 import BoardElement.Tools.ITool;
 import Media.Concrete.ImageArray;
+import Media.IMediaElement;
 import Media.IMediaListing;
 import Media.MediaListingFactory;
 import Patterns.IBuilder;
@@ -53,17 +54,27 @@ public class Skill extends AbstractTool implements ITool, IBoardElement, IProtot
 
     @Override
     public void setDefaultLife(int amount) {
-
+        defaultLife = amount;
     }
 
     @Override
     public void decLife(int amount) {
-
+        if(decrementableLife - amount <= 0){
+            decrementableLife = 0;
+        }
+        else{
+            decrementableLife -= amount;
+        }
     }
 
     @Override
     public void incLife(int amount) {
-
+        if(decrementableLife + amount >= defaultLife){
+            decrementableLife = defaultLife;
+        }
+        else{
+            decrementableLife += amount;
+        }
     }
 
     @Override
@@ -180,8 +191,8 @@ public class Skill extends AbstractTool implements ITool, IBoardElement, IProtot
             return this;
         }
 
-        public SkillBuilder addMedia(String name, File file) {
-            this.media.loadMedia(name, file);
+        public SkillBuilder addMedia(IMediaElement media) {
+            this.media.loadMedia(media);
             return this;
         }
 
