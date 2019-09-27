@@ -5,7 +5,6 @@
  */
 package Views;
 
-import BoardElement.Character.Concrete.Warrior;
 import BoardElement.Tools.Concrete.Skill;
 import BoardElement.Tools.Concrete.Weapon;
 import BoardElement.Tools.ITool;

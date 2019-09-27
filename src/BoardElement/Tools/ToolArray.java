@@ -6,16 +6,13 @@ import java.util.ArrayList;
 
 public class ToolArray implements IToolListing, IPrototype<ToolArray> {
     private ArrayList<ITool> list;
-    private String name;
 
-    public ToolArray(String name) {
-        this.name = name;
+    public ToolArray() {
         this.list = new ArrayList<>();
     }
 
-    public ToolArray(ArrayList<ITool> list, String name) {
+    public ToolArray(ArrayList<ITool> list) {
         this.list = list;
-        this.name = name;
     }
 
     @Override
@@ -49,7 +46,7 @@ public class ToolArray implements IToolListing, IPrototype<ToolArray> {
         for (int i = 0; i<list.size(); i++){
             clonedTools.add(list.get(i));
         }
-        ToolArray clonedToolArray = new ToolArray(clonedTools, this.name);
+        ToolArray clonedToolArray = new ToolArray(clonedTools);
         return clonedToolArray;
     }
 
