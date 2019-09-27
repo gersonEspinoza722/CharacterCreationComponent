@@ -84,6 +84,11 @@ public class Weapon extends AbstractTool implements ITool, IBoardElement, IProto
     }
 
     @Override
+    public IPrototype deepCloneAux() {
+        return deepClone();
+    }
+
+    @Override
     public IMediaListing getMediaListing() {
         return this.media;
     }
@@ -121,7 +126,7 @@ public class Weapon extends AbstractTool implements ITool, IBoardElement, IProto
 
         public WeaponBuilder() {
             MediaListingFactory mediaListingFactory = new MediaListingFactory();
-            mediaListingFactory.getMediaListing(MediaListingFactory.IMAGE_ARRAY);
+            media = mediaListingFactory.getMediaListing(MediaListingFactory.IMAGE_ARRAY);
         }
 
         @Override

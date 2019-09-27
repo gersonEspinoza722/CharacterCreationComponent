@@ -30,6 +30,12 @@ public class Skill extends AbstractTool implements ITool, IBoardElement, IProtot
         this.regenerative = regenerative;
     }
 
+    public Skill(float simpleUseDecrement, String name, int defaultLife, int decrementableLife, int reach, float level, float minCharacterLevelReq, float minPlayerLevelReq, int type, boolean regenerative, IMediaListing media) {
+        super(simpleUseDecrement,name, defaultLife, decrementableLife, reach, level, minCharacterLevelReq, minPlayerLevelReq);
+        this.type = type;
+        this.media = media;
+        this.regenerative = regenerative;
+    }
 
 
     public boolean isRegenerative() {
@@ -94,8 +100,13 @@ public class Skill extends AbstractTool implements ITool, IBoardElement, IProtot
 
     @Override
     public IPrototype deepClone() {
-        Skill clonedSkill = new Skill(this.simpleUseDecrement, this.name, this.defaultLife, this.decrementableLife, this.reach, this.level, this.minCharacterLevelReq, this.minPlayerLevelReq, this.type, this.regenerative);
+        Skill clonedSkill = new Skill(this.simpleUseDecrement, this.name, this.defaultLife, this.decrementableLife, this.reach, this.level, this.minCharacterLevelReq, this.minPlayerLevelReq, this.type, this.regenerative, this.media);
         return clonedSkill;
+    }
+
+    @Override
+    public IPrototype deepCloneAux() {
+        return deepClone();
     }
 
     @Override
@@ -137,7 +148,7 @@ public class Skill extends AbstractTool implements ITool, IBoardElement, IProtot
 
         public SkillBuilder() {
             MediaListingFactory mediaListingFactory = new MediaListingFactory();
-            mediaListingFactory.getMediaListing(MediaListingFactory.IMAGE_ARRAY);
+            media = mediaListingFactory.getMediaListing(MediaListingFactory.IMAGE_ARRAY);
         }
 
         @Override
