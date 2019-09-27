@@ -18,15 +18,42 @@ public class Skill extends AbstractTool implements ITool, IBoardElement, IProtot
     public Skill() {
     }
 
-    public Skill(float simpleUseDecrement, String name, int defaultLife, int decrementableLife, int reach, float level, float minCharacterLevelReq, float minPlayerLevelReq, int type) {
+    public Skill(float simpleUseDecrement, String name, int defaultLife, int decrementableLife, int reach, float level, 
+    		float minCharacterLevelReq, float minPlayerLevelReq, int type,boolean regenerative,float effectAmount,IMediaListing media) {
         super(simpleUseDecrement, name, defaultLife, decrementableLife, reach, level, minCharacterLevelReq, minPlayerLevelReq);
         this.type = type;
-        media = new ImageArray();
+        this.media = media;
+        this.regenerative = regenerative;
+        this.effectAmount = effectAmount;
     }
 
 
 
-    public void setMedia(IMediaListing media) {
+    public boolean isRegenerative() {
+		return regenerative;
+	}
+
+	public void setRegenerative(boolean regenerative) {
+		this.regenerative = regenerative;
+	}
+
+	public float getEffectAmount() {
+		return effectAmount;
+	}
+
+	public void setEffectAmount(float effectAmount) {
+		this.effectAmount = effectAmount;
+	}
+
+	public IMediaListing getMedia() {
+		return media;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
+
+	public void setMedia(IMediaListing media) {
         this.media = media;
     }
 
@@ -62,7 +89,8 @@ public class Skill extends AbstractTool implements ITool, IBoardElement, IProtot
 
     @Override
     public IPrototype deepClone() {
-        Skill clonedSkill = new Skill(this.simpleUseDecrement, this.name, this.defaultLife, this.decrementableLife, this.reach, this.level, this.minCharacterLevelReq, this.minPlayerLevelReq, this.type);
+        Skill clonedSkill = new Skill(this.simpleUseDecrement, this.name, this.defaultLife, this.decrementableLife, this.reach, 
+        		this.level, this.minCharacterLevelReq, this.minPlayerLevelReq, this.type,this.regenerative,this.effectAmount,this.media);
         return clonedSkill;
     }
 

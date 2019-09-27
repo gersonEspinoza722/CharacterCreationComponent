@@ -115,7 +115,7 @@ public class CharacterBasic extends AbstractCharacter implements IBoardElement {
                 "MinPlayerLevelReq" + this.minPlayerLevelReq;
         return toString;
     }
-
+/*
     @Override
     public IPrototype clone() {
         CharacterBasic clone = new CharacterBasic(this.name, this.defaultLife, this.decrementableLife, this.tools, this.level, this.minPlayerLevelReq, this.hitsPerUnit, this.fields);
@@ -128,7 +128,7 @@ public class CharacterBasic extends AbstractCharacter implements IBoardElement {
         CharacterBasic clone = new CharacterBasic(this.name, this.defaultLife, this.decrementableLife, clonedTools, this.level, this.minPlayerLevelReq, this.hitsPerUnit, this.fields, this.media);
         return clone;
     }
-
+*/
     @Override
     public IBuilder<ICharacter> getBuilder() {
         return builder;

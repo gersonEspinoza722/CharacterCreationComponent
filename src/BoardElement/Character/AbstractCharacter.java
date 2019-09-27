@@ -13,7 +13,7 @@ import Patterns.IPrototype;
 
 import java.io.File;
 
-public abstract class AbstractCharacter implements ICharacter, IPrototype<AbstractCharacter>, IBoardElement {
+public abstract class AbstractCharacter implements ICharacter,IBoardElement { //IPrototype<AbstractCharacter>,
 
     protected String name;
     protected float defaultLife;
