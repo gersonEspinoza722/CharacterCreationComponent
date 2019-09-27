@@ -8,7 +8,7 @@ public class ToolListingFactory {
 
     public static final int TOOL_ARRAY = 0;
 
-    private ToolListingFactory() {
+    public ToolListingFactory() {
     }
 
     public static ToolListingFactory getInstance(){
