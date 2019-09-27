@@ -1,8 +1,9 @@
 package Media;
 
+import BoardElement.Character.IFactoryCreationComponent;
 import Media.Concrete.ImageArray;
 
-public class MediaListingFactory {
+public class MediaListingFactory implements IFactoryCreationComponent {
 
     public static final int IMAGE_ARRAY = 0;
 

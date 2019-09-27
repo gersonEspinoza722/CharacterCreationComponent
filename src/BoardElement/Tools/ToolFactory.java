@@ -1,9 +1,10 @@
 package BoardElement.Tools;
 
+import BoardElement.Character.IFactoryCreationComponent;
 import BoardElement.Tools.Concrete.Skill;
 import BoardElement.Tools.Concrete.Weapon;
 
-public class ToolFactory {
+public class ToolFactory implements IFactoryCreationComponent {
 
     public static final int WEAPON = 0;
     public static final int SKILL = 1;

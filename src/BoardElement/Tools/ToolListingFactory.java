@@ -1,8 +1,10 @@
 package BoardElement.Tools;
 
+import BoardElement.Character.IFactoryCreationComponent;
+
 import java.util.HashMap;
 
-public class ToolListingFactory {
+public class ToolListingFactory implements IFactoryCreationComponent {
 
     private static ToolListingFactory singleton = null;
 

@@ -101,13 +101,13 @@ public  class MainSelectCreationView extends javax.swing.JFrame {
         
         IMediaListing imagesCharacter = mediaListingFactory.getMediaListing(0);
         IMediaElement imageCharacterLvl0= mediaElementFactory.getTool(0);
-        imageCharacterLvl0.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\magicLvl1.png");
+        imageCharacterLvl0.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\BoardElement.CharacterCreationComponent\\src\\Images\\Character\\magicLvl1.png");
         IMediaElement imageCharacterLvl1 = mediaElementFactory.getTool(0);
-        imageCharacterLvl1.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\magicLvl2.png");
+        imageCharacterLvl1.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\BoardElement.CharacterCreationComponent\\src\\Images\\Character\\magicLvl2.png");
         IMediaElement imageCharacterLvl2 = mediaElementFactory.getTool(0);
-        imageCharacterLvl2.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\magicLvl3.png");
+        imageCharacterLvl2.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\BoardElement.CharacterCreationComponent\\src\\Images\\Character\\magicLvl3.png");
         IMediaElement imageCharacterLvl3 = mediaElementFactory.getTool(0);
-        imageCharacterLvl3.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\magicLvl4.png");
+        imageCharacterLvl3.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\BoardElement.CharacterCreationComponent\\src\\Images\\Character\\magicLvl4.png");
         imagesCharacter.loadMedia(imageCharacterLvl0);
         imagesCharacter.loadMedia(imageCharacterLvl1);
         imagesCharacter.loadMedia(imageCharacterLvl2);
@@ -116,22 +116,22 @@ public  class MainSelectCreationView extends javax.swing.JFrame {
         
         IMediaListing imagesToolSkill = mediaListingFactory.getMediaListing(0);
         IMediaElement imageSkillPreview= mediaElementFactory.getTool(0);
-        imageSkillPreview.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\Skill\\ball\\ballPREVIEW.png");
+        imageSkillPreview.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\BoardElement.CharacterCreationComponent\\src\\Images\\Character\\Skill\\ball\\ballPREVIEW.png");
         IMediaElement imageSkillLvl0= mediaElementFactory.getTool(0);
-        imageSkillLvl0.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\Skill\\ball\\ballLevel1.png");
+        imageSkillLvl0.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\BoardElement.CharacterCreationComponent\\src\\Images\\Character\\Skill\\ball\\ballLevel1.png");
         IMediaElement imageSkillLvl1= mediaElementFactory.getTool(0);
-        imageSkillLvl1.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\Skill\\ball\\ballLevel2.png");
+        imageSkillLvl1.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\BoardElement.CharacterCreationComponent\\src\\Images\\Character\\Skill\\ball\\ballLevel2.png");
         imagesToolSkill.loadMedia(imageSkillPreview);
         imagesToolSkill.loadMedia(imageSkillLvl0);
         imagesToolSkill.loadMedia(imageSkillLvl1);
         
         IMediaListing imagesToolWeapon = mediaListingFactory.getMediaListing(0);
         IMediaElement imageToolPreview= mediaElementFactory.getTool(0);
-        imageToolPreview.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\Weapon\\Stick\\stickPREVIEW.png");
+        imageToolPreview.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\BoardElement.CharacterCreationComponent\\src\\Images\\Character\\Weapon\\Stick\\stickPREVIEW.png");
         IMediaElement imageToolLvl0= mediaElementFactory.getTool(0);
-        imageToolLvl0.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\Weapon\\Stick\\stickLevel1.png");
+        imageToolLvl0.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\BoardElement.CharacterCreationComponent\\src\\Images\\Character\\Weapon\\Stick\\stickLevel1.png");
         IMediaElement imageToolLvl1= mediaElementFactory.getTool(0);
-        imageToolLvl1.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\Weapon\\Stick\\stickLevel2.png");
+        imageToolLvl1.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\BoardElement.CharacterCreationComponent\\src\\Images\\Character\\Weapon\\Stick\\stickLevel2.png");
         imagesToolWeapon.loadMedia(imageToolPreview);
         imagesToolWeapon.loadMedia(imageToolLvl0);
         imagesToolWeapon.loadMedia(imageToolLvl1);

@@ -7,16 +7,16 @@ import Patterns.IPrototype;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class CharacterFactory {
+public class CharacterFactory implements IFactoryCreationComponent {
 
-    CharacterFactory singleton = null;
+    private static CharacterFactory singleton = null;
 
     private HashMap<Integer, ICharacter> characters = new HashMap<>();
 
-    public CharacterFactory() {
+    private CharacterFactory() {
     }
 
-    public CharacterFactory getInstance(){
+    public static CharacterFactory getInstance(){
         if(singleton == null){
             singleton = new CharacterFactory();
         }

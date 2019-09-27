@@ -5,6 +5,11 @@
  */
 package GUI;
 
+import BoardElement.Character.CharacterFactory;
+import BoardElement.Character.Concrete.CharacterBasic;
+import BoardElement.Character.ICharacter;
+import Patterns.IBuilder;
+
 /**
  *
  * @author Marvin Armando
@@ -76,6 +81,9 @@ public class Main extends javax.swing.JFrame {
                 new Main().setVisible(true);
             }
         });
+
+        CharacterFactory factory = CharacterFactory.getInstance();
+        IBuilder builder = (CharacterBasic.CharacterBasicBuilder) factory.getCharacterBuilder();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
