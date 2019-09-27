@@ -133,6 +133,11 @@ public class CharacterBasic extends AbstractCharacter implements IBoardElement {
     public IBuilder<ICharacter> getBuilder() {
         return builder;
     }
+
+    @Override
+    public IPrototype deepCloneAux() {
+        return deepClone();
+    }
 /*
     public static class CharacterBasicBuilder implements IBuilder<ICharacter>{
         private String name;

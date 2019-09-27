@@ -4,6 +4,7 @@ import Patterns.IBuilder;
 
 import BoardElement.Tools.IToolListing;
 import Media.IMediaListing;
+import Patterns.IPrototype;
 
 public interface ICharacter {
     void decLife(int amount);
@@ -15,4 +16,5 @@ public interface ICharacter {
     IToolListing getTools();
     String getToString();
     IBuilder<ICharacter> getBuilder();
+    IPrototype deepCloneAux();
 }

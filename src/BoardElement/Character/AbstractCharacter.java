@@ -81,5 +81,15 @@ public abstract class AbstractCharacter implements ICharacter, IPrototype<Abstra
             this.media.loadMedia(name, file);
             return this;
         }
+
+        public CharacterBuilder setName(String name){
+            this.name = name;
+            return this;
+        }
+
+        public CharacterBuilder setFields(int fields){
+            this.fields = fields;
+            return this;
+        }
     }
 }

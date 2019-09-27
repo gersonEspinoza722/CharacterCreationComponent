@@ -2,6 +2,7 @@ package BoardElement.Character;
 
 import BoardElement.Character.Concrete.CharacterBasic;
 import Patterns.IBuilder;
+import Patterns.IPrototype;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,10 +32,18 @@ public class CharacterFactory {
             return newCharacter.getBuilder();
         }
     }
-    public ArrayList<IBuilder<ICharacter>> getCharacters (){
-        ArrayList<IBuilder<ICharacter>> prototypes = new ArrayList<>();
+    public ArrayList<IPrototype> getCharacters (){
+        ArrayList<IPrototype> prototypes = new ArrayList<>();
         for(int i = 0; i<characters.size(); i++){
-            prototypes.add(characters.get(i).getBuilder());
+            prototypes.add((IPrototype) characters.get(i));
+        }
+        return prototypes;
+    }
+
+    public ArrayList<IPrototype> getClonedCharacters(int type, int quantity){
+        ArrayList<IPrototype> prototypes = new ArrayList<>();
+        for (int i = 0; i<quantity; i++){
+            prototypes.add(characters.get(type).deepCloneAux());
         }
         return prototypes;
     }
