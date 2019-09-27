@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import BoardElement.Character.AbstractCharacter;
+import BoardElement.Character.ICharacter;
 import BoardElement.Character.Concrete.CharacterBasic;
 //import BoardElement.Character.Concrete.CharacterDummy;
 import BoardElement.Tools.IToolListing;
@@ -23,7 +24,7 @@ import storage.WeaponDummy;
 public class json_intents {
 
 	public static void main(String[] args) {
-		ArrayList<AbstractCharacter> myList = CharacterClassFactory.getInstace().getCharacters();
+		ArrayList<ICharacter> myList = CharacterClassFactory.getInstace().getCharacters();
 		System.out.println("Personajes en Json: "+myList.size());
 		ObjectMapper mapper = new ObjectMapper();
 		
