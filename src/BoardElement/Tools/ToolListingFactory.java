@@ -18,10 +18,10 @@ public class ToolListingFactory {
         return singleton;
     }
 
-    public IToolListing getToolListing(int type, String name){
+    public IToolListing getToolListing(int type){
         switch (type){
             case TOOL_ARRAY:
-                return new ToolArray(name);
+                return new ToolArray();
         }
         return null;
     }
