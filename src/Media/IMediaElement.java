@@ -6,4 +6,5 @@ public interface IMediaElement {
     void load();
     void delete();
     String getPath();
+    void setPath(String path);
 }
