@@ -17,20 +17,15 @@ public class Weapon extends AbstractTool implements ITool, IBoardElement, IProto
     private int type; //Example. 0: affects character, 1: affects weapon,...
     
     public Weapon() {
-        media = new ImageArray();
-    }
-
-    public Weapon(float simpleUseDecrement, String name, int defaultLife, int decrementableLife, int reach, float level, 
-    		float minCharacterLevelReq, float minPlayerLevelReq, int type,IMediaListing media) {
-        super(simpleUseDecrement,name, defaultLife, decrementableLife, reach, level, minCharacterLevelReq, minPlayerLevelReq);
-        this.type = type;
-        this.media = media;
     }
     
-    public void setMedia(IMediaListing media) {
-        this.media = media;
+    public Weapon(float simpleUseDecrement, String name, int defaultLife, int decrementableLife, int reach, float level, 
+    		float minCharacterLevelReq, float minPlayerLevelReq, int type,IMediaListing media) {
+        super(simpleUseDecrement,name, defaultLife, decrementableLife, reach, level, minCharacterLevelReq, minPlayerLevelReq,media);
+        this.type = type;
+        super.media = media;
     }
-
+    
     @Override
     public void setDefaultLife(int amount) {
 
@@ -97,6 +92,11 @@ public class Weapon extends AbstractTool implements ITool, IBoardElement, IProto
         this.level --;
     }
 
+    @Override
+    public IBuilder<ITool> getBuilder() {
+        return new WeaponBuilder();
+    }
+
     public static class WeaponBuilder implements IBuilder<ITool>{
 
         private int type, defaultLife, decrementableLife, reach;
@@ -106,12 +106,15 @@ public class Weapon extends AbstractTool implements ITool, IBoardElement, IProto
 
         public WeaponBuilder() {
             MediaListingFactory mediaListingFactory = new MediaListingFactory();
-            mediaListingFactory.getMediaListing(MediaListingFactory.IMAGE_ARRAY);
+            media = mediaListingFactory.getMediaListing(MediaListingFactory.IMAGE_ARRAY);
         }
+
+        
 
         @Override
         public ITool build() {
-            ITool newTool = new Weapon(simpleUseDecrement, name, defaultLife, decrementableLife, reach, level, minCharacterLevelReq, minPlayerLevelReq, type);
+            ITool newTool = new Weapon(simpleUseDecrement, name, defaultLife, decrementableLife,reach, level, 
+        		minCharacterLevelReq, minPlayerLevelReq, type,media);
             return newTool;
         }
 
@@ -160,8 +163,8 @@ public class Weapon extends AbstractTool implements ITool, IBoardElement, IProto
             return this;
         }
 
-        public WeaponBuilder addMedia(String name, File file) {
-            this.media.loadMedia(name, file);
+        public WeaponBuilder addMedia(IMediaElement media) {
+            this.media.loadMedia(media);
             return this;
         }
     }

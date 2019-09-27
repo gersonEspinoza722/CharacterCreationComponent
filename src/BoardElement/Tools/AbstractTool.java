@@ -16,7 +16,7 @@ public class AbstractTool {
     public AbstractTool() {
     }
 
-    public AbstractTool(float simpleUseDecrement, String name, int defaultLife, int decrementableLife, int reach, float level, float minCharacterLevelReq, float minPlayerLevelReq) {
+    public AbstractTool(float simpleUseDecrement, String name, int defaultLife, int decrementableLife, int reach, float level, float minCharacterLevelReq, float minPlayerLevelReq,IMediaListing media) {
         this.name = name;
         this.defaultLife = defaultLife;
         this.decrementableLife = decrementableLife;
@@ -25,6 +25,7 @@ public class AbstractTool {
         this.minCharacterLevelReq = minCharacterLevelReq;
         this.minPlayerLevelReq = minPlayerLevelReq;
         this.simpleUseDecrement = simpleUseDecrement;
+        this.media = media;
         //IMAGE AND MEDIA STORAGE NEEDED
     }
 }

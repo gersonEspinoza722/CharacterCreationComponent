@@ -4,6 +4,7 @@ import BoardElement.IBoardElement;
 import BoardElement.Tools.AbstractTool;
 import BoardElement.Tools.ITool;
 import Media.Concrete.ImageArray;
+import Media.IMediaElement;
 import Media.IMediaListing;
 import Media.MediaListingFactory;
 import Patterns.IBuilder;
@@ -21,10 +22,10 @@ public class Skill extends AbstractTool implements ITool, IBoardElement, IProtot
     public Skill() {
     }
 
-    public Skill(float simpleUseDecrement, String name, int defaultLife, int decrementableLife, int reach, float level, float minCharacterLevelReq, float minPlayerLevelReq, int type, boolean regenerative) {
-        super(simpleUseDecrement, name, defaultLife, decrementableLife, reach, level, minCharacterLevelReq, minPlayerLevelReq);
+    public Skill(float simpleUseDecrement, String name, int defaultLife, int decrementableLife, int reach, float level, float minCharacterLevelReq, float minPlayerLevelReq, int type, boolean regenerative,IMediaListing media) {
+        super(simpleUseDecrement, name, defaultLife, decrementableLife, reach, level, minCharacterLevelReq, minPlayerLevelReq,media);
         this.type = type;
-        media = new ImageArray();
+        super.media = media;
     }
 
 
@@ -37,13 +38,6 @@ public class Skill extends AbstractTool implements ITool, IBoardElement, IProtot
 		this.regenerative = regenerative;
 	}
 
-	public float getEffectAmount() {
-		return effectAmount;
-	}
-
-	public void setEffectAmount(float effectAmount) {
-		this.effectAmount = effectAmount;
-	}
 
 	public IMediaListing getMedia() {
 		return media;
@@ -89,7 +83,7 @@ public class Skill extends AbstractTool implements ITool, IBoardElement, IProtot
 
     @Override
     public IPrototype deepClone() {
-        Skill clonedSkill = new Skill(this.simpleUseDecrement, this.name, this.defaultLife, this.decrementableLife, this.reach, this.level, this.minCharacterLevelReq, this.minPlayerLevelReq, this.type, this.regenerative);
+        Skill clonedSkill = new Skill(this.simpleUseDecrement, this.name, this.defaultLife, this.decrementableLife, this.reach, this.level, this.minCharacterLevelReq, this.minPlayerLevelReq, this.type, this.regenerative, this.media);
         return clonedSkill;
     }
 
@@ -122,6 +116,11 @@ public class Skill extends AbstractTool implements ITool, IBoardElement, IProtot
         this.level --;
     }
 
+    @Override
+    public IBuilder<ITool> getBuilder() {
+        return new SkillBuilder();
+    }
+
     public static class SkillBuilder implements IBuilder<ITool> {
 
         private int type, defaultLife, decrementableLife, reach;
@@ -132,12 +131,14 @@ public class Skill extends AbstractTool implements ITool, IBoardElement, IProtot
 
         public SkillBuilder() {
             MediaListingFactory mediaListingFactory = new MediaListingFactory();
-            mediaListingFactory.getMediaListing(MediaListingFactory.IMAGE_ARRAY);
+            media = mediaListingFactory.getMediaListing(MediaListingFactory.IMAGE_ARRAY);
         }
+        
+        
 
         @Override
         public ITool build() {
-            ITool newTool = new Skill(simpleUseDecrement, name, defaultLife, decrementableLife, reach, level, minCharacterLevelReq, minPlayerLevelReq, type, regenerative);
+            ITool newTool = new Skill(simpleUseDecrement, name, defaultLife, decrementableLife, reach, level, minCharacterLevelReq, minPlayerLevelReq, type, regenerative,media);
             return newTool;
         }
 
@@ -186,8 +187,8 @@ public class Skill extends AbstractTool implements ITool, IBoardElement, IProtot
             return this;
         }
 
-        public SkillBuilder addMedia(String name, File file) {
-            this.media.loadMedia(name, file);
+        public SkillBuilder addMedia(IMediaElement media) {
+            this.media.loadMedia(media);
             return this;
         }
 

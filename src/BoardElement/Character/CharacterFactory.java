@@ -1,6 +1,7 @@
 package BoardElement.Character;
 
 import BoardElement.Character.Concrete.CharacterBasic;
+import BoardElement.Character.Concrete.CharacterBasic.CharacterBasicBuilder;
 import Patterns.IBuilder;
 import Patterns.IPrototype;
 
@@ -9,29 +10,21 @@ import java.util.HashMap;
 
 public class CharacterFactory {
 
-    CharacterFactory singleton = null;
+    private static CharacterFactory singleton = null;
 
     private HashMap<Integer, ICharacter> characters = new HashMap<>();
 
     public CharacterFactory() {
     }
 
-    public CharacterFactory getInstance(){
+    public static CharacterFactory getInstance(){
         if(singleton == null){
             singleton = new CharacterFactory();
         }
         return singleton;
     }
 
-    /**
-     *
-     * @return: Returns a Builder to build a new character from scratch
-     */
-    public IBuilder<ICharacter> getCharacterBuilder(){
-        ICharacter newCharacter = new CharacterBasic();
-        return newCharacter.getBuilder();
-    }
-
+    
     /**
      * Adds a new Character to the prototype lists, id is set
      * @param newCharacter

@@ -19,11 +19,6 @@ import java.io.File;
 public class CharacterBasic extends AbstractCharacter implements ICharacter, IPrototype<CharacterBasic>, IBoardElement{
 
     public CharacterBasic() {
-        ToolListingFactory toolListingFactory = ToolListingFactory.getInstance();
-        this.tools = toolListingFactory.getToolListing(ToolListingFactory.TOOL_ARRAY);
-
-        MediaListingFactory mediaListingFactory = new MediaListingFactory();
-        super.media = mediaListingFactory.getMediaListing(MediaListingFactory.IMAGE_ARRAY);
 
     }
 
@@ -31,14 +26,12 @@ public class CharacterBasic extends AbstractCharacter implements ICharacter, IPr
         super(name, defaultLife, decrementableLife, tools, level, minPlayerLevelReq, hitsPerUnit, fields);
 
         MediaListingFactory mediaListingFactory = new MediaListingFactory();
-        super.media = mediaListingFactory.getMediaListing(MediaListingFactory.IMAGE_ARRAY);
+        super.media = media;
     }
 
     public CharacterBasic(String name, float defaultLife, float decrementableLife, IToolListing tools, float level, float minPlayerLevelReq, float hitsPerUnit, int fields, IMediaListing media) {
         super(name, defaultLife, decrementableLife, tools, level, minPlayerLevelReq, hitsPerUnit, fields, media);
-
-        MediaListingFactory mediaListingFactory = new MediaListingFactory();
-        super.media = mediaListingFactory.getMediaListing(MediaListingFactory.IMAGE_ARRAY);
+        super.media = media;
     }
 
     /**
@@ -118,7 +111,7 @@ public class CharacterBasic extends AbstractCharacter implements ICharacter, IPr
                 "MinPlayerLevelReq" + this.minPlayerLevelReq;
         return toString;
     }
-/*
+
     @Override
     public IPrototype clone() {
         CharacterBasic clone = new CharacterBasic(this.name, this.defaultLife, this.decrementableLife, this.tools, this.level, this.minPlayerLevelReq, this.hitsPerUnit, this.fields);
@@ -131,7 +124,6 @@ public class CharacterBasic extends AbstractCharacter implements ICharacter, IPr
         CharacterBasic clone = new CharacterBasic(this.name, this.defaultLife, this.decrementableLife, clonedTools, this.level, this.minPlayerLevelReq, this.hitsPerUnit, this.fields, this.media);
         return clone;
     }
-*/
     @Override
     public IBuilder<ICharacter> getBuilder() {
         return new CharacterBasicBuilder();
@@ -147,8 +139,8 @@ public class CharacterBasic extends AbstractCharacter implements ICharacter, IPr
         private String name;
         private int fields;
         private float defaultLife, decrementableLife, hitsPerUnit, level, minPlayerLevelReq;
-        private IToolListing tools;
-        private IMediaListing media;
+        private final IToolListing tools;
+        private final IMediaListing media;
 
         public CharacterBasicBuilder() {
             tools = ToolListingFactory.getInstance().getToolListing(ToolListingFactory.TOOL_ARRAY);
@@ -168,6 +160,7 @@ public class CharacterBasic extends AbstractCharacter implements ICharacter, IPr
         }
 
         public CharacterBasicBuilder addImage(IMediaElement image) {
+            //System.out.println("Meti una imagen");
             this.media.loadMedia(image);
             return this;
         }

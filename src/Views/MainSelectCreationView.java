@@ -7,10 +7,14 @@ package Views;
 
 import BoardElement.Character.CharacterFactory;
 import BoardElement.Character.CharacterListingFactory;
+import BoardElement.Character.Concrete.CharacterBasic;
+import BoardElement.Character.Concrete.CharacterBasic.CharacterBasicBuilder;
 import BoardElement.Character.ICharacter;
 import BoardElement.Character.ICharacterListing;
 import BoardElement.Tools.Concrete.Skill;
+import BoardElement.Tools.Concrete.Skill.SkillBuilder;
 import BoardElement.Tools.Concrete.Weapon;
+import BoardElement.Tools.Concrete.Weapon.WeaponBuilder;
 import BoardElement.Tools.ITool;
 import BoardElement.Tools.IToolListing;
 import BoardElement.Tools.ToolArray;
@@ -29,11 +33,11 @@ import java.io.File;
  *
  * @author Marvin Armando
  */
-public  class MainSelectCreationView extends javax.swing.JFrame {
+public final  class MainSelectCreationView extends javax.swing.JFrame {
     
 
     public CharacterListingFactory characterListingFactory = new CharacterListingFactory();
-    public CharacterFactory characterFactory = new CharacterFactory();
+    public CharacterFactory characterFactory = CharacterFactory.getInstance();
     
     public ToolListingFactory toolListingFactory = new ToolListingFactory();
     public ToolFactory toolFactory = new ToolFactory();
@@ -41,12 +45,14 @@ public  class MainSelectCreationView extends javax.swing.JFrame {
     public MediaListingFactory mediaListingFactory  = new MediaListingFactory();
     public MediaElementFactory mediaElementFactory = new MediaElementFactory();
     
+    public ICharacterListing characterListing;
 
     /**
      * Creates new form MainCharacterView
      */
     public MainSelectCreationView() {
         initComponents();
+        //System.out.println("Ya inicie todo");
         loadTemplates();
     }
 
@@ -63,7 +69,7 @@ public  class MainSelectCreationView extends javax.swing.JFrame {
         newCharacterButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        //getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         templatesButton.setText("Templates");
         templatesButton.addActionListener(new java.awt.event.ActionListener() {
@@ -71,7 +77,7 @@ public  class MainSelectCreationView extends javax.swing.JFrame {
                 templatesButtonActionPerformed(evt);
             }
         });
-        //getContentPane().add(templatesButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, 240, 60));
+        getContentPane().add(templatesButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 120, 240, 60));
 
         newCharacterButton.setText("NewCharacter");
         newCharacterButton.addActionListener(new java.awt.event.ActionListener() {
@@ -79,7 +85,7 @@ public  class MainSelectCreationView extends javax.swing.JFrame {
                 newCharacterButtonActionPerformed(evt);
             }
         });
-        //getContentPane().add(newCharacterButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 280, 240, 60));
+        getContentPane().add(newCharacterButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 280, 240, 60));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -87,13 +93,15 @@ public  class MainSelectCreationView extends javax.swing.JFrame {
     private void templatesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_templatesButtonActionPerformed
         // TODO add your handling code here:
         
-        TemplatesCharacterView templatesCharacterView = new  TemplatesCharacterView(this.character);
+        TemplatesCharacterView templatesCharacterView = new  TemplatesCharacterView(characterFactory.getCharacters());
         templatesCharacterView.setVisible(true);
         
     }//GEN-LAST:event_templatesButtonActionPerformed
 
     private void newCharacterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newCharacterButtonActionPerformed
         // TODO add your handling code here:
+        CreateCharacter createCharacter = new CreateCharacter();
+        createCharacter.setVisible(true);
         
     }//GEN-LAST:event_newCharacterButtonActionPerformed
 
@@ -113,7 +121,6 @@ public  class MainSelectCreationView extends javax.swing.JFrame {
         imagesCharacter.loadMedia(imageCharacterLvl2);
         imagesCharacter.loadMedia(imageCharacterLvl3);
         
-        
         IMediaListing imagesToolSkill = mediaListingFactory.getMediaListing(0);
         IMediaElement imageSkillPreview= mediaElementFactory.getTool(0);
         imageSkillPreview.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\Skill\\ball\\ballPREVIEW.png");
@@ -124,53 +131,55 @@ public  class MainSelectCreationView extends javax.swing.JFrame {
         imagesToolSkill.loadMedia(imageSkillPreview);
         imagesToolSkill.loadMedia(imageSkillLvl0);
         imagesToolSkill.loadMedia(imageSkillLvl1);
+        System.out.println("Soy el path de una toolSkill"+imageSkillPreview.getPath());
+        System.out.println("Tengo en la lista:" + imagesToolSkill.getMedia().size());
         
         IMediaListing imagesToolWeapon = mediaListingFactory.getMediaListing(0);
-        IMediaElement imageToolPreview= mediaElementFactory.getTool(0);
-        imageToolPreview.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\Weapon\\Stick\\stickPREVIEW.png");
-        IMediaElement imageToolLvl0= mediaElementFactory.getTool(0);
-        imageToolLvl0.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\Weapon\\Stick\\stickLevel1.png");
-        IMediaElement imageToolLvl1= mediaElementFactory.getTool(0);
-        imageToolLvl1.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\Weapon\\Stick\\stickLevel2.png");
-        imagesToolWeapon.loadMedia(imageToolPreview);
-        imagesToolWeapon.loadMedia(imageToolLvl0);
-        imagesToolWeapon.loadMedia(imageToolLvl1);
+        IMediaElement imageWeaponPreview= mediaElementFactory.getTool(0);
+        imageWeaponPreview.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\Weapon\\Stick\\stickPREVIEW.png");
+        IMediaElement imageWeaponLvl0= mediaElementFactory.getTool(0);
+        imageWeaponLvl0.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\Weapon\\Stick\\stickLevel1.png");
+        IMediaElement imageWeaponLvl1= mediaElementFactory.getTool(0);
+        imageWeaponLvl1.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\Weapon\\Stick\\stickLevel2.png");
+        imagesToolWeapon.loadMedia(imageWeaponPreview);
+        imagesToolWeapon.loadMedia(imageWeaponLvl0);
+        imagesToolWeapon.loadMedia(imageWeaponLvl1);
+        System.out.println("Soy el path de una toolWeapon"+imageWeaponPreview.getPath());
+        System.out.println("Tengo en la lista:" + imagesToolWeapon.getMedia().size());
         
         IToolListing toolListingCharacter = toolListingFactory.getToolListing(0);
-        ITool toolSkill = toolFactory.getTool(0);
-        
-        ITool toolWeapon = toolFactory.getTool(0);
-        
-        ICharacterListing characterListing = characterListingFactory.getCharacterListing(0);
-        IBuilder character = characterFactory.getCharacterBuilder();
         
         
         
-        Skill tool = 
+        Skill.SkillBuilder skillBuilder = new Skill.SkillBuilder();
+        skillBuilder.setName("Skill").setDecrementableLife(10).setDefaultLife(10).setLevel(10).setMinCharacterLevelReq(10)
+                .setMinPlayerLevelReq(10).setReach(10).setRegenerative(true).setSimpleUseDecrement(10).setType(0)
+                .addMedia(imageSkillPreview).addMedia(imageSkillLvl0).addMedia(imageSkillLvl1);
+        ITool toolSkill = skillBuilder.build();
+        toolListingCharacter.addTool(toolSkill);
+        //System.out.println("Size de tools" + toolSkill.getMediaListing().getMedia().size());
         
         
+        Weapon.WeaponBuilder weaponBuilder = new Weapon.WeaponBuilder();
+        weaponBuilder.setDecrementableLife(10).setDefaultLife(10).setLevel(10).setMinCharacterLevelReq(10)
+                .setMinPlayerLevelReq(10).setName("Weapon").setReach(10).setSimpleUseDecrement(10)
+                .setType(0).addMedia(imageWeaponPreview).addMedia(imageWeaponLvl0).addMedia(imageWeaponLvl1);
+        ITool toolWeapon = weaponBuilder.build();
+        toolListingCharacter.addTool(toolWeapon);
+        //System.out.println(toolWeapon.getToString());
         
-        imagesCharacter.loadMedia("CharacterWarrior", fileCharacter);
-        imagesCharacter.loadMedia("CharacterWarrior", fileCharacter2);
-        imagesCharacter.loadMedia("CharacterWarrior", fileCharacter3);
-        imagesCharacter.loadMedia("CharacterWarrior", fileCharacter4);
-        imagesToolSkill.loadMedia("WeaponPreview", fileWeapon);
-        imagesToolSkill.loadMedia("WeaponLevel1", fileWeapon2);
-        imagesToolSkill.loadMedia("WeaponLevel2", fileWeapon3);
-        imagesToolWeapon.loadMedia("SkillPreview", fileSkill);
-        imagesToolWeapon.loadMedia("SkillLevel1", fileSkill2);
-        imagesToolWeapon.loadMedia("SkillLevel2", fileSkill3);
-
-        tool.setMedia(images);
-        //System.out.println(tool.getToString());
-        //System.out.println(images.getImages().get(0).getPath());
-        prueba.addTool(tool);
-
-        Weapon tool2 = new Weapon(5, "RompeCulos", 100, 50, 10, 1, 2, 2, 1);
-        tool2.setMedia(images2);
-        //System.out.println(tool2.getToString());
-        //System.out.println(images2.getImages().get(0).getPath());
-        prueba.addTool(tool2);
+        characterListing = characterListingFactory.getCharacterListing(0);
+        CharacterBasic.CharacterBasicBuilder characterBasicBuilder = new CharacterBasic.CharacterBasicBuilder();
+        characterBasicBuilder.setDecrementableLife(10).setDefaultLife(10).setFields(10).setHitsPerUnit(10)
+                .setLevel(10).setMinPlayerLevelReq(10).setName("Barbaro").addImage(imageCharacterLvl0)
+                .addImage(imageCharacterLvl1).addImage(imageCharacterLvl2).addImage(imageCharacterLvl3)
+                .addTool(toolSkill).addTool(toolWeapon);
+        ICharacter character = characterBasicBuilder.build();
+        characterListing.addCharacter(character);
+        characterFactory.addPrototype(character);
+        //System.out.println(character.getToString());
+        //System.out.println(character.getMedia().getMedia().size());
+        //System.out.println(character.getMedia().getMedia().get(0).getPath());
     }
     /**
      * @param args the command line arguments

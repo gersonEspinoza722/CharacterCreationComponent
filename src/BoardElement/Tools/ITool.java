@@ -2,6 +2,7 @@ package BoardElement.Tools;
 
 import BoardElement.IBoardElement;
 import Media.IMediaListing;
+import Patterns.IBuilder;
 
 public interface ITool {
     void setDefaultLife(int amount);
@@ -13,4 +14,5 @@ public interface ITool {
     IMediaListing getMediaListing();
     int getType();
     String getToString();
+    IBuilder <ITool> getBuilder();
 }
