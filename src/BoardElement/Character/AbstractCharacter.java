@@ -13,7 +13,7 @@ import Patterns.IPrototype;
 
 import java.io.File;
 
-public abstract class AbstractCharacter{
+public abstract class AbstractCharacter implements ICharacter,IBoardElement { //IPrototype<AbstractCharacter>,
 
     protected String name;
     protected float defaultLife;
@@ -25,7 +25,10 @@ public abstract class AbstractCharacter{
     protected int fields;
     protected IMediaListing media;
 
+    protected static IBuilder<ICharacter> builder;
+
     public AbstractCharacter() {
+        this.builder = new CharacterBuilder();
     }
 
     public AbstractCharacter(String name, float defaultLife, float decrementableLife, IToolListing tools, float level, float minPlayerLevelReq, float hitsPerUnit, int fields) {
@@ -37,6 +40,7 @@ public abstract class AbstractCharacter{
         this.minPlayerLevelReq = minPlayerLevelReq;
         this.hitsPerUnit = hitsPerUnit;
         this.fields = fields;
+        this.builder = new CharacterBuilder();
     }
 
     public AbstractCharacter(String name, float defaultLife, float decrementableLife, IToolListing tools, float level, float minPlayerLevelReq, float hitsPerUnit, int fields, IMediaListing media) {
@@ -49,9 +53,9 @@ public abstract class AbstractCharacter{
         this.hitsPerUnit = hitsPerUnit;
         this.fields = fields;
         this.media = media;
+        this.builder = new CharacterBuilder();
     }
 
-    /*
     public static class CharacterBuilder implements IBuilder<ICharacter> {
 
         private String name;
@@ -77,15 +81,5 @@ public abstract class AbstractCharacter{
             this.media.loadMedia(name, file);
             return this;
         }
-
-        public CharacterBuilder setName(String name){
-            this.name = name;
-            return this;
-        }
-
-        public CharacterBuilder setFields(int fields){
-            this.fields = fields;
-            return this;
-        }
-    }*/
+    }
 }

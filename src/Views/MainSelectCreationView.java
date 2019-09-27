@@ -19,7 +19,7 @@ import java.io.File;
  */
 public  class MainSelectCreationView extends javax.swing.JFrame {
     
-    public ToolArray prueba = new ToolArray();
+    public ToolArray prueba = new ToolArray("Arma");
     public Warrior character;
     public IMediaListing imagesCharacter = new ImageArray();
 
@@ -44,7 +44,7 @@ public  class MainSelectCreationView extends javax.swing.JFrame {
         newCharacterButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        //getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         templatesButton.setText("Templates");
         templatesButton.addActionListener(new java.awt.event.ActionListener() {
@@ -52,7 +52,7 @@ public  class MainSelectCreationView extends javax.swing.JFrame {
                 templatesButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(templatesButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, 240, 60));
+        //getContentPane().add(templatesButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, 240, 60));
 
         newCharacterButton.setText("NewCharacter");
         newCharacterButton.addActionListener(new java.awt.event.ActionListener() {
@@ -60,7 +60,7 @@ public  class MainSelectCreationView extends javax.swing.JFrame {
                 newCharacterButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(newCharacterButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 280, 240, 60));
+        //getContentPane().add(newCharacterButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 280, 240, 60));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -115,7 +115,7 @@ public  class MainSelectCreationView extends javax.swing.JFrame {
         imagesCharacter.loadMedia("CharacterWarrior", fileCharacter2);
         imagesCharacter.loadMedia("CharacterWarrior", fileCharacter3);
         imagesCharacter.loadMedia("CharacterWarrior", fileCharacter4);
-        character = new Warrior("Prueba", 100, 50, prueba, 10, 10, 10, 10, 10, 10, imagesCharacter);
+        //character = new Warrior("Prueba", 100, 50, prueba, 10, 10, 10, 10, 10, 10, imagesCharacter);
     }
     /**
      * @param args the command line arguments
