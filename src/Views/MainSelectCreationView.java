@@ -109,13 +109,13 @@ public final  class MainSelectCreationView extends javax.swing.JFrame {
         
         IMediaListing imagesCharacter = mediaListingFactory.getMediaListing(0);
         IMediaElement imageCharacterLvl0= mediaElementFactory.getTool(0);
-        imageCharacterLvl0.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\magicLvl1.png");
+        imageCharacterLvl0.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\BoardElement.CharacterCreationComponent\\src\\Images\\Character\\magicLvl1.png");
         IMediaElement imageCharacterLvl1 = mediaElementFactory.getTool(0);
-        imageCharacterLvl1.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\magicLvl2.png");
+        imageCharacterLvl1.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\BoardElement.CharacterCreationComponent\\src\\Images\\Character\\magicLvl2.png");
         IMediaElement imageCharacterLvl2 = mediaElementFactory.getTool(0);
-        imageCharacterLvl2.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\magicLvl3.png");
+        imageCharacterLvl2.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\BoardElement.CharacterCreationComponent\\src\\Images\\Character\\magicLvl3.png");
         IMediaElement imageCharacterLvl3 = mediaElementFactory.getTool(0);
-        imageCharacterLvl3.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\magicLvl4.png");
+        imageCharacterLvl3.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\BoardElement.CharacterCreationComponent\\src\\Images\\Character\\magicLvl4.png");
         imagesCharacter.loadMedia(imageCharacterLvl0);
         imagesCharacter.loadMedia(imageCharacterLvl1);
         imagesCharacter.loadMedia(imageCharacterLvl2);
@@ -123,11 +123,11 @@ public final  class MainSelectCreationView extends javax.swing.JFrame {
         
         IMediaListing imagesToolSkill = mediaListingFactory.getMediaListing(0);
         IMediaElement imageSkillPreview= mediaElementFactory.getTool(0);
-        imageSkillPreview.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\Skill\\ball\\ballPREVIEW.png");
+        imageSkillPreview.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\BoardElement.CharacterCreationComponent\\src\\Images\\Character\\Skill\\ball\\ballPREVIEW.png");
         IMediaElement imageSkillLvl0= mediaElementFactory.getTool(0);
-        imageSkillLvl0.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\Skill\\ball\\ballLevel1.png");
+        imageSkillLvl0.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\BoardElement.CharacterCreationComponent\\src\\Images\\Character\\Skill\\ball\\ballLevel1.png");
         IMediaElement imageSkillLvl1= mediaElementFactory.getTool(0);
-        imageSkillLvl1.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\Skill\\ball\\ballLevel2.png");
+        imageSkillLvl1.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\BoardElement.CharacterCreationComponent\\src\\Images\\Character\\Skill\\ball\\ballLevel2.png");
         imagesToolSkill.loadMedia(imageSkillPreview);
         imagesToolSkill.loadMedia(imageSkillLvl0);
         imagesToolSkill.loadMedia(imageSkillLvl1);
@@ -146,6 +146,7 @@ public final  class MainSelectCreationView extends javax.swing.JFrame {
         imagesToolWeapon.loadMedia(imageWeaponLvl1);
         System.out.println("Soy el path de una toolWeapon"+imageWeaponPreview.getPath());
         System.out.println("Tengo en la lista:" + imagesToolWeapon.getMedia().size());
+
         
         IToolListing toolListingCharacter = toolListingFactory.getToolListing(0);
         

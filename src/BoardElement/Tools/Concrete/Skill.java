@@ -20,14 +20,23 @@ public class Skill extends AbstractTool implements ITool, IBoardElement, IProtot
 
 
     public Skill() {
+        media = new ImageArray();
     }
 
     public Skill(float simpleUseDecrement, String name, int defaultLife, int decrementableLife, int reach, float level, float minCharacterLevelReq, float minPlayerLevelReq, int type, boolean regenerative,IMediaListing media) {
         super(simpleUseDecrement, name, defaultLife, decrementableLife, reach, level, minCharacterLevelReq, minPlayerLevelReq,media);
         this.type = type;
         super.media = media;
+        media = new ImageArray();
+        this.regenerative = regenerative;
     }
 
+    public Skill(float simpleUseDecrement, String name, int defaultLife, int decrementableLife, int reach, float level, float minCharacterLevelReq, float minPlayerLevelReq, int type, boolean regenerative, IMediaListing media) {
+        super(simpleUseDecrement,name, defaultLife, decrementableLife, reach, level, minCharacterLevelReq, minPlayerLevelReq);
+        this.type = type;
+        this.media = media;
+        this.regenerative = regenerative;
+    }
 
 
     public boolean isRegenerative() {
@@ -37,7 +46,6 @@ public class Skill extends AbstractTool implements ITool, IBoardElement, IProtot
 	public void setRegenerative(boolean regenerative) {
 		this.regenerative = regenerative;
 	}
-
 
 	public IMediaListing getMedia() {
 		return media;
@@ -53,17 +61,27 @@ public class Skill extends AbstractTool implements ITool, IBoardElement, IProtot
 
     @Override
     public void setDefaultLife(int amount) {
-
+        defaultLife = amount;
     }
 
     @Override
     public void decLife(int amount) {
-
+        if(decrementableLife - amount <= 0){
+            decrementableLife = 0;
+        }
+        else{
+            decrementableLife -= amount;
+        }
     }
 
     @Override
     public void incLife(int amount) {
-
+        if(decrementableLife + amount >= defaultLife){
+            decrementableLife = defaultLife;
+        }
+        else{
+            decrementableLife += amount;
+        }
     }
 
     @Override
@@ -85,6 +103,11 @@ public class Skill extends AbstractTool implements ITool, IBoardElement, IProtot
     public IPrototype deepClone() {
         Skill clonedSkill = new Skill(this.simpleUseDecrement, this.name, this.defaultLife, this.decrementableLife, this.reach, this.level, this.minCharacterLevelReq, this.minPlayerLevelReq, this.type, this.regenerative, this.media);
         return clonedSkill;
+    }
+
+    @Override
+    public IPrototype deepCloneAux() {
+        return deepClone();
     }
 
     @Override

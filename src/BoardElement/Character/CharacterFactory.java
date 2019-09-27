@@ -8,13 +8,13 @@ import Patterns.IPrototype;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class CharacterFactory {
+public class CharacterFactory implements IFactoryCreationComponent {
 
     private static CharacterFactory singleton = null;
 
     private HashMap<Integer, ICharacter> characters = new HashMap<>();
 
-    public CharacterFactory() {
+    private CharacterFactory() {
     }
 
     public static CharacterFactory getInstance(){

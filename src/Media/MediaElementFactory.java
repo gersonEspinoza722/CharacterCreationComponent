@@ -5,18 +5,19 @@
  */
 package Media;
 
+import BoardElement.Character.IFactoryCreationComponent;
 import Media.Concrete.Image;
 
 /**
  *
  * @author Marvin Armando
  */
-public class MediaElementFactory {
+public class MediaElementFactory implements IFactoryCreationComponent {
     public static final int IMAGEN = 0;
     public static final int VIDEO = 1;
     public static final int GIFT = 2;
 
-    public IMediaElement getTool(int mediaType){
+    public IMediaElement getMedia(int mediaType){
         switch (mediaType){
                 case IMAGEN:
                     return new Image();
