@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import BoardElement.Character.AbstractCharacter;
+import BoardElement.Character.ICharacter;
 import BoardElement.Character.Concrete.CharacterBasic;
 import BoardElement.Tools.ITool;
 import BoardElement.Tools.IToolListing;
@@ -21,12 +22,12 @@ import Media.Concrete.ImageArray;
 
 public class CharacterClassFactory {
 
-	private ArrayList<AbstractCharacter> myCharacters;
+	private ArrayList<ICharacter> myCharacters;
 	private ObjectMapper mapper;
 	private static CharacterClassFactory characterClassFactory = null;
 	
 	private CharacterClassFactory() {
-		myCharacters = new ArrayList<AbstractCharacter>();
+		myCharacters = new ArrayList<ICharacter>();
 		mapper = new ObjectMapper();
 	}
 	public static CharacterClassFactory getInstace() {
@@ -35,7 +36,7 @@ public class CharacterClassFactory {
 		}
 		return characterClassFactory;
 	}
-	public ArrayList<AbstractCharacter> getCharacters(){
+	public ArrayList<ICharacter> getCharacters(){
 		loadBasicCharacters();
 		return myCharacters;
 	}
@@ -44,8 +45,12 @@ public class CharacterClassFactory {
 		CharacterDummy value = null;
 		for(int i = 0;i<charactersCount;i++) {
 			try {
-	            value = mapper.readValue(new File("src/storage/jsons/result"+i+".json"), CharacterDummy.class);
-	            myCharacters.add(getRealCharacterBasicClass(value));
+				//if(tipo==1){
+					value = mapper.readValue(new File("src/storage/jsons/result"+i+".json"), CharacterDummy.class);
+					myCharacters.add(getRealCharacterBasicClass(value));
+				//}
+					
+	            
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }	
@@ -75,7 +80,7 @@ public class CharacterClassFactory {
 		return new Image(dummy.name,new File(dummy.path));
 	}
 	
-	public Skill getRealSkillClass(SkillDummy dummy) {
+	public ITool getRealSkillClass(SkillDummy dummy) {
     	ArrayList<Image> newImages = new ArrayList<Image>(); 
     	for(ImageDummy imgDummy : dummy.images) {
     		newImages.add(getRealImageClass(imgDummy));
@@ -84,7 +89,7 @@ public class CharacterClassFactory {
     	return new Skill(dummy.simpleUseDecrement,dummy.name,dummy.defaultLife,dummy.decrementableLife,dummy.reach,dummy.level,dummy.minCharacterLevelReq,dummy.minPlayerLevelReq,dummy.type,dummy.regenerative,dummy.effectAmount,array);
     }
 	
-	public Weapon getRealWeaponClass(WeaponDummy dummy) {
+	public ITool getRealWeaponClass(WeaponDummy dummy) {
     	ArrayList<Image> newImages = new ArrayList<Image>(); 
     	for(ImageDummy imgDummy : dummy.images) {
     		newImages.add(getRealImageClass(imgDummy));
@@ -93,7 +98,7 @@ public class CharacterClassFactory {
     	return new Weapon(dummy.simpleUseDecrement,dummy.name,dummy.defaultLife,dummy.decrementableLife,dummy.reach,dummy.level,dummy.minCharacterLevelReq,dummy.minPlayerLevelReq,dummy.type,array);
     }
 	
-    public CharacterBasic getRealCharacterBasicClass(CharacterDummy dummy) {
+    public ICharacter getRealCharacterBasicClass(CharacterDummy dummy) {
     	ArrayList<ITool> tools = new ArrayList<ITool>();
     	IToolListing toolArray = new ToolArray(tools,"Lista de Herramientas");
     	ArrayList<Image> newImages = new ArrayList<Image>();
