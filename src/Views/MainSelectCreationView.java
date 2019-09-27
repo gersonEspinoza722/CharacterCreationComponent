@@ -26,36 +26,30 @@ import Media.IMediaListing;
 import Media.MediaElementFactory;
 import Media.MediaListingFactory;
 import Patterns.IBuilder;
+import Patterns.IPrototype;
 import java.awt.Image;
 import java.io.File;
+import java.util.ArrayList;
+import javax.swing.JFrame;
 
 /**
  *
  * @author Marvin Armando
  */
 public final  class MainSelectCreationView extends javax.swing.JFrame {
-    
-
-    public CharacterListingFactory characterListingFactory = new CharacterListingFactory();
-    public CharacterFactory characterFactory = CharacterFactory.getInstance();
-    
-    public ToolListingFactory toolListingFactory = new ToolListingFactory();
-    public ToolFactory toolFactory = new ToolFactory();
-    
-    public MediaListingFactory mediaListingFactory  = new MediaListingFactory();
-    public MediaElementFactory mediaElementFactory = new MediaElementFactory();
-    
-    public ICharacterListing characterListing;
+    public ArrayList<IPrototype> prototypes;
+    public IToolListing tools;
 
     /**
      * Creates new form MainCharacterView
      */
-    public MainSelectCreationView() {
+    public MainSelectCreationView(ArrayList<IPrototype> prototypes,IToolListing tools) {
         initComponents();
-        //System.out.println("Ya inicie todo");
-        loadTemplates();
+        this.prototypes = prototypes;
+        this.tools = tools;
+        System.out.println("La lista de tools en mainSelect tiene:"+this.tools.getSize());
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -93,130 +87,18 @@ public final  class MainSelectCreationView extends javax.swing.JFrame {
     private void templatesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_templatesButtonActionPerformed
         // TODO add your handling code here:
         
-        TemplatesCharacterView templatesCharacterView = new  TemplatesCharacterView(characterFactory.getCharacters());
-        templatesCharacterView.setVisible(true);
-        
+        TemplatesCharacterView templatesCharacterView = new  TemplatesCharacterView(this.prototypes,tools);    
+        templatesCharacterView.show();
+        dispose();
     }//GEN-LAST:event_templatesButtonActionPerformed
 
     private void newCharacterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newCharacterButtonActionPerformed
         // TODO add your handling code here:
-        CreateCharacter createCharacter = new CreateCharacter();
-        createCharacter.setVisible(true);
-        
+        CreateCharacter createCharacter = new CreateCharacter(this.prototypes,this.tools);
+        createCharacter.show();
+        this.dispose();
     }//GEN-LAST:event_newCharacterButtonActionPerformed
 
-    public void loadTemplates(){
-        
-        IMediaListing imagesCharacter = mediaListingFactory.getMediaListing(0);
-        IMediaElement imageCharacterLvl0= mediaElementFactory.getTool(0);
-        imageCharacterLvl0.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\BoardElement.CharacterCreationComponent\\src\\Images\\Character\\magicLvl1.png");
-        IMediaElement imageCharacterLvl1 = mediaElementFactory.getTool(0);
-        imageCharacterLvl1.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\BoardElement.CharacterCreationComponent\\src\\Images\\Character\\magicLvl2.png");
-        IMediaElement imageCharacterLvl2 = mediaElementFactory.getTool(0);
-        imageCharacterLvl2.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\BoardElement.CharacterCreationComponent\\src\\Images\\Character\\magicLvl3.png");
-        IMediaElement imageCharacterLvl3 = mediaElementFactory.getTool(0);
-        imageCharacterLvl3.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\BoardElement.CharacterCreationComponent\\src\\Images\\Character\\magicLvl4.png");
-        imagesCharacter.loadMedia(imageCharacterLvl0);
-        imagesCharacter.loadMedia(imageCharacterLvl1);
-        imagesCharacter.loadMedia(imageCharacterLvl2);
-        imagesCharacter.loadMedia(imageCharacterLvl3);
-        
-        IMediaListing imagesToolSkill = mediaListingFactory.getMediaListing(0);
-        IMediaElement imageSkillPreview= mediaElementFactory.getTool(0);
-        imageSkillPreview.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\BoardElement.CharacterCreationComponent\\src\\Images\\Character\\Skill\\ball\\ballPREVIEW.png");
-        IMediaElement imageSkillLvl0= mediaElementFactory.getTool(0);
-        imageSkillLvl0.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\BoardElement.CharacterCreationComponent\\src\\Images\\Character\\Skill\\ball\\ballLevel1.png");
-        IMediaElement imageSkillLvl1= mediaElementFactory.getTool(0);
-        imageSkillLvl1.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\BoardElement.CharacterCreationComponent\\src\\Images\\Character\\Skill\\ball\\ballLevel2.png");
-        imagesToolSkill.loadMedia(imageSkillPreview);
-        imagesToolSkill.loadMedia(imageSkillLvl0);
-        imagesToolSkill.loadMedia(imageSkillLvl1);
-        System.out.println("Soy el path de una toolSkill"+imageSkillPreview.getPath());
-        System.out.println("Tengo en la lista:" + imagesToolSkill.getMedia().size());
-        
-        IMediaListing imagesToolWeapon = mediaListingFactory.getMediaListing(0);
-        IMediaElement imageWeaponPreview= mediaElementFactory.getTool(0);
-        imageWeaponPreview.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\Weapon\\Stick\\stickPREVIEW.png");
-        IMediaElement imageWeaponLvl0= mediaElementFactory.getTool(0);
-        imageWeaponLvl0.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\Weapon\\Stick\\stickLevel1.png");
-        IMediaElement imageWeaponLvl1= mediaElementFactory.getTool(0);
-        imageWeaponLvl1.setPath("C:\\Users\\Marvin Armando\\Documents\\NetBeansProjects\\Diseño\\Proyecto\\CharacterCreationComponent\\src\\Images\\Character\\Weapon\\Stick\\stickLevel2.png");
-        imagesToolWeapon.loadMedia(imageWeaponPreview);
-        imagesToolWeapon.loadMedia(imageWeaponLvl0);
-        imagesToolWeapon.loadMedia(imageWeaponLvl1);
-        System.out.println("Soy el path de una toolWeapon"+imageWeaponPreview.getPath());
-        System.out.println("Tengo en la lista:" + imagesToolWeapon.getMedia().size());
-
-        
-        IToolListing toolListingCharacter = toolListingFactory.getToolListing(0);
-        
-        
-        
-        Skill.SkillBuilder skillBuilder = new Skill.SkillBuilder();
-        skillBuilder.setName("Skill").setDecrementableLife(10).setDefaultLife(10).setLevel(10).setMinCharacterLevelReq(10)
-                .setMinPlayerLevelReq(10).setReach(10).setRegenerative(true).setSimpleUseDecrement(10).setType(0)
-                .addMedia(imageSkillPreview).addMedia(imageSkillLvl0).addMedia(imageSkillLvl1);
-        ITool toolSkill = skillBuilder.build();
-        toolListingCharacter.addTool(toolSkill);
-        //System.out.println("Size de tools" + toolSkill.getMediaListing().getMedia().size());
-        
-        
-        Weapon.WeaponBuilder weaponBuilder = new Weapon.WeaponBuilder();
-        weaponBuilder.setDecrementableLife(10).setDefaultLife(10).setLevel(10).setMinCharacterLevelReq(10)
-                .setMinPlayerLevelReq(10).setName("Weapon").setReach(10).setSimpleUseDecrement(10)
-                .setType(0).addMedia(imageWeaponPreview).addMedia(imageWeaponLvl0).addMedia(imageWeaponLvl1);
-        ITool toolWeapon = weaponBuilder.build();
-        toolListingCharacter.addTool(toolWeapon);
-        //System.out.println(toolWeapon.getToString());
-        
-        characterListing = characterListingFactory.getCharacterListing(0);
-        CharacterBasic.CharacterBasicBuilder characterBasicBuilder = new CharacterBasic.CharacterBasicBuilder();
-        characterBasicBuilder.setDecrementableLife(10).setDefaultLife(10).setFields(10).setHitsPerUnit(10)
-                .setLevel(10).setMinPlayerLevelReq(10).setName("Barbaro").addImage(imageCharacterLvl0)
-                .addImage(imageCharacterLvl1).addImage(imageCharacterLvl2).addImage(imageCharacterLvl3)
-                .addTool(toolSkill).addTool(toolWeapon);
-        ICharacter character = characterBasicBuilder.build();
-        characterListing.addCharacter(character);
-        characterFactory.addPrototype(character);
-        //System.out.println(character.getToString());
-        //System.out.println(character.getMedia().getMedia().size());
-        //System.out.println(character.getMedia().getMedia().get(0).getPath());
-    }
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainSelectCreationView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainSelectCreationView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainSelectCreationView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainSelectCreationView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainSelectCreationView().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton newCharacterButton;

@@ -13,6 +13,7 @@ import BoardElement.Tools.IToolListing;
 import BoardElement.Tools.ToolArray;
 import Media.Concrete.ImageArray;
 import Media.IMediaListing;
+import Patterns.IPrototype;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,17 +35,20 @@ public class CharacterView extends javax.swing.JFrame {
     public int toolLvl;
     public ICharacter character;
     public ITool toolSelect;
-
+    public ArrayList<IPrototype> prototypes;
+    public IToolListing tools;
 
     /**
      * Creates new form CharacterView
      * @param character
      */
-    public CharacterView(ICharacter character) {
+    public CharacterView(ICharacter character,ArrayList<IPrototype> prototypes,IToolListing tools) {
         initComponents();
         characterLvl = 0;
+        this.prototypes = prototypes;
         this.character = character;
         toolLvl = 1;
+        this.tools = tools;
         this.backButton.setEnabled(false);
         loadCharacter();
     }
@@ -74,6 +78,7 @@ public class CharacterView extends javax.swing.JFrame {
         ToolView = new javax.swing.JLabel();
         lvlIncButton = new javax.swing.JButton();
         lvlDecButton = new javax.swing.JButton();
+        backView = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -139,6 +144,14 @@ public class CharacterView extends javax.swing.JFrame {
         });
         getContentPane().add(lvlDecButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 540, 60, -1));
 
+        backView.setText("Back");
+        backView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backViewActionPerformed(evt);
+            }
+        });
+        getContentPane().add(backView, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 10, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -149,14 +162,14 @@ public class CharacterView extends javax.swing.JFrame {
          characterLvl--;
         if (characterLvl > 0) {
            
-            path = character.getMedia().getMedia().get(characterLvl).getPath();
+            path = character.getMedia().getImages().get(characterLvl).getPath();
             ImageIcon icon = new ImageIcon(path);
             Image image = icon.getImage().getScaledInstance(characterView.getWidth(), characterView.getHeight(), Image.SCALE_DEFAULT);
             ImageIcon newIcon = new ImageIcon(image);
             this.characterView.setIcon(newIcon);
 
         } else {
-            path = character.getMedia().getMedia().get(0).getPath();
+            path = character.getMedia().getImages().get(0).getPath();
             ImageIcon icon = new ImageIcon(path);
             Image image = icon.getImage().getScaledInstance(characterView.getWidth(), characterView.getHeight(), Image.SCALE_DEFAULT);
             ImageIcon newIcon = new ImageIcon(image);
@@ -170,21 +183,21 @@ public class CharacterView extends javax.swing.JFrame {
 
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
         // TODO add your handling code here:
-        int sizeList = character.getMedia().getMedia().size() - 1;
+        int sizeList = character.getMedia().getImages().size() - 1;
         //System.out.println("El size:" + sizeList);
         this.backButton.setEnabled(true);
         String path = "";
         characterLvl++;
         if (characterLvl < sizeList) {
             
-            path = character.getMedia().getMedia().get(characterLvl).getPath();
+            path = character.getMedia().getImages().get(characterLvl).getPath();
             ImageIcon icon = new ImageIcon(path);
             Image image = icon.getImage().getScaledInstance(characterView.getWidth(), characterView.getHeight(), Image.SCALE_DEFAULT);
             ImageIcon newIcon = new ImageIcon(image);
             this.characterView.setIcon(newIcon);
 
         } else {
-            path = character.getMedia().getMedia().get(sizeList).getPath();
+            path = character.getMedia().getImages().get(sizeList).getPath();
             ImageIcon icon = new ImageIcon(path);
             Image image = icon.getImage().getScaledInstance(characterView.getWidth(), characterView.getHeight(), Image.SCALE_DEFAULT);
             ImageIcon newIcon = new ImageIcon(image);
@@ -199,11 +212,11 @@ public class CharacterView extends javax.swing.JFrame {
     private void lvlIncButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lvlIncButtonActionPerformed
         // TODO add your handling code here:
         
-        int sizeList = this.toolSelect.getMediaListing().getMedia().size() -1;
+        int sizeList = this.toolSelect.getMediaListing().getImages().size() -1;
         this.lvlDecButton.setEnabled(true);
         toolLvl++;
         if (toolLvl < sizeList) {
-            String path = toolSelect.getMediaListing().getMedia().get(toolLvl).getPath();
+            String path = toolSelect.getMediaListing().getImages().get(toolLvl).getPath();
             ImageIcon icon = new ImageIcon(path);
             Image image = icon.getImage().getScaledInstance(ToolView.getWidth(), ToolView.getHeight(), Image.SCALE_DEFAULT);
             ImageIcon newIcon = new ImageIcon(image);
@@ -212,7 +225,7 @@ public class CharacterView extends javax.swing.JFrame {
             ImageIcon newIcon2 = new ImageIcon(image2);
             toolViewCharacter.setIcon(newIcon2);
         }else {
-            String path = toolSelect.getMediaListing().getMedia().get(sizeList).getPath();
+            String path = toolSelect.getMediaListing().getImages().get(sizeList).getPath();
             ImageIcon icon = new ImageIcon(path);
             Image image = icon.getImage().getScaledInstance(ToolView.getWidth(), ToolView.getHeight(), Image.SCALE_DEFAULT);
             ImageIcon newIcon = new ImageIcon(image);
@@ -232,7 +245,7 @@ public class CharacterView extends javax.swing.JFrame {
         toolLvl--;
         if (toolLvl > 1) {
             
-            String path = toolSelect.getMediaListing().getMedia().get(toolLvl).getPath();
+            String path = toolSelect.getMediaListing().getImages().get(toolLvl).getPath();
             ImageIcon icon = new ImageIcon(path);
             Image image = icon.getImage().getScaledInstance(ToolView.getWidth(), ToolView.getHeight(), Image.SCALE_DEFAULT);
             ImageIcon newIcon = new ImageIcon(image);
@@ -241,7 +254,7 @@ public class CharacterView extends javax.swing.JFrame {
             ImageIcon newIcon2 = new ImageIcon(image2);
             toolViewCharacter.setIcon(newIcon2);
         }else {
-            String path = toolSelect.getMediaListing().getMedia().get(1).getPath();
+            String path = toolSelect.getMediaListing().getImages().get(1).getPath();
             ImageIcon icon = new ImageIcon(path);
             Image image = icon.getImage().getScaledInstance(ToolView.getWidth(), ToolView.getHeight(), Image.SCALE_DEFAULT);
             ImageIcon newIcon = new ImageIcon(image);
@@ -256,13 +269,20 @@ public class CharacterView extends javax.swing.JFrame {
         
     }//GEN-LAST:event_lvlDecButtonActionPerformed
 
+    private void backViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backViewActionPerformed
+        // TODO add your handling code here:
+        MainSelectCreationView mainSelectCreationView = new MainSelectCreationView(this.prototypes,tools);
+        mainSelectCreationView.show();
+        this.dispose();
+    }//GEN-LAST:event_backViewActionPerformed
+
 
     //
     public void setTools(ITool tool){
         toolLvl = 0;
         JButton toolButton = new JButton();
         //System.out.println(tool.getMediaListing().getMedia().size());
-        String path = tool.toString();
+        String path = tool.getMediaListing().getImages().get(0).getPath();
         //System.out.println(path);
         toolButton.setIcon(new javax.swing.ImageIcon(path));
         if (tool.getType() == 0) {
@@ -283,7 +303,7 @@ public class CharacterView extends javax.swing.JFrame {
                     lvlDecButton.setEnabled(false);
                     lvlIncButton.setEnabled(true);
                     ToolStatistics.setText(tool.getToString());
-                    String path = tool.getMediaListing().getMedia().get(1).getPath();
+                    String path = tool.getMediaListing().getImages().get(toolLvl).getPath();
                     ImageIcon icon = new ImageIcon(path);
                     Image image = icon.getImage().getScaledInstance(ToolView.getWidth(), ToolView.getHeight(), Image.SCALE_DEFAULT);
                     ImageIcon newIcon = new ImageIcon(image);
@@ -301,7 +321,7 @@ public class CharacterView extends javax.swing.JFrame {
     }
 
     public final void loadCharacter() {
-        String path = character.getMedia().getMedia().get(0).getPath();
+        String path = character.getMedia().getImages().get(0).getPath();
         System.out.println("Soy el path del character" + path);
         ImageIcon icon = new ImageIcon(path);
         Image image = icon.getImage().getScaledInstance(characterView.getWidth(), characterView.getHeight(), Image.SCALE_DEFAULT);
@@ -330,6 +350,7 @@ public class CharacterView extends javax.swing.JFrame {
     private javax.swing.JPanel WeaponPanel;
     private javax.swing.JScrollPane WeaponScroll;
     private javax.swing.JButton backButton;
+    private javax.swing.JButton backView;
     private javax.swing.JLabel characterView;
     private javax.swing.JButton lvlDecButton;
     private javax.swing.JButton lvlIncButton;

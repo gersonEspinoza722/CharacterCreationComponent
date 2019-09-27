@@ -14,28 +14,12 @@ import java.io.File;
 
 public class Weapon extends AbstractTool implements ITool, IBoardElement, IPrototype<Weapon> {
 
-    private int type; //Example. 0: affects character, 1: affects weapon,...
     
-    public Weapon() {
+    public Weapon(float simpleUseDecrement, String name, int defaultLife, int decrementableLife, int reach, float level,float minCharacterLevelReq, float minPlayerLevelReq,IMediaListing media,int type) {
+        super(simpleUseDecrement,name, defaultLife, decrementableLife, reach, level, minCharacterLevelReq, minPlayerLevelReq,media,type);
     }
 
-    
-    public Weapon(float simpleUseDecrement, String name, int defaultLife, int decrementableLife, int reach, float level, 
-    		float minCharacterLevelReq, float minPlayerLevelReq, int type,IMediaListing media) {
-        super(simpleUseDecrement,name, defaultLife, decrementableLife, reach, level, minCharacterLevelReq, minPlayerLevelReq,media);
 
-
-    public Weapon(float simpleUseDecrement, String name, int defaultLife, int decrementableLife, int reach, float level, float minCharacterLevelReq, float minPlayerLevelReq, int type) {
-        super(simpleUseDecrement,name, defaultLife, decrementableLife, reach, level, minCharacterLevelReq, minPlayerLevelReq);
-        this.type = type;
-        media = new ImageArray();
-    }
-
-    public Weapon(float simpleUseDecrement, String name, int defaultLife, int decrementableLife, int reach, float level, float minCharacterLevelReq, float minPlayerLevelReq, int type, IMediaListing media) {
-        super(simpleUseDecrement,name, defaultLife, decrementableLife, reach, level, minCharacterLevelReq, minPlayerLevelReq);
-        this.type = type;
-        super.media = media;
-    }
     
     @Override
     public void setDefaultLife(int amount) {
@@ -80,7 +64,7 @@ public class Weapon extends AbstractTool implements ITool, IBoardElement, IProto
     @Override
     public IPrototype deepClone() {
 
-        Weapon clonedWeapon = new Weapon(this.simpleUseDecrement, this.name, this.defaultLife, this.decrementableLife, this.reach, this.level, this.minCharacterLevelReq, this.minPlayerLevelReq, this.type, this.media);
+        Weapon clonedWeapon = new Weapon(this.simpleUseDecrement, this.name, this.defaultLife, this.decrementableLife, this.reach, this.level, this.minCharacterLevelReq, this.minPlayerLevelReq, this.media,type);
         return clonedWeapon;
     }
 
@@ -104,6 +88,7 @@ public class Weapon extends AbstractTool implements ITool, IBoardElement, IProto
         String toString="";
         toString = "Name" + this.name + "\n" +
                 "SimpleUseDecrement" + this.simpleUseDecrement + "\n"+
+                "Type" + this.type + "\n" + 
                 "DefaultLife" + this.defaultLife + "\n" +
                 "DecrementableLife" + this.decrementableLife + "\n" +
                 "Reach" + this.reach + "\n" + 
@@ -140,7 +125,7 @@ public class Weapon extends AbstractTool implements ITool, IBoardElement, IProto
         @Override
         public ITool build() {
             ITool newTool = new Weapon(simpleUseDecrement, name, defaultLife, decrementableLife,reach, level, 
-        		minCharacterLevelReq, minPlayerLevelReq, type,media);
+        		minCharacterLevelReq, minPlayerLevelReq,media,type);
             return newTool;
         }
 
