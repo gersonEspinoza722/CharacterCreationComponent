@@ -19,12 +19,14 @@ public class Skill extends AbstractTool implements ITool, IBoardElement, IProtot
 
 
     public Skill() {
+        media = new ImageArray();
     }
 
     public Skill(float simpleUseDecrement, String name, int defaultLife, int decrementableLife, int reach, float level, float minCharacterLevelReq, float minPlayerLevelReq, int type, boolean regenerative) {
         super(simpleUseDecrement, name, defaultLife, decrementableLife, reach, level, minCharacterLevelReq, minPlayerLevelReq);
         this.type = type;
         media = new ImageArray();
+        this.regenerative = regenerative;
     }
 
 
@@ -35,14 +37,6 @@ public class Skill extends AbstractTool implements ITool, IBoardElement, IProtot
 
 	public void setRegenerative(boolean regenerative) {
 		this.regenerative = regenerative;
-	}
-
-	public float getEffectAmount() {
-		return effectAmount;
-	}
-
-	public void setEffectAmount(float effectAmount) {
-		this.effectAmount = effectAmount;
 	}
 
 	public IMediaListing getMedia() {
