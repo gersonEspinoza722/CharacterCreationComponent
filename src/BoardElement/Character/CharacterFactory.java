@@ -1,6 +1,7 @@
 package BoardElement.Character;
 
 import BoardElement.Character.Concrete.CharacterBasic;
+import BoardElement.Character.Concrete.CharacterBasic.CharacterBasicBuilder;
 import Patterns.IBuilder;
 import Patterns.IPrototype;
 
@@ -23,15 +24,7 @@ public class CharacterFactory implements IFactoryCreationComponent {
         return singleton;
     }
 
-    /**
-     *
-     * @return: Returns a Builder to build a new character from scratch
-     */
-    public IBuilder<ICharacter> getCharacterBuilder(){
-        ICharacter newCharacter = new CharacterBasic();
-        return newCharacter.getBuilder();
-    }
-
+    
     /**
      * Adds a new Character to the prototype lists, id is set
      * @param newCharacter

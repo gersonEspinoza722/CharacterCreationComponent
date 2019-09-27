@@ -5,9 +5,10 @@
  */
 package Views;
 
-import BoardElement.Character.Concrete.Warrior;
+import BoardElement.Character.Concrete.CharacterBasic;
 import BoardElement.Tools.ITool;
 import BoardElement.Tools.IToolListing;
+import Patterns.IPrototype;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,40 +30,43 @@ public class TemplatesCharacterView extends javax.swing.JFrame {
      *
      * @param warrior
      */
-    public TemplatesCharacterView(Warrior warrior) {
+    public TemplatesCharacterView(ArrayList<IPrototype> prototypes) {
         //System.out.println(warrior.getToString());
         initComponents();
-        for (int i = 0; i < 2; i++) {
-            setCharacters(warrior);
-        }
+        setCharacters(prototypes);
     }
 
-    public void setCharacters(Warrior warrior) {
-        JButton toolButton = new JButton();
+    public void setCharacters(ArrayList<IPrototype> prototypes) {
+        System.out.println(prototypes.size());
+        for (IPrototype prototype : prototypes) {
+            CharacterBasic character = (CharacterBasic) prototype.deepClone();
+            //System.out.println(character.getToString());
+            //System.out.println(character.getMedia().getMedia().size());
+            JButton toolButton = new JButton();
+            String path = character.getMedia().getMedia().get(0).getPath();
+            ImageIcon icon = new ImageIcon(path);
+            Image image = icon.getImage().getScaledInstance(250, 500, Image.SCALE_DEFAULT);
+            ImageIcon newIcon = new ImageIcon(image);
+            toolButton.setIcon(newIcon);
+            //System.out.println("PRUEBA");
+            this.templatesCharacter.add(toolButton);
+            this.templatesCharacter.updateUI();
+            toolButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    //System.out.println(path);
+                    try {
+                        CharacterView characterView = new CharacterView(character);
+                        characterView.setVisible(true);
 
-        String path = warrior.getMedia().getImages().get(0).getPath();
-        ImageIcon icon = new ImageIcon(path);
-        Image image = icon.getImage().getScaledInstance(250, 500, Image.SCALE_DEFAULT);
-        ImageIcon newIcon = new ImageIcon(image);
-        toolButton.setIcon(newIcon);
+                    } catch (Exception ex) {
+                        Logger.getLogger(CharacterView.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            });
+        }
         //String path = warrior.getMedia().getImages().get(0).getPath();
         //toolButton.setIcon(new javax.swing.ImageIcon(path));
-        System.out.println("PRUEBA");
-        this.templatesCharacter.add(toolButton);
-        this.templatesCharacter.updateUI();
-        toolButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println(path);
-                try {
-                    CharacterView characterView = new CharacterView(warrior);
-                    characterView.setVisible(true);
-
-                } catch (Exception ex) {
-                    Logger.getLogger(CharacterView.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
 
     }
 

@@ -2,6 +2,7 @@ package BoardElement.Tools;
 
 import BoardElement.IBoardElement;
 import Media.IMediaListing;
+import Patterns.IBuilder;
 import Patterns.IPrototype;
 
 public interface ITool {
@@ -14,5 +15,6 @@ public interface ITool {
     IMediaListing getMediaListing();
     int getType();
     String getToString();
+    IBuilder <ITool> getBuilder();
     IPrototype deepCloneAux();
 }

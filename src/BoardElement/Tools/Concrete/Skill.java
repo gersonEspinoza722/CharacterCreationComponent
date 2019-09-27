@@ -23,9 +23,10 @@ public class Skill extends AbstractTool implements ITool, IBoardElement, IProtot
         media = new ImageArray();
     }
 
-    public Skill(float simpleUseDecrement, String name, int defaultLife, int decrementableLife, int reach, float level, float minCharacterLevelReq, float minPlayerLevelReq, int type, boolean regenerative) {
-        super(simpleUseDecrement, name, defaultLife, decrementableLife, reach, level, minCharacterLevelReq, minPlayerLevelReq);
+    public Skill(float simpleUseDecrement, String name, int defaultLife, int decrementableLife, int reach, float level, float minCharacterLevelReq, float minPlayerLevelReq, int type, boolean regenerative,IMediaListing media) {
+        super(simpleUseDecrement, name, defaultLife, decrementableLife, reach, level, minCharacterLevelReq, minPlayerLevelReq,media);
         this.type = type;
+        super.media = media;
         media = new ImageArray();
         this.regenerative = regenerative;
     }
@@ -138,6 +139,11 @@ public class Skill extends AbstractTool implements ITool, IBoardElement, IProtot
         this.level --;
     }
 
+    @Override
+    public IBuilder<ITool> getBuilder() {
+        return new SkillBuilder();
+    }
+
     public static class SkillBuilder implements IBuilder<ITool> {
 
         private int type, defaultLife, decrementableLife, reach;
@@ -150,10 +156,12 @@ public class Skill extends AbstractTool implements ITool, IBoardElement, IProtot
             MediaListingFactory mediaListingFactory = new MediaListingFactory();
             media = mediaListingFactory.getMediaListing(MediaListingFactory.IMAGE_ARRAY);
         }
+        
+        
 
         @Override
         public ITool build() {
-            ITool newTool = new Skill(simpleUseDecrement, name, defaultLife, decrementableLife, reach, level, minCharacterLevelReq, minPlayerLevelReq, type, regenerative);
+            ITool newTool = new Skill(simpleUseDecrement, name, defaultLife, decrementableLife, reach, level, minCharacterLevelReq, minPlayerLevelReq, type, regenerative,media);
             return newTool;
         }
 
