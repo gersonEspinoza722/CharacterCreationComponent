@@ -1,4 +1,4 @@
-/**package storage;
+package storage;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -6,6 +6,7 @@ import java.io.FileReader;
 
 import java.util.ArrayList;
 
+import Media.IMediaElement;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import BoardElement.Character.AbstractCharacter;
@@ -85,8 +86,10 @@ public class CharacterClassFactory {
     	for(ImageDummy imgDummy : dummy.images) {
     		newImages.add(getRealImageClass(imgDummy));
     	}
-    	ImageArray array = new ImageArray(newImages);
-    	return new Skill(dummy.simpleUseDecrement,dummy.name,dummy.defaultLife,dummy.decrementableLife,dummy.reach,dummy.level,dummy.minCharacterLevelReq,dummy.minPlayerLevelReq,dummy.type,dummy.regenerative,dummy.effectAmount,array);
+    	ImageArray array = new ImageArray();
+    	array.loadMedia((IMediaElement) newImages);
+    	return new Skill(dummy.simpleUseDecrement,dummy.name,dummy.defaultLife,dummy.decrementableLife,dummy.reach,dummy.level,
+				dummy.minCharacterLevelReq,dummy.minPlayerLevelReq,array,dummy.type);
     }
 	
 	public ITool getRealWeaponClass(WeaponDummy dummy) {
@@ -94,15 +97,18 @@ public class CharacterClassFactory {
     	for(ImageDummy imgDummy : dummy.images) {
     		newImages.add(getRealImageClass(imgDummy));
     	}
-    	ImageArray array = new ImageArray(newImages);
-    	return new Weapon(dummy.simpleUseDecrement,dummy.name,dummy.defaultLife,dummy.decrementableLife,dummy.reach,dummy.level,dummy.minCharacterLevelReq,dummy.minPlayerLevelReq,dummy.type,array);
+    	ImageArray array = new ImageArray();
+		array.loadMedia((IMediaElement) newImages);
+    	return new Weapon(dummy.simpleUseDecrement,dummy.name,dummy.defaultLife,dummy.decrementableLife,
+				dummy.reach,dummy.level,dummy.minCharacterLevelReq,dummy.minPlayerLevelReq,array,dummy.type);
     }
 	
     public ICharacter getRealCharacterBasicClass(CharacterDummy dummy) {
     	ArrayList<ITool> tools = new ArrayList<ITool>();
-    	IToolListing toolArray = new ToolArray(tools,"Lista de Herramientas");
+    	IToolListing toolArray = new ToolArray(tools);
     	ArrayList<Image> newImages = new ArrayList<Image>();
-    	IMediaListing media = new ImageArray(newImages);
+    	IMediaListing media = new ImageArray();
+    	media.loadMedia((IMediaElement) newImages);
     	
     	for(WeaponDummy weaponDummy : dummy.weapons) {
     		tools.add(getRealWeaponClass(weaponDummy));
@@ -118,4 +124,3 @@ public class CharacterClassFactory {
     
 	
 }
-**/
