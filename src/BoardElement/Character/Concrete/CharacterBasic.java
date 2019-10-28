@@ -1,6 +1,6 @@
 package BoardElement.Character.Concrete;
 
-import BoardElement.Character.CharacterA;
+import BoardElement.Character.CharacterAbstract;
 import BoardElement.Character.ICharacter;
 import BoardElement.Tools.ITool;
 import BoardElement.Tools.IToolListing;
@@ -11,7 +11,7 @@ import Media.MediaListingFactory;
 import Patterns.IBuilder;
 import Patterns.IPrototype;
 
-public class CharacterBasic extends CharacterA {
+public class CharacterBasic extends CharacterAbstract {
 
     public CharacterBasic() {
 

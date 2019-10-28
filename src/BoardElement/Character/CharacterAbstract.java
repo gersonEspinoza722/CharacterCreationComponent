@@ -2,7 +2,6 @@
 package BoardElement.Character;
 
 import BoardElement.Character.Concrete.CharacterBasic;
-import BoardElement.IBoardElement;
 import BoardElement.Tools.ITool;
 import BoardElement.Tools.IToolListing;
 import BoardElement.Tools.ToolListingFactory;
@@ -12,9 +11,7 @@ import Media.MediaListingFactory;
 import Patterns.IBuilder;
 import Patterns.IPrototype;
 
-import java.io.File;
-
-public class CharacterA implements ICharacter { //IPrototype<AbstractCharacter>
+public class CharacterAbstract implements ICharacter { //IPrototype<AbstractCharacter>
 
     protected String name;
     protected float defaultLife;
@@ -28,11 +25,11 @@ public class CharacterA implements ICharacter { //IPrototype<AbstractCharacter>
 
     protected static IBuilder<ICharacter> builder;
 
-    public CharacterA() {
+    public CharacterAbstract() {
         this.builder = new CharacterBuilder();
     }
 
-    public CharacterA(String name, float defaultLife, float decrementableLife, IToolListing tools, float level, float minPlayerLevelReq, float hitsPerUnit, int fields) {
+    public CharacterAbstract(String name, float defaultLife, float decrementableLife, IToolListing tools, float level, float minPlayerLevelReq, float hitsPerUnit, int fields) {
         this.name = name;
         this.defaultLife = defaultLife;
         this.decrementableLife = decrementableLife;
@@ -44,7 +41,7 @@ public class CharacterA implements ICharacter { //IPrototype<AbstractCharacter>
         this.builder = new CharacterBuilder();
     }
 
-    public CharacterA(String name, float defaultLife, float decrementableLife, IToolListing tools, float level, float minPlayerLevelReq, float hitsPerUnit, int fields, IMediaListing media) {
+    public CharacterAbstract(String name, float defaultLife, float decrementableLife, IToolListing tools, float level, float minPlayerLevelReq, float hitsPerUnit, int fields, IMediaListing media) {
         this.name = name;
         this.defaultLife = defaultLife;
         this.decrementableLife = decrementableLife;
@@ -137,19 +134,19 @@ public class CharacterA implements ICharacter { //IPrototype<AbstractCharacter>
 
     @Override
     public IPrototype clone() {
-        CharacterA clone = new CharacterA(this.name, this.defaultLife, this.decrementableLife, this.tools, this.level, this.minPlayerLevelReq, this.hitsPerUnit, this.fields);
+        CharacterAbstract clone = new CharacterAbstract(this.name, this.defaultLife, this.decrementableLife, this.tools, this.level, this.minPlayerLevelReq, this.hitsPerUnit, this.fields);
         return clone;
     }
 
     @Override
     public IPrototype deepClone() {
         IToolListing clonedTools = (IToolListing) this.tools.deepClone();
-        CharacterA clone = new CharacterA(this.name, this.defaultLife, this.decrementableLife, clonedTools, this.level, this.minPlayerLevelReq, this.hitsPerUnit, this.fields, this.media);
+        CharacterAbstract clone = new CharacterAbstract(this.name, this.defaultLife, this.decrementableLife, clonedTools, this.level, this.minPlayerLevelReq, this.hitsPerUnit, this.fields, this.media);
         return clone;
     }
     @Override
     public IBuilder<ICharacter> getBuilder() {
-        return new CharacterBasic.CharacterBasicBuilder();
+        return new CharacterBuilder();
     }
 
     public static class CharacterBuilder implements IBuilder<ICharacter>{
@@ -169,7 +166,7 @@ public class CharacterA implements ICharacter { //IPrototype<AbstractCharacter>
 
         @Override
         public ICharacter build() {
-            ICharacter newCharacter = new CharacterA(name, defaultLife, decrementableLife, tools, level, minPlayerLevelReq, hitsPerUnit, fields, media);
+            ICharacter newCharacter = new CharacterAbstract(name, defaultLife, decrementableLife, tools, level, minPlayerLevelReq, hitsPerUnit, fields, media);
             return newCharacter;
         }
 

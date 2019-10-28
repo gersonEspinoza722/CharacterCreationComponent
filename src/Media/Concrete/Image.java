@@ -2,6 +2,7 @@ package Media.Concrete;
 
 import Media.AbstractMediaElement;
 import Media.IMediaElement;
+import Patterns.IPrototype;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -46,5 +47,15 @@ public class Image extends AbstractMediaElement implements IMediaElement {
     @Override
     public void setPath(String path) {
         this.path = path;
+    }
+
+    @Override
+    public IPrototype clone() {
+        return null;
+    }
+
+    @Override
+    public IPrototype deepClone() {
+        return null;
     }
 }

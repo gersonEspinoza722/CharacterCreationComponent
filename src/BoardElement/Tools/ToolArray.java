@@ -4,7 +4,7 @@ import Patterns.IPrototype;
 
 import java.util.ArrayList;
 
-public class ToolArray implements IToolListing, IPrototype<ToolArray> {
+public class ToolArray implements IToolListing {
     private ArrayList<ITool> list;
 
     public ToolArray() {
