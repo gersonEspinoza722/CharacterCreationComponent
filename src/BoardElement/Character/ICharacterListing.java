@@ -14,7 +14,7 @@ import java.util.ArrayList;
  *
  * @author Marvin Armando
  */
-public interface ICharacterListing {
+public interface ICharacterListing extends IPrototype<ICharacterListing>{
     void deleteCharacter(int index);
     void addCharacter(ICharacter object);
     ICharacter getCharacter(int index);

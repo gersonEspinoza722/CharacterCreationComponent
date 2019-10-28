@@ -3,6 +3,7 @@ package Media.Concrete;
 import Media.AbstractMediaElement;
 import Media.IMediaElement;
 import Media.IMediaListing;
+import Patterns.IPrototype;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -34,4 +35,15 @@ public class ImageArray implements IMediaListing {
         return this.mediaList;
     }
 
+    //faltan implementar
+    @Override
+    public IPrototype clone() {
+        return null;
+    }
+
+    //faltan implementar
+    @Override
+    public IPrototype deepClone() {
+        return null;
+    }
 }

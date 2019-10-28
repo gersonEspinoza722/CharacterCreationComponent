@@ -14,7 +14,7 @@ import java.util.ArrayList;
  *
  * @author Marvin Armando
  */
-public class CharacterArray implements ICharacterListing, IPrototype<CharacterArray>{
+public class CharacterArray implements ICharacterListing{
     private ArrayList<ICharacter> list;
 
     public CharacterArray() {
