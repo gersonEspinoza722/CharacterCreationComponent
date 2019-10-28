@@ -46,7 +46,7 @@ public class CharacterFactory implements IFactoryCreationComponent {
     public ArrayList<IPrototype> getCharacters() {
         ArrayList<IPrototype> prototypes = new ArrayList<>();
         for (int i = 0; i < characters.size(); i++) {
-            prototypes.add((IPrototype) characters.get(i));
+            prototypes.add(characters.get(i));
         }
         return prototypes;
     }
@@ -60,7 +60,7 @@ public class CharacterFactory implements IFactoryCreationComponent {
     public ArrayList<IPrototype> getClonedCharacters(int id, int quantity) {
         ArrayList<IPrototype> prototypes = new ArrayList<>();
         for (int i = 0; i < quantity; i++) {
-            prototypes.add(characters.get(id).deepCloneAux());
+            prototypes.add(characters.get(id).deepClone());
         }
         return prototypes;
     }
