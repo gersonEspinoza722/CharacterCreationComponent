@@ -5,7 +5,7 @@ import Media.IMediaListing;
 import Patterns.IBuilder;
 import Patterns.IPrototype;
 
-public interface ITool {
+public interface ITool extends IPrototype<ITool>{
     void setDefaultLife(int amount);
     void decLife(int amount);
     void incLife(int amount);
@@ -16,5 +16,4 @@ public interface ITool {
     int getType();
     String getToString();
     IBuilder <ITool> getBuilder();
-    IPrototype deepCloneAux();
 }

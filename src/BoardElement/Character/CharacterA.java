@@ -1,7 +1,8 @@
-package BoardElement.Character.Concrete;
 
-import BoardElement.Character.CharacterA;
-import BoardElement.Character.ICharacter;
+package BoardElement.Character;
+
+import BoardElement.Character.Concrete.CharacterBasic;
+import BoardElement.IBoardElement;
 import BoardElement.Tools.ITool;
 import BoardElement.Tools.IToolListing;
 import BoardElement.Tools.ToolListingFactory;
@@ -11,22 +12,49 @@ import Media.MediaListingFactory;
 import Patterns.IBuilder;
 import Patterns.IPrototype;
 
-public class CharacterBasic extends CharacterA {
+import java.io.File;
 
-    public CharacterBasic() {
+public class CharacterA implements ICharacter { //IPrototype<AbstractCharacter>
 
+    protected String name;
+    protected float defaultLife;
+    protected float decrementableLife;
+    protected IToolListing tools;
+    protected float level;
+    protected float minPlayerLevelReq;
+    protected float hitsPerUnit;
+    protected int fields;
+    protected IMediaListing media;
+
+    protected static IBuilder<ICharacter> builder;
+
+    public CharacterA() {
+        this.builder = new CharacterBuilder();
     }
 
-    public CharacterBasic(String name, float defaultLife, float decrementableLife, IToolListing tools, float level, float minPlayerLevelReq, float hitsPerUnit, int fields) {
-        super(name, defaultLife, decrementableLife, tools, level, minPlayerLevelReq, hitsPerUnit, fields);
-
-        MediaListingFactory mediaListingFactory = new MediaListingFactory();
-        super.media = media;
+    public CharacterA(String name, float defaultLife, float decrementableLife, IToolListing tools, float level, float minPlayerLevelReq, float hitsPerUnit, int fields) {
+        this.name = name;
+        this.defaultLife = defaultLife;
+        this.decrementableLife = decrementableLife;
+        this.tools = tools;
+        this.level = level;
+        this.minPlayerLevelReq = minPlayerLevelReq;
+        this.hitsPerUnit = hitsPerUnit;
+        this.fields = fields;
+        this.builder = new CharacterBuilder();
     }
 
-    public CharacterBasic(String name, float defaultLife, float decrementableLife, IToolListing tools, float level, float minPlayerLevelReq, float hitsPerUnit, int fields, IMediaListing media) {
-        super(name, defaultLife, decrementableLife, tools, level, minPlayerLevelReq, hitsPerUnit, fields, media);
-        super.media = media;
+    public CharacterA(String name, float defaultLife, float decrementableLife, IToolListing tools, float level, float minPlayerLevelReq, float hitsPerUnit, int fields, IMediaListing media) {
+        this.name = name;
+        this.defaultLife = defaultLife;
+        this.decrementableLife = decrementableLife;
+        this.tools = tools;
+        this.level = level;
+        this.minPlayerLevelReq = minPlayerLevelReq;
+        this.hitsPerUnit = hitsPerUnit;
+        this.fields = fields;
+        this.media = media;
+        this.builder = new CharacterBuilder();
     }
 
     /**
@@ -109,22 +137,22 @@ public class CharacterBasic extends CharacterA {
 
     @Override
     public IPrototype clone() {
-        CharacterBasic clone = new CharacterBasic(this.name, this.defaultLife, this.decrementableLife, this.tools, this.level, this.minPlayerLevelReq, this.hitsPerUnit, this.fields);
+        CharacterA clone = new CharacterA(this.name, this.defaultLife, this.decrementableLife, this.tools, this.level, this.minPlayerLevelReq, this.hitsPerUnit, this.fields);
         return clone;
     }
 
     @Override
     public IPrototype deepClone() {
         IToolListing clonedTools = (IToolListing) this.tools.deepClone();
-        CharacterBasic clone = new CharacterBasic(this.name, this.defaultLife, this.decrementableLife, clonedTools, this.level, this.minPlayerLevelReq, this.hitsPerUnit, this.fields, this.media);
+        CharacterA clone = new CharacterA(this.name, this.defaultLife, this.decrementableLife, clonedTools, this.level, this.minPlayerLevelReq, this.hitsPerUnit, this.fields, this.media);
         return clone;
     }
     @Override
     public IBuilder<ICharacter> getBuilder() {
-        return new CharacterBasicBuilder();
+        return new CharacterBasic.CharacterBasicBuilder();
     }
 
-    public static class CharacterBasicBuilder implements IBuilder<ICharacter>{
+    public static class CharacterBuilder implements IBuilder<ICharacter>{
 
         private String name;
         private int fields;
@@ -132,7 +160,7 @@ public class CharacterBasic extends CharacterA {
         private final IToolListing tools;
         private final IMediaListing media;
 
-        public CharacterBasicBuilder() {
+        public CharacterBuilder() {
             ToolListingFactory toolListingFactory = new ToolListingFactory();
             tools = toolListingFactory.getToolListing(ToolListingFactory.TOOL_ARRAY);
             MediaListingFactory mediaListingFactory = new MediaListingFactory();
@@ -141,56 +169,55 @@ public class CharacterBasic extends CharacterA {
 
         @Override
         public ICharacter build() {
-            ICharacter newCharacter = new CharacterBasic(name, defaultLife, decrementableLife, tools, level, minPlayerLevelReq, hitsPerUnit, fields, media);
+            ICharacter newCharacter = new CharacterA(name, defaultLife, decrementableLife, tools, level, minPlayerLevelReq, hitsPerUnit, fields, media);
             return newCharacter;
         }
 
-        public CharacterBasicBuilder addTool(ITool tool) {
+        public CharacterBuilder addTool(ITool tool) {
             this.tools.addTool(tool);
             return this;
         }
 
-        public CharacterBasicBuilder addImage(IMediaElement image) {
+        public CharacterBuilder addImage(IMediaElement image) {
             //System.out.println("Meti una imagen");
             this.media.loadMedia(image);
             return this;
         }
 
-        public CharacterBasicBuilder setName(String name){
+        public CharacterBuilder setName(String name){
             this.name = name;
             return this;
         }
 
-        public CharacterBasicBuilder setFields(int fields){
+        public CharacterBuilder setFields(int fields){
             this.fields = fields;
             return this;
         }
 
-        public CharacterBasicBuilder setDefaultLife(float defaultLife){
+        public CharacterBuilder setDefaultLife(float defaultLife){
             this.defaultLife = defaultLife;
             return this;
         }
 
-        public CharacterBasicBuilder setHitsPerUnit(float hitsPerUnit){
+        public CharacterBuilder setHitsPerUnit(float hitsPerUnit){
             this.hitsPerUnit = hitsPerUnit;
             return this;
         }
 
-        public CharacterBasicBuilder setDecrementableLife(float decrementableLife){
+        public CharacterBuilder setDecrementableLife(float decrementableLife){
             this.decrementableLife = decrementableLife;
             return this;
         }
 
-        public CharacterBasicBuilder setLevel(float level){
+        public CharacterBuilder setLevel(float level){
             this.level = level;
             return this;
         }
 
-        public CharacterBasicBuilder setMinPlayerLevelReq(float minPlayerLevelReq){
+        public CharacterBuilder setMinPlayerLevelReq(float minPlayerLevelReq){
             this.minPlayerLevelReq = minPlayerLevelReq;
             return this;
         }
-
-
     }
+
 }

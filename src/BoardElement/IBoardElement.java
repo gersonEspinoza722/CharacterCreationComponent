@@ -1,5 +1,5 @@
 package BoardElement;
 
 public interface IBoardElement {
-    //void interact();
+    void interact();
 }

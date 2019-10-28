@@ -1,18 +1,15 @@
 package BoardElement.Tools.Concrete;
 
 import BoardElement.IBoardElement;
-import BoardElement.Tools.AbstractTool;
+import BoardElement.Tools.Tool;
 import BoardElement.Tools.ITool;
-import Media.Concrete.ImageArray;
 import Media.IMediaElement;
 import Media.IMediaListing;
 import Media.MediaListingFactory;
 import Patterns.IBuilder;
 import Patterns.IPrototype;
 
-import java.io.File;
-
-public class Skill extends AbstractTool implements ITool, IBoardElement, IPrototype<Skill> {
+public class Skill extends Tool {
 
     private boolean regenerative; //true if its use increments life
 
@@ -83,11 +80,6 @@ public class Skill extends AbstractTool implements ITool, IBoardElement, IProtot
 
         Skill clonedSkill = new Skill(this.simpleUseDecrement, this.name, this.defaultLife, this.decrementableLife, this.reach, this.level, this.minCharacterLevelReq, this.minPlayerLevelReq, this.media,type);
         return clonedSkill;
-    }
-
-    @Override
-    public IPrototype deepCloneAux() {
-        return deepClone();
     }
 
     @Override
